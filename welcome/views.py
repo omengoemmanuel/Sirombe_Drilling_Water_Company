@@ -1,9 +1,11 @@
 from django.shortcuts import render
+from admins.models import survey
 
 
 # Create your views here.
 def index(request):
-    return render(request, 'index.html')
+    price1 = survey.objects.all()
+    return render(request, 'index.html', {'navbar': 'index', 'price1': price1})
 
 
 def about(request):

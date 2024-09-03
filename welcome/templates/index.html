@@ -547,24 +547,25 @@
                         water source, and the quality and quantity of water that can be expected
                     </p>
                 </div>
-                <div class="categories-carousel owl-carousel wow fadeInUp" data-wow-delay="0.1s">
+
+                <div class="categories-carousel owl-carousel wow fadeInUp" data-wow-delay="0.1s">{% for p1 in price1 %}
                     <div class="categories-item p-4">
                         <div class="categories-item-inner">
                             <div class="categories-img rounded-top">
-                                <img src="{% static 'img/car-1.png' %}" class="img-fluid w-100 rounded-top" alt="">
+                                <img src="/media/{{ p1.survey_photo }}" class="img-fluid w-100 rounded-top" alt="">
                             </div>
                             <div class="categories-content rounded-bottom p-4">
-                                <h4><span class="text-primary">Client category:</span>industrial</h4>
+                                <h4><span class="text-primary">Client category: </span>{{ p1.client_category }}</h4>
                                 <div class="mb-4">
-                                    <h4><span class="text-primary">Survey fees:</span>20000</h4>
+                                    <h4><span class="text-primary">Survey fees: </span>{{ p1.survey_fees }}</h4>
                                 </div>
                                 <div class="mb-4">
-                                    <h4><span class="text-primary">Local authority fee:</span>50000</h4>
+                                    <h4><span class="text-primary">Local authority fee: </span>{{ p1.local_authority_fees }}</h4>
                                 </div>
                                 <a href="#" class="btn btn-primary rounded-pill d-flex justify-content-center py-3">Book Now</a>
                             </div>
                         </div>
-                    </div>
+                    </div>{% endfor %}
                 </div>
             </div>
         </div>
@@ -574,8 +575,8 @@
         <div class="container-fluid steps py-5">
             <div class="container py-5">
                 <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 800px;">
-                    <h1 class="display-5 text-capitalize text-white mb-3">Cental<span class="text-primary"> Process</span></h1>
-                    <p class="mb-0 text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut amet nemo expedita asperiores commodi accusantium at cum harum, excepturi, quia tempora cupiditate! Adipisci facilis modi quisquam quia distinctio,
+                    <h1 class="display-5 text-capitalize text-white mb-3">Application <span class="text-primary"> Process</span></h1>
+                    <p class="mb-0 text-white">
                     </p>
                 </div>
                 <div class="row g-4">
