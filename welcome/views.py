@@ -40,3 +40,6 @@ def messageinsert(request):
 
         return redirect('/contact')
     return redirect('/contact')
+
+
+
