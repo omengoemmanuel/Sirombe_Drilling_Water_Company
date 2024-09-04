@@ -11,4 +11,15 @@ class blog_page(models.Model):
 
     def __str__(self):
         return self.blog_name
-    
+
+
+class messagess(models.Model):
+    fname = models.CharField(max_length=20, null=False, blank=False)
+    lname = models.CharField(max_length=20, null=False, blank=False)
+    phone = models.IntegerField()
+    mail = models.EmailField()
+    subject = models.CharField(max_length=50, null=False, blank=False)
+    message = models.TextField()
+
+    def __str__(self):
+        return self.fname

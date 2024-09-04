@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from welcome.models import blog_page
+from django.shortcuts import render, redirect
+from welcome.models import blog_page, messagess
 from admins.models import survey
 
 
@@ -24,3 +24,19 @@ def blog(request):
 
 def contact(request):
     return render(request, 'contact.html')
+
+
+def messageinsert(request):
+    if request.method == "POST":
+        fname = request.POST.get('fname')
+        lname = request.POST.get('lname')
+        phone = request.POST.get('phone')
+        mail = request.POST.get('mail')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+
+        mess = messagess(fname=fname, lname=lname, phone=phone, mail=mail, subject=subject, message=message)
+        mess.save()
+
+        return redirect('/contact')
+    return redirect('/contact')
