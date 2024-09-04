@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from welcome.models import blog_page
 from admins.models import survey
 
 
@@ -17,7 +18,8 @@ def service(request):
 
 
 def blog(request):
-    return render(request, 'blog.html')
+    blog1 = blog_page.objects.all()
+    return render(request, 'blog.html', {'navbar': 'blog', 'blog1': blog1})
 
 
 def contact(request):
