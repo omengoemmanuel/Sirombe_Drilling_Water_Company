@@ -105,10 +105,11 @@
                                     <div class="col-lg-6 fadeInLeft animated" data-animation="fadeInLeft" data-delay="1s" style="animation-delay: 1s;">
                                         <div class="bg-secondary rounded p-5">
                                             <h4 class="text-white mb-4">BOOK A QUERY RESERVATION</h4>
-                                            <form>
+                                            <form action="/bookings" method="post">
+                                                {% csrf_token %}
                                                 <div class="row g-3">
                                                     <div class="col-12">
-                                                        <select class="form-select" aria-label="Default select example">
+                                                        <select class="form-select" aria-label="Default select example" name="query_type">
                                                             <option selected>Select Your Query type</option>
                                                             <option value="1">Surveys and Local fees</option>
                                                             <option value="2">Drilling Services</option>
@@ -120,7 +121,7 @@
                                                             <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
                                                                 <span class="fas fa-map-marker-alt"></span> <span class="ms-1">Location</span>
                                                             </div>
-                                                            <input class="form-control" type="text" placeholder="Enter a City " aria-label="Enter your current loaction">
+                                                            <input class="form-control" type="text" placeholder="Enter a City " aria-label="Enter your current location" name="location">
                                                         </div>
                                                     </div>
 
@@ -129,8 +130,8 @@
                                                             <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
                                                                 <span class="fas fa-calendar-alt"></span><span class="ms-1">Pick Date</span>
                                                             </div>
-                                                            <input class="form-control" type="date">
-                                                            <select class="form-select ms-3" aria-label="Default select example">
+                                                            <input class="form-control" type="date" name="pick_date">
+                                                            <select class="form-select ms-3" aria-label="Default select example" name="pick_time">
                                                                 <option selected>10:00AM</option>
                                                                 <option value="1">11:00AM</option>
                                                                 <option value="2">12:00PM</option>
@@ -167,10 +168,11 @@
                                     <div class="col-lg-6 fadeInLeft animated" data-animation="fadeInLeft" data-delay="1s" style="animation-delay: 1s;">
                                        <div class="bg-secondary rounded p-5">
                                             <h4 class="text-white mb-4">BOOK A QUERY RESERVATION</h4>
-                                            <form>
+                                            <form action="/bookings" method="post">
+                                                {% csrf_token %}
                                                 <div class="row g-3">
                                                     <div class="col-12">
-                                                        <select class="form-select" aria-label="Default select example">
+                                                        <select class="form-select" aria-label="Default select example" name="query_type">
                                                             <option selected>Select Your Query type</option>
                                                             <option value="1">Surveys and Local fees</option>
                                                             <option value="2">Drilling Services</option>
@@ -182,7 +184,7 @@
                                                             <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
                                                                 <span class="fas fa-map-marker-alt"></span> <span class="ms-1">Location</span>
                                                             </div>
-                                                            <input class="form-control" type="text" placeholder="Enter a City" aria-label="Enter your current loaction">
+                                                            <input class="form-control" type="text" placeholder="Enter a City " aria-label="Enter your current location" name="location">
                                                         </div>
                                                     </div>
 
@@ -191,8 +193,8 @@
                                                             <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
                                                                 <span class="fas fa-calendar-alt"></span><span class="ms-1">Pick Date</span>
                                                             </div>
-                                                            <input class="form-control" type="date">
-                                                            <select class="form-select ms-3" aria-label="Default select example">
+                                                            <input class="form-control" type="date" name="pick_date">
+                                                            <select class="form-select ms-3" aria-label="Default select example" name="pick_time">
                                                                 <option selected>10:00AM</option>
                                                                 <option value="1">11:00AM</option>
                                                                 <option value="2">12:00PM</option>

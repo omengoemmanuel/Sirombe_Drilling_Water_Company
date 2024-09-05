@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from welcome.models import blog_page, messagess
+from welcome.models import blog_page, messagess, booking
 from admins.models import survey
 
 
@@ -42,3 +42,15 @@ def messageinsert(request):
     return redirect('/contact')
 
 
+def bookings(request):
+    if request.method == "POST":
+        query_type = request.POST.get('query_type')
+        location = request.POST.get('location')
+        pick_date = request.POST.get('pick_date')
+        pick_time = request.POST.get('pick_time')
+
+        book = booking(query_type=query_type, location=location, pick_date=pick_date, pick_time=pick_time)
+        book.save()
+
+        return redirect('/')
+    return redirect('/')

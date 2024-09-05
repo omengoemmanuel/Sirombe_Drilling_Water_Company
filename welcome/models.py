@@ -23,3 +23,19 @@ class messagess(models.Model):
 
     def __str__(self):
         return self.fname
+
+
+class booking(models.Model):
+    query_choice =[
+        ('Select Your Query Type', 'Select Your Query Type'),
+        ('Surveys and Local Fees', 'Surveys and Local Fees'),
+        ('Drilling Services', 'Drilling Services'),
+        ('Pump Installation', 'Pump Installation')
+    ]
+    query_type = models.CharField(max_length=50, null=False, blank=False, choices=query_choice)
+    location = models.CharField(max_length=50, null=False, blank=False)
+    pick_date = models.DateField()
+    pick_time = models.CharField(max_length=20, null=False, blank=False)
+
+    def __str__(self):
+        return self.query_type
