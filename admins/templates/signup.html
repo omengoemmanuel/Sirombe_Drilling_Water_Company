@@ -12,7 +12,8 @@
 </head>
 <body>
     <div class="registration-form">
-        <form>
+        <form action="" method="post">
+            {% csrf_token %}
             <div class="form-icon">
                 <span><i class="icon icon-user"></i></span>
             </div>
