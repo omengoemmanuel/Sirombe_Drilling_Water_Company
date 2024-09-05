@@ -9,4 +9,5 @@ urlpatterns = [
     path('contact', views.contact),
     path('messageinsert', views.messageinsert),
 
+
 ]
