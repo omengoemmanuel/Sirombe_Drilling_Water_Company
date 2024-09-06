@@ -3,7 +3,7 @@ from .models import survey
 
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 
 # Create your views here.
@@ -19,7 +19,6 @@ def signup(request):
         myuser = User.objects.create_user(username, email, pass1)
         myuser.first_name = fname
         myuser.last_name = lname
-
         myuser.save()
 
         messages.success(request, "Your Account has been created successfully")
@@ -47,7 +46,9 @@ def signin(request):
 
 
 def signout(request):
-    pass
+    logout(request)
+    messages.success(request, "Logout successfully")
+    return redirect("signin")
 
 
 def home(request):

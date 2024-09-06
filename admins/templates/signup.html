@@ -11,6 +11,13 @@
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
 </head>
 <body>
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        <strong>Message:</strong>{{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="close">
+        </button>
+        </div>
+    {% endfor %}
     <div class="registration-form">
         <form action="/signup" method="post">
             {% csrf_token %}
