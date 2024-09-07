@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from welcome.models import blog_page, messagess, booking
 from admins.models import survey
+from django.contrib import messages
 
 
 # Create your views here.
@@ -37,6 +38,7 @@ def messageinsert(request):
 
         mess = messagess(fname=fname, lname=lname, phone=phone, mail=mail, subject=subject, message=message)
         mess.save()
+        messages.success(request, "Message sent successfully")
 
         return redirect('/contact')
     return redirect('/contact')
