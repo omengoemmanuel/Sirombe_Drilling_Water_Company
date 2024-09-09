@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import survey
+from admins.models import userprofile
 
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -37,7 +38,7 @@ def signin(request):
 
         if user is not None:
             login(request, user)
-            return redirect("home")
+            return redirect("welcome")
         else:
             messages.error(request, "Invalid Logins")
             return redirect("signin")
@@ -52,4 +53,38 @@ def signout(request):
 
 
 def home(request):
-    return render(request, 'home.html')
+    fnane = request.user.first_name
+    lname = request.user.last_name
+    return render(request, 'home.html', {'navbar': 'home', 'fname': fnane, 'lname': lname})
+
+
+def welcome(request):
+    return render(request, 'adminweb/index.html')
+
+
+def user_profile(request):
+    fnane = request.user.first_name
+    lname = request.user.last_name
+
+    return render(request, 'adminweb/users-profile.html',
+                  {'navbar': 'user_profile', 'fname': fnane, 'lname': lname,})
+
+
+def profileinsert(request):
+    if request.method == 'POST':
+        fname = request.POST.get('fname')
+        lname = request.POST.get('lname')
+        about = request.POST.get('about')
+        company = request.POST.get('company')
+        job = request.POST.get('job')
+        county = request.POST.get('county')
+        address = request.POST.get('address')
+        phone = request.POST.get('phone')
+        email = request.POST.get('email')
+
+        prof = userprofile(fname=fname, lname=lname, about=about, company=company, job=job, county=county,
+                           address=address, phone=phone, email=email)
+        prof.save()
+        messages.success(request, 'Profile updated successfully')
+        return redirect('user_profile')
+    return redirect('user_profile')

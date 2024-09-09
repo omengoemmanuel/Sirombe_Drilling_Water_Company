@@ -15,3 +15,18 @@ class survey(models.Model):
 
     def __str__(self):
         return self.client_category
+
+
+class userprofile(models.Model):
+    fname = models.CharField(max_length=20, null=False, blank=False)
+    lname = models.CharField(max_length=20, null=False, blank=False)
+    about = models.CharField(max_length=100, null=False, blank=False)
+    company = models.CharField(max_length=100, null=False, blank=False)
+    job = models.CharField(max_length=100, null=False, blank=False)
+    county = models.CharField(max_length=20, null=False, blank=False)
+    address = models.CharField(max_length=200, null=False, blank=False)
+    phone = models.IntegerField()
+    email = models.EmailField()
+
+    def __str__(self):
+        return self.fname
