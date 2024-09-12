@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import survey
 from admins.models import userprofile, survey_and_local_fee
 
@@ -66,10 +66,10 @@ def user_profile(request):
     fnane = request.user.first_name
     lname = request.user.last_name
     email = request.user.email
-    pro1 = userprofile.objects.all()
+    proff = get_object_or_404(User, email=email)
 
     return render(request, 'adminweb/users-profile.html',
-                  {'navbar': 'user_profile', 'fname': fnane, 'lname': lname, 'email': email, 'pro1': pro1})
+                  {'navbar': 'user_profile', 'fname': fnane, 'lname': lname, 'proff1': proff})
 
 
 def profileinsert(request):
@@ -93,7 +93,7 @@ def profileinsert(request):
 
 
 def survey(request):
-    prof = userprofile.objects.all().values_list('fname')
-    suv = survey_and_local_fee.objects.all()
-
-    return render(request, 'adminweb/survey.html', {'suv': suv, 'prof': prof})
+    email = request.user.email
+    suv = get_object_or_404(userprofile, email=email)
+    suv2 = get_object_or_404(survey_and_local_fee)
+    return render(request, 'adminweb/survey.html', {'suv1': suv, 'suv3': suv2})

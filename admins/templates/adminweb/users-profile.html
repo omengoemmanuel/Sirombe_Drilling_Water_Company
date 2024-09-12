@@ -255,10 +255,6 @@
     {% endfor %}
 
               <div class="tab-content pt-2">
-
-
-
-
                 <div class="tab-pane fade show active profile-overview" id="profile-overview">
                   <h5 class="card-title">About</h5>
                   <p class="small fst-italic">Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.</p>
@@ -267,42 +263,42 @@
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label ">First Name</div>
-                    <div class="col-lg-9 col-md-8">{{ fname}}</div>
+                    <div class="col-lg-9 col-md-8"></div>
                   </div>
 
                     <div class="row">
                     <div class="col-lg-3 col-md-4 label ">Last Name</div>
-                    <div class="col-lg-9 col-md-8">{{ lname }}</div>
+                    <div class="col-lg-9 col-md-8"></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Company</div>
-                    <div class="col-lg-9 col-md-8">{{ company }}</div>
+                    <div class="col-lg-9 col-md-8"></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Job</div>
-                    <div class="col-lg-9 col-md-8">{{ job }}</div>
+                    <div class="col-lg-9 col-md-8"></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">County</div>
-                    <div class="col-lg-9 col-md-8">{{ county }}</div>
+                    <div class="col-lg-9 col-md-8"></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Address</div>
-                    <div class="col-lg-9 col-md-8">{{ address }}</div>
+                    <div class="col-lg-9 col-md-8"></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Phone</div>
-                    <div class="col-lg-9 col-md-8">{{ pro1.phone }}</div>
+                    <div class="col-lg-9 col-md-8"></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Email</div>
-                    <div class="col-lg-9 col-md-8">{{ pro1.email }}</div>
+                    <div class="col-lg-9 col-md-8"></div>
                   </div>
 
                 </div>
@@ -322,13 +318,13 @@
                     <div class="row mb-3">
                       <label for="fullName" class="col-md-4 col-lg-3 col-form-label">First Name</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="fname" type="text" class="form-control" id="fullName" value="{{ fname }}">
+                        <input name="fname" type="text" class="form-control" id="fullName" value="{{ proff1.first_name }}">
                       </div>
                     </div>
                     <div class="row mb-3">
                       <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Last Name</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="lname" type="text" class="form-control" id="fullName" value="{{ lname }}">
+                        <input name="lname" type="text" class="form-control" id="fullName" value="{{ proff1.last_name }}">
                       </div>
                     </div>
 
@@ -349,7 +345,7 @@
                     <div class="row mb-3">
                       <label for="Country" class="col-md-4 col-lg-3 col-form-label">County</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="county" type="text" class="form-control" id="Country" value="{{ county }}">
+                        <input name="county" type="text" class="form-control" id="Country" value="">
                       </div>
                     </div>
 
@@ -370,7 +366,7 @@
                     <div class="row mb-3">
                       <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="email" type="email" class="form-control" id="Email" value="{{ email }}">
+                        <input name="email" type="email" class="form-control" id="Email" value="{{ proff1.email }}">
                       </div>
                     </div>
                     <div class="text-center">
