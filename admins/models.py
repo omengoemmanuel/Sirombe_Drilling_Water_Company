@@ -20,7 +20,6 @@ class survey(models.Model):
 class userprofile(models.Model):
     fname = models.CharField(max_length=20, null=False, blank=False)
     lname = models.CharField(max_length=20, null=False, blank=False)
-    about = models.CharField(max_length=100, null=False, blank=False)
     company = models.CharField(max_length=100, null=False, blank=False)
     job = models.CharField(max_length=100, null=False, blank=False)
     county = models.CharField(max_length=20, null=False, blank=False)
@@ -30,3 +29,12 @@ class userprofile(models.Model):
 
     def __str__(self):
         return self.fname
+
+
+class survey_and_local_fee(models.Model):
+    industrial_survey_fee = models.PositiveIntegerField()
+    industrial_local_authority_fee = models.PositiveIntegerField()
+    commercial_survey_fee = models.PositiveIntegerField()
+    commercial_local_authority_fee = models.PositiveIntegerField()
+    domestic_survey_fee = models.PositiveIntegerField()
+    domestic_local_authority_fee = models.PositiveIntegerField()

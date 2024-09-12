@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import survey
-from admins.models import userprofile
+from admins.models import userprofile, survey_and_local_fee
 
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -65,16 +65,17 @@ def welcome(request):
 def user_profile(request):
     fnane = request.user.first_name
     lname = request.user.last_name
+    email = request.user.email
+    pro1 = userprofile.objects.all()
 
     return render(request, 'adminweb/users-profile.html',
-                  {'navbar': 'user_profile', 'fname': fnane, 'lname': lname,})
+                  {'navbar': 'user_profile', 'fname': fnane, 'lname': lname, 'email': email, 'pro1': pro1})
 
 
 def profileinsert(request):
     if request.method == 'POST':
         fname = request.POST.get('fname')
         lname = request.POST.get('lname')
-        about = request.POST.get('about')
         company = request.POST.get('company')
         job = request.POST.get('job')
         county = request.POST.get('county')
@@ -82,9 +83,17 @@ def profileinsert(request):
         phone = request.POST.get('phone')
         email = request.POST.get('email')
 
-        prof = userprofile(fname=fname, lname=lname, about=about, company=company, job=job, county=county,
+        prof = userprofile(fname=fname, lname=lname, company=company, job=job, county=county,
                            address=address, phone=phone, email=email)
         prof.save()
+
         messages.success(request, 'Profile updated successfully')
         return redirect('user_profile')
     return redirect('user_profile')
+
+
+def survey(request):
+    prof = userprofile.objects.all().values_list('fname')
+    suv = survey_and_local_fee.objects.all()
+
+    return render(request, 'adminweb/survey.html', {'suv': suv, 'prof': prof})
