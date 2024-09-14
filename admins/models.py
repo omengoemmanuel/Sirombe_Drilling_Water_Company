@@ -38,3 +38,17 @@ class survey_and_local_fee(models.Model):
     commercial_local_authority_fee = models.PositiveIntegerField()
     domestic_survey_fee = models.PositiveIntegerField()
     domestic_local_authority_fee = models.PositiveIntegerField()
+
+
+class Survey_Application(models.Model):
+    Survey_Category = models.CharField(max_length=50, null=False, blank=False)
+    First_Name = models.CharField(max_length=20, null=False, blank=False)
+    Last_Name = models.CharField(max_length=20, null=False, blank=False)
+    Email_Address = models.EmailField(null=False, blank=False)
+    Phone_Number = models.PositiveIntegerField(null=False, blank=False)
+    Survey_Fee = models.PositiveIntegerField(null=False, blank=False)
+    Local_Authority_Fee = models.PositiveIntegerField(null=False, blank=False)
+    Total_Amount = models.PositiveIntegerField(null=False, blank=False)
+
+    def __str__(self):
+        return f"{self.First_Name} {self.Last_Name}"

@@ -10,6 +10,6 @@ urlpatterns = [
     path('user_profile', views.user_profile, name="user_profile"),
     path('profileinsert', views.profileinsert, name='profileinsert'),
     path('survey', views.survey, name='survey'),
-
+    path('Survey_Application_insert', views.Survey_Application_insert, name='Survey_Application_insert')
 
 ]

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import survey
-from admins.models import userprofile, survey_and_local_fee
+from admins.models import userprofile, survey_and_local_fee, Survey_Application
 
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -97,3 +97,23 @@ def survey(request):
     suv = get_object_or_404(userprofile, email=email)
     suv2 = get_object_or_404(survey_and_local_fee)
     return render(request, 'adminweb/survey.html', {'suv1': suv, 'suv3': suv2})
+
+
+def Survey_Application_insert(request):
+    if request.method == 'POST':
+        Survey_Category = request.POST.get('category')
+        First_Name = request.POST.get('fname')
+        Last_Name = request.POST.get('lname')
+        Email_Address = request.POST.get('email')
+        Phone_Number = request.POST.get('phone')
+        Survey_Fee = request.POST.get('sfee')
+        Local_Authority_Fee = request.POST.get('lfee')
+        Total_Amount = request.POST.get('tamount')
+
+        application = Survey_Application(Survey_Category=Survey_Category, First_Name=First_Name, Last_Name=Last_Name,
+                                         Email_Address=Email_Address, Phone_Number=Phone_Number, Survey_Fee=Survey_Fee,
+                                         Local_Authority_Fee=Local_Authority_Fee, Total_Amount=Total_Amount)
+        application.save()
+        messages.success(request, 'Survey application sent successfully')
+        return redirect('survey')
+    return redirect('survey')

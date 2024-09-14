@@ -71,7 +71,6 @@ label {
 
     </style>
 </head>
-
 <body>
 
   <!-- ======= Header ======= -->
@@ -229,6 +228,7 @@ label {
 
   </aside><!-- End Sidebar-->
 
+
   <main id="main" class="main">
     <div class="pagetitle">
       <h1>Dashboard</h1>
@@ -271,7 +271,8 @@ label {
     window.onload = add_fees;
 </script>
 
-<form action="" method="">
+<form action="/Survey_Application_insert" method="post">
+    {% csrf_token %}
     <div class="mb-3">
         <label for="category" class="form-label">Survey Category</label>
         <input type="text" class="form-control" name="category" value="Industrial" readonly>
@@ -304,14 +305,16 @@ label {
         <label for="total_amount" class="form-label">Total Amount</label>
         <input type="number" class="form-control" id="tamount" name="tamount" readonly>
     </div>
+    <button type="submit" class="btn btn-primary">Save changes</button>
+    <input type="submit">
+
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 </form>
-
-
  <!-- end industrial html -->
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
           <button type="submit" class="btn btn-primary">Save changes</button>
         </div>
       </div>
