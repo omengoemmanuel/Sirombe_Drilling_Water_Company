@@ -306,16 +306,11 @@ label {
         <input type="number" class="form-control" id="tamount" name="tamount" readonly>
     </div>
     <button type="submit" class="btn btn-primary">Save changes</button>
-    <input type="submit">
-
+    <button type="submit" class="btn btn-primary">Pay</button>
     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 </form>
  <!-- end industrial html -->
 
-        </div>
-        <div class="modal-footer">
-
-          <button type="submit" class="btn btn-primary">Save changes</button>
         </div>
       </div>
     </div>
@@ -331,42 +326,45 @@ label {
         </div>
         <div class="modal-body">
           <!-- commercial html -->
-             <form action="" method="">
-  <div class="mb-3">
-    <label for="category" class="form-label">Survey Category</label>
-    <input type="text" class="form-control"  name="category" value="Commercial">
-  </div>
-  <div class="mb-3">
-    <label for="first name" class="form-label">First Name</label>
-    <input type="text" class="form-control"  name="fname" value="First name">
-  </div>
-   <div class="mb-3">
-    <label for="last name" class="form-label">Last Name</label>
-    <input type="text" class="form-control"  name="lname" value="Last name">
-  </div>
-     <div class="mb-3">
-    <label for="email" class="form-label">Email Address</label>
-    <input type="email" class="form-control"  name="email" value="Email">
-  </div>
-     <div class="mb-3">
-    <label for="phone" class="form-label">Phone Number</label>
-    <input type="number" class="form-control"  name="phone" value="0215545225">
-  </div>
-      <div class="mb-3">
-    <label for="phone" class="form-label">Survey Fee</label>
-    <input type="number" class="form-control"  name="sfee" value="">
-  </div>
-        <div class="mb-3">
-    <label for="phone" class="form-label">Local Authority Fee</label>
-    <input type="number" class="form-control"  name="lfee" value="">
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+<form action="/Survey_Application_insert" method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="category" class="form-label">Survey Category</label>
+        <input type="text" class="form-control" name="category" value="Industrial" readonly>
+    </div>
+    <div class="mb-3">
+        <label for="first name" class="form-label">First Name</label>
+        <input type="text" class="form-control" name="fname" value="{{ suv1.fname }}" readonly>
+    </div>
+    <div class="mb-3">
+        <label for="last name" class="form-label">Last Name</label>
+        <input type="text" class="form-control" name="lname" value="{{ suv1.lname }}" readonly>
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Email Address</label>
+        <input type="email" class="form-control" name="email" value="{{ suv1.email }}" readonly>
+    </div>
+    <div class="mb-3">
+        <label for="phone" class="form-label">Phone Number</label>
+        <input type="number" class="form-control" name="phone" value="{{ suv1.phone }}" readonly>
+    </div>
+    <div class="mb-3">
+        <label for="survey_fee" class="form-label">Survey Fee</label>
+        <input type="number" class="form-control" id="sfee" name="sfee" value="{{ suv3.commercial_survey_fee }}" readonly oninput="add_fees()">
+    </div>
+    <div class="mb-3">
+        <label for="local_authority_fee" class="form-label">Local Authority Fee</label>
+        <input type="number" class="form-control" id="lfee" name="lfee" value="{{ suv3.commercial_local_authority_fee }}" readonly oninput="add_fees()">
+    </div>
+    <div class="mb-3">
+        <label for="total_amount" class="form-label">Total Amount</label>
+        <input type="number" class="form-control" id="tamount" name="tamount" readonly>
+    </div>
+    <button type="submit" class="btn btn-primary">Save changes</button>
+    <button type="submit" class="btn btn-primary">Pay</button>
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 </form>
           <! -- end commercial html -->
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
         </div>
       </div>
     </div>
@@ -382,45 +380,47 @@ label {
         </div>
         <div class="modal-body">
           <!-- domestic html-->
-            <form action="" method="">
-  <div class="mb-3">
-    <label for="category" class="form-label">Survey Category</label>
-    <input type="text" class="form-control"  name="category" value="Domestic">
-  </div>
-  <div class="mb-3">
-    <label for="first name" class="form-label">First Name</label>
-    <input type="text" class="form-control"  name="fname" value="First name">
-  </div>
-   <div class="mb-3">
-    <label for="last name" class="form-label">Last Name</label>
-    <input type="text" class="form-control"  name="lname" value="Last name">
-  </div>
-     <div class="mb-3">
-    <label for="email" class="form-label">Email Address</label>
-    <input type="email" class="form-control"  name="email" value="Email">
-  </div>
-     <div class="mb-3">
-    <label for="phone" class="form-label">Phone Number</label>
-    <input type="number" class="form-control"  name="phone" value="0215545225">
-  </div>
-      <div class="mb-3">
-    <label for="phone" class="form-label">Survey Fee</label>
-    <input type="number" class="form-control"  name="sfee" value="">
-  </div>
-        <div class="mb-3">
-    <label for="phone" class="form-label">Local Authority Fee</label>
-    <input type="number" class="form-control"  name="lfee" value="">
-  </div>
 
-
-  <button type="submit" class="btn btn-primary">Submit</button>
+<form action="/Survey_Application_insert" method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="category" class="form-label">Survey Category</label>
+        <input type="text" class="form-control" name="category" value="Industrial" readonly>
+    </div>
+    <div class="mb-3">
+        <label for="first name" class="form-label">First Name</label>
+        <input type="text" class="form-control" name="fname" value="{{ suv1.fname }}" readonly>
+    </div>
+    <div class="mb-3">
+        <label for="last name" class="form-label">Last Name</label>
+        <input type="text" class="form-control" name="lname" value="{{ suv1.lname }}" readonly>
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Email Address</label>
+        <input type="email" class="form-control" name="email" value="{{ suv1.email }}" readonly>
+    </div>
+    <div class="mb-3">
+        <label for="phone" class="form-label">Phone Number</label>
+        <input type="number" class="form-control" name="phone" value="{{ suv1.phone }}" readonly>
+    </div>
+    <div class="mb-3">
+        <label for="survey_fee" class="form-label">Survey Fee</label>
+        <input type="number" class="form-control" id="sfee" name="sfee" value="{{ suv3.domestic_survey_fee }}" readonly oninput="add_fees()">
+    </div>
+    <div class="mb-3">
+        <label for="local_authority_fee" class="form-label">Local Authority Fee</label>
+        <input type="number" class="form-control" id="lfee" name="lfee" value="{{ suv3.industrial_local_authority_fee }}" readonly oninput="add_fees()">
+    </div>
+    <div class="mb-3">
+        <label for="total_amount" class="form-label">Total Amount</label>
+        <input type="number" class="form-control" id="tamount" name="tamount" readonly>
+    </div>
+    <button type="submit" class="btn btn-primary">Save changes</button>
+    <button type="submit" class="btn btn-primary">Pay</button>
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 </form>
 
          <!-- end domestic html -->
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
         </div>
       </div>
     </div>
