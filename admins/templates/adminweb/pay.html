@@ -216,20 +216,20 @@ input:focus:-ms-input-placeholder {
                 <div class="row row-1">
                     <span id="card-header">First Name:</span>
                     <div class="col-7">
-                        <input type="text" value="First Name">
+                        <input type="text" value="{{ pay2.First_Name }}" readonly>
                     </div>
 
                 </div>
                  <div class="row row-1">
                     <span id="card-header">Last Name:</span>
                     <div class="col-7">
-                 <input type="text" value="Last Name">
+                 <input type="text" value="{{ pay2.Last_Name }}" readonly>
                     </div>
                 </div>
                 <div class="row row-1">
-                    <span id="card-header">Phone Number:</span>
+                    <span id="card-header">MPESA Phone No:</span>
                     <div class="col-7">
-                <input type="text" value="Phone Number">
+                <input type="number" value="254" name="mpesa_phone">
                     </div>
 
                 </div>
@@ -240,7 +240,7 @@ input:focus:-ms-input-placeholder {
                         <span id="card-inner">Please pay</span>
                     </div>
                     <div class="row row-2">
-                        <input type="text" value="amount">
+                        <input type="text" value="" name="Amount_paid" readonly>
                     </div>
                 </div>
 

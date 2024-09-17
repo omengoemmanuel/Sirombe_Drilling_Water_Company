@@ -140,4 +140,5 @@ def Survey_Application_commercial_insert(request):
 
 
 def pay(request):
-    return render(request, 'adminweb/pay.html')
+
+    return render(request, 'adminweb/pay.html', )
