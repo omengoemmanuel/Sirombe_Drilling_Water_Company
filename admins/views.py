@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 from .models import survey
 from admins.models import userprofile, survey_and_local_fee, Survey_Application
 
@@ -117,3 +117,22 @@ def Survey_Application_insert(request):
         messages.success(request, 'Survey application sent successfully')
         return redirect('survey')
     return redirect('survey')
+
+
+def Survey_Application_commercial_insert(request):
+    if request.method == 'POST':
+        Survey_Category = request.POST.get('cat')
+        First_Name = request.POST.get('f_name')
+        Last_Name = request.POST.get('l_name')
+        Email_Address = request.POST.get('email')
+        Phone_Number = request.POST.get('phone')
+        Survey_Fee = request.POST.get('s_fee')
+        Local_Authority_Fee = request.POST.get('l_fee')
+        Total_Amount = request.POST.get('t_amount')
+
+        application = Survey_Application(Survey_Category=Survey_Category, First_Name=First_Name, Last_Name=Last_Name,
+                                         Email_Address=Email_Address, Phone_Number=Phone_Number, Survey_Fee=Survey_Fee,
+                                         Local_Authority_Fee=Local_Authority_Fee, Total_Amount=Total_Amount)
+        application.save()
+        messages.success(request, 'Survey application sent successfully')
+        return redirect('survey')

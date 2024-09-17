@@ -222,13 +222,8 @@ label {
           <span>Apply for Survey</span>
         </a>
       </li><!-- End Profile Page Nav -->
-
-
     </ul>
-
   </aside><!-- End Sidebar-->
-
-
   <main id="main" class="main">
     <div class="pagetitle">
       <h1>Dashboard</h1>
@@ -239,6 +234,13 @@ label {
         </ol>
       </nav>
     </div><!-- End Page Title -->
+               {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        <strong>Message:</strong>{{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="close">
+        </button>
+        </div>
+    {% endfor %}
       <h1>Select Survey Category<span class="badge text-bg-secondary"></span></h1>
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#industrialModal">Industrial Category</button>
   <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#commercialModal">Commercial Category</button>
@@ -324,21 +326,26 @@ label {
           <h5 class="modal-title" id="commercialModalLabel">Commercial Category</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+
         <div class="modal-body">
+            <marquee behavior="" style="color: green" direction="">Please update your details before making the application</marquee>
           <!-- commercial html -->
-<form action="/Survey_Application_insert" method="post">
+            <script>
+
+            </script>
+<form action="/Survey_Application_commercial_insert" method="post">
     {% csrf_token %}
     <div class="mb-3">
         <label for="category" class="form-label">Survey Category</label>
-        <input type="text" class="form-control" name="category" value="Industrial" readonly>
+        <input type="text" class="form-control" name="cat" value="Commercial" readonly>
     </div>
     <div class="mb-3">
         <label for="first name" class="form-label">First Name</label>
-        <input type="text" class="form-control" name="fname" value="{{ suv1.fname }}" readonly>
+        <input type="text" class="form-control" name="f_name" value="{{ suv1.fname }}" readonly>
     </div>
     <div class="mb-3">
         <label for="last name" class="form-label">Last Name</label>
-        <input type="text" class="form-control" name="lname" value="{{ suv1.lname }}" readonly>
+        <input type="text" class="form-control" name="l_name" value="{{ suv1.lname }}" readonly>
     </div>
     <div class="mb-3">
         <label for="email" class="form-label">Email Address</label>
@@ -350,15 +357,15 @@ label {
     </div>
     <div class="mb-3">
         <label for="survey_fee" class="form-label">Survey Fee</label>
-        <input type="number" class="form-control" id="sfee" name="sfee" value="{{ suv3.commercial_survey_fee }}" readonly oninput="add_fees()">
+        <input type="number" class="form-control" id="sfee" name="s_fee" value="{{ suv3.commercial_survey_fee }}" readonly >
     </div>
     <div class="mb-3">
         <label for="local_authority_fee" class="form-label">Local Authority Fee</label>
-        <input type="number" class="form-control" id="lfee" name="lfee" value="{{ suv3.commercial_local_authority_fee }}" readonly oninput="add_fees()">
+        <input type="number" class="form-control" id="lfee" name="l_fee" value="{{ suv3.commercial_local_authority_fee }}" readonly >
     </div>
     <div class="mb-3">
         <label for="total_amount" class="form-label">Total Amount</label>
-        <input type="number" class="form-control" id="tamount" name="tamount" readonly>
+        <input type="number" class="form-control" id="tamount" name="t_amount" value="2000">
     </div>
     <button type="submit" class="btn btn-primary">Save changes</button>
     <button type="submit" class="btn btn-primary">Pay</button>
@@ -378,7 +385,9 @@ label {
           <h5 class="modal-title" id="domesticModalLabel">Domestic Category</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+
         <div class="modal-body">
+            <marquee behavior="" style="color: green" direction="">Please update your details before making the application</marquee>
           <!-- domestic html-->
 
 <form action="/Survey_Application_insert" method="post">
