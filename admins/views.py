@@ -116,8 +116,8 @@ def Survey_Application_insert(request):
                                          Local_Authority_Fee=Local_Authority_Fee, Total_Amount=Total_Amount)
         application.save()
         messages.success(request, 'Survey application sent successfully')
-        return redirect('survey')
-    return redirect('survey')
+        return redirect('pay')
+    return redirect('pay')
 
 
 def Survey_Application_commercial_insert(request):
@@ -136,7 +136,7 @@ def Survey_Application_commercial_insert(request):
                                          Local_Authority_Fee=Local_Authority_Fee, Total_Amount=Total_Amount)
         application.save()
         messages.success(request, 'Survey application sent successfully')
-        return redirect('survey')
+        return redirect('pay')
 
 
 def pay(request):
