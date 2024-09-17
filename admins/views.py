@@ -96,7 +96,8 @@ def survey(request):
     email = request.user.email
     suv = get_object_or_404(userprofile, email=email)
     suv2 = get_object_or_404(survey_and_local_fee)
-    return render(request, 'adminweb/survey.html', {'suv1': suv, 'suv3': suv2})
+
+    return render(request, 'adminweb/survey.html', {'suv1': suv, 'suv3': suv2, })
 
 
 def Survey_Application_insert(request):
@@ -136,3 +137,7 @@ def Survey_Application_commercial_insert(request):
         application.save()
         messages.success(request, 'Survey application sent successfully')
         return redirect('survey')
+
+
+def pay(request):
+    return render(request, 'adminweb/pay.html')
