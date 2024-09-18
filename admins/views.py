@@ -140,5 +140,7 @@ def Survey_Application_commercial_insert(request):
 
 
 def pay(request):
+    email = request.user.email
+    pay2 = Survey_Application.objects.get(Email_Address=email)
 
-    return render(request, 'adminweb/pay.html', )
+    return render(request, 'adminweb/pay.html', {'pay2': pay2})
