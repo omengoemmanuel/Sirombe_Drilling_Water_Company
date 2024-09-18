@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 from .models import survey
-from admins.models import userprofile, survey_and_local_fee, Survey_Application
+from admins.models import userprofile, survey_and_local_fee, Survey_Application, profile_photo
 
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -59,7 +59,9 @@ def home(request):
 
 
 def welcome(request):
-    return render(request, 'adminweb/index.html')
+    email = request.user.email
+    wel = User.objects.get(email=email)
+    return render(request, 'adminweb/index.html', {'wel': wel})
 
 
 def user_profile(request):
@@ -67,9 +69,10 @@ def user_profile(request):
     lname = request.user.last_name
     email = request.user.email
     proff = get_object_or_404(User, email=email)
+    wel = User.objects.get(email=email)
 
     return render(request, 'adminweb/users-profile.html',
-                  {'navbar': 'user_profile', 'fname': fnane, 'lname': lname, 'proff1': proff})
+                  {'navbar': 'user_profile', 'fname': fnane, 'lname': lname, 'proff1': proff, 'wel': wel})
 
 
 def profileinsert(request):
@@ -83,8 +86,10 @@ def profileinsert(request):
         phone = request.POST.get('phone')
         email = request.POST.get('email')
 
+        photo = request.POST.get('photo', None)
+
         prof = userprofile(fname=fname, lname=lname, company=company, job=job, county=county,
-                           address=address, phone=phone, email=email)
+                           address=address, phone=phone, email=email, photo=photo)
         prof.save()
 
         messages.success(request, 'Profile updated successfully')
@@ -96,8 +101,9 @@ def survey(request):
     email = request.user.email
     suv = get_object_or_404(userprofile, email=email)
     suv2 = get_object_or_404(survey_and_local_fee)
+    wel = User.objects.get(email=email)
 
-    return render(request, 'adminweb/survey.html', {'suv1': suv, 'suv3': suv2, })
+    return render(request, 'adminweb/survey.html', {'suv1': suv, 'suv3': suv2, 'wel': wel})
 
 
 def Survey_Application_insert(request):
@@ -144,3 +150,11 @@ def pay(request):
     pay2 = Survey_Application.objects.get(Email_Address=email)
 
     return render(request, 'adminweb/pay.html', {'pay2': pay2})
+
+
+def p_photoinsert(request):
+    if request.method == 'POST':
+        photo = request.POST.get('photo', None)
+        profile_ = profile_photo(photo=photo)
+        profile_.save()
+        return redirect('user_profile')

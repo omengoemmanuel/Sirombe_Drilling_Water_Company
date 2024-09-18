@@ -28,7 +28,11 @@ class userprofile(models.Model):
     email = models.EmailField()
 
     def __str__(self):
-        return self.fname
+        return f"{self.fname} {self.lname}"
+
+
+class profile_photo(models.Model):
+    photo = models.ImageField(upload_to='uploads/profiles', default='uploads/profile/profile.jpg')
 
 
 class survey_and_local_fee(models.Model):

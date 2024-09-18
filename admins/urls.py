@@ -11,8 +11,9 @@ urlpatterns = [
     path('profileinsert', views.profileinsert, name='profileinsert'),
     path('survey', views.survey, name='survey'),
     path('Survey_Application_insert', views.Survey_Application_insert, name='Survey_Application_insert'),
-    path('Survey_Application_commercial_insert', views.Survey_Application_commercial_insert, name='Survey_Application_commercial_insert'),
-    path('pay', views.pay, name = 'pay')
-
+    path('Survey_Application_commercial_insert', views.Survey_Application_commercial_insert,
+         name='Survey_Application_commercial_insert'),
+    path('pay', views.pay, name='pay'),
+    path('p_photoinsert', views.p_photoinsert, name='p_photoinsert')
 
 ]
