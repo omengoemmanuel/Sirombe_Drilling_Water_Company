@@ -242,9 +242,9 @@ label {
         </div>
     {% endfor %}
       <h1>Select Survey Category<span class="badge text-bg-secondary"></span></h1>
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#industrialModal">Industrial Category</button>
-  <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#commercialModal">Commercial Category</button>
-  <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#domesticModal">Domestic Category</button>
+      <button type="button" class=" btn-industrial btn btn-primary btn-industrial" data-bs-toggle="modal" data-bs-target="#industrialModal">Industrial Category</button>
+  <button type="button" class=" btn-commercial btn btn-success" data-bs-toggle="modal" data-bs-target="#commercialModal">Commercial Category</button>
+  <button type="button" class=" btn-domestic btn btn-info" data-bs-toggle="modal" data-bs-target="#domesticModal">Domestic Category</button>
 
   <!-- Industrial Modal -->
   <div class="modal fade" id="industrialModal" tabindex="-1" aria-labelledby="industrialModalLabel" aria-hidden="true">
@@ -258,20 +258,7 @@ label {
         <div class="modal-body">
             <marquee behavior="" style="color: green" direction="">Please update your details before making the application</marquee>
             <!-- industrial html -->
-             <script>
-    // Function to add survey and local authority fees
-    function add_fees() {
-        // Get the values from the input fields and ensure they are numbers
-        const sfee = parseFloat(document.getElementById('sfee').value) || 0;
-        const lfee = parseFloat(document.getElementById('lfee').value) || 0;
 
-        // Calculate and update the total amount
-        document.getElementById('tamount').value = sfee + lfee;
-    }
-
-    // Call the add_fees function when the page loads to initialize the total amount
-    window.onload = add_fees;
-</script>
 
 <form action="/Survey_Application_insert" method="post">
     {% csrf_token %}
@@ -329,7 +316,7 @@ label {
         <div class="modal-body">
             <marquee behavior="" style="color: green" direction="">Please update your details before making the application</marquee>
           <!-- commercial html -->
-
+ 
 <form action="/Survey_Application_commercial_insert" method="post">
     {% csrf_token %}
     <div class="mb-3">
@@ -354,15 +341,15 @@ label {
     </div>
     <div class="mb-3">
         <label for="survey_fee" class="form-label">Survey Fee</label>
-        <input type="number" class="form-control" id="s_fee" name="s_fee" value="{{ suv3.commercial_survey_fee }}" readonly oninput="add_survey()">
+        <input type="number" class="form-control" id="scfee" name="s_fee" value="{{ suv3.commercial_survey_fee }}" readonly oninput="add_survey()">
     </div>
     <div class="mb-3">
         <label for="local_authority_fee" class="form-label">Local Authority Fee</label>
-        <input type="number" class="form-control" id="l_fee" name="l_fee" value="{{ suv3.commercial_local_authority_fee }}" readonly oninput="add_survey()" >
+        <input type="number" class="form-control" id="lcfee" name="l_fee" value="{{ suv3.commercial_local_authority_fee }}" readonly oninput="add_survey()" >
     </div>
     <div class="mb-3">
         <label for="total_amount" class="form-label">Total Amount</label>
-        <input type="number" class="form-control" id="t_amount" name="t_amount" value="2000">
+        <input type="number" class="form-control" id="tcamount" name="tamount" >
     </div>
     <button type="submit" class="btn btn-primary">Save changes</button>
     <button type="submit" class="btn btn-primary">Pay</button>
@@ -411,15 +398,15 @@ label {
     </div>
     <div class="mb-3">
         <label for="survey_fee" class="form-label">Survey Fee</label>
-        <input type="number" class="form-control" id="sfee" name="sfee" value="{{ suv3.domestic_survey_fee }}" readonly>
+        <input type="number" class="form-control" id="sdfee" name="sfee" value="{{ suv3.domestic_survey_fee }}" readonly>
     </div>
     <div class="mb-3">
         <label for="local_authority_fee" class="form-label">Local Authority Fee</label>
-        <input type="number" class="form-control" id="lfee" name="lfee" value="{{ suv3.industrial_local_authority_fee }}" readonly >
+        <input type="number" class="form-control" id="ldfee" name="lfee" value="{{ suv3.industrial_local_authority_fee }}" readonly >
     </div>
     <div class="mb-3">
         <label for="total_amount" class="form-label">Total Amount</label>
-        <input type="number" class="form-control" id="tamount" name="tamount" readonly>
+        <input type="number" class="form-control" id="tdamount" name="tamount" readonly>
     </div>
     <button type="submit" class="btn btn-primary">Save changes</button>
     <button type="submit" class="btn btn-primary">Pay</button>
@@ -456,8 +443,10 @@ label {
   <script src="{% static 'assets/vendor/tinymce/tinymce.min.js' %}"></script>
   <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
 
+
   <!-- Template Main JS File -->
   <script src="{% static 'assets/js/main.js' %}"></script>
+
 
 </body>
 

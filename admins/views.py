@@ -86,10 +86,10 @@ def profileinsert(request):
         phone = request.POST.get('phone')
         email = request.POST.get('email')
 
-        photo = request.POST.get('photo', None)
+        # photo = request.POST.get('photo', None)
 
         prof = userprofile(fname=fname, lname=lname, company=company, job=job, county=county,
-                           address=address, phone=phone, email=email, photo=photo)
+                           address=address, phone=phone, email=email, ) 
         prof.save()
 
         messages.success(request, 'Profile updated successfully')
