@@ -14,6 +14,6 @@ urlpatterns = [
     path('Survey_Application_commercial_insert', views.Survey_Application_commercial_insert,
          name='Survey_Application_commercial_insert'),
     path('pay', views.pay, name='pay'),
-
+    path('p_photo', views.p_photo, name='p_photo')
 
 ]

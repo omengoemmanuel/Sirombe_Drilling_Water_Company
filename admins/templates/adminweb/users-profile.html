@@ -213,7 +213,14 @@
               <h2>{{ wel.first_name }} {{ wel.last_name }}</h2>
               <h3>Web Designer</h3>
 
-
+                <div class="">
+                 <form action="/p_photo" method="post">
+                    {% csrf_token %}
+                    <label for="profile_photo">Upload profile</label>
+                    <input type="file" name="profile_photos" alt="profile_photo">
+                    <button class="btn btn-success">Upload</button>
+                </form>
+                </div>
             </div>
           </div>
         </div>

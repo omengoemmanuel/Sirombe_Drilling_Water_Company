@@ -31,10 +31,6 @@ class userprofile(models.Model):
         return f"{self.fname} {self.lname}"
 
 
-class profile_photo(models.Model):
-    photo = models.ImageField(upload_to='uploads/profiles', default='uploads/profile/profile.jpg')
-
-
 class survey_and_local_fee(models.Model):
     industrial_survey_fee = models.PositiveIntegerField()
     industrial_local_authority_fee = models.PositiveIntegerField()
@@ -56,3 +52,7 @@ class Survey_Application(models.Model):
 
     def __str__(self):
         return f"{self.First_Name} {self.Last_Name}"
+
+
+class profile_photo(models.Model):
+    profile_photos = models.ImageField(upload_to='uploads/profiles', default='uploads/profile/profile.jpg')
