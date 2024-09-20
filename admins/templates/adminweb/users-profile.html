@@ -212,12 +212,7 @@
               <img src="{% static 'assets/img/profile-img.jpg' %}" alt="Profile" class="rounded-circle">
               <h2>{{ wel.first_name }} {{ wel.last_name }}</h2>
               <h3>Web Designer</h3>
-                <form action="/p_photoinsert" method="post">
-                   {% csrf_token %}
-                    <label for="profile" class="form-label">Please upload your Profile image</label>
-                    <input type="file" class="input-group" name="photo">
-                    <button type="submit" class="btn-group">Submit</button>
-                </form>
+
 
             </div>
           </div>

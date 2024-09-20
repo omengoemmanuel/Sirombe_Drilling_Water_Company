@@ -86,10 +86,8 @@ def profileinsert(request):
         phone = request.POST.get('phone')
         email = request.POST.get('email')
 
-        photo = request.POST.get('photo', None)
-
         prof = userprofile(fname=fname, lname=lname, company=company, job=job, county=county,
-                           address=address, phone=phone, email=email, photo=photo)
+                           address=address, phone=phone, email=email, )
         prof.save()
 
         messages.success(request, 'Profile updated successfully')
@@ -150,11 +148,3 @@ def pay(request):
     pay2 = Survey_Application.objects.get(Email_Address=email)
 
     return render(request, 'adminweb/pay.html', {'pay2': pay2})
-
-
-def p_photoinsert(request):
-    if request.method == 'POST':
-        photo = request.POST.get('photo', None)
-        profile_ = profile_photo(photo=photo)
-        profile_.save()
-        return redirect('user_profile')
