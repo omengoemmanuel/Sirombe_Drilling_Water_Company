@@ -153,7 +153,7 @@ def pay(request):
 def p_photo(request):
     if request.method == 'POST':
         profile_photos = request.FILES['profile_photos']
-        pphoto = profile_photo(profile_photos = profile_photos)
+        pphoto = profile_photo(profile_photos=profile_photos)
         pphoto.save()
         return redirect('user_profile')
-
+    return redirect('user_profile')
