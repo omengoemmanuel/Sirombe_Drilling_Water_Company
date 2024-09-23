@@ -212,14 +212,20 @@
               <img src="{% static 'assets/img/profile-img.jpg' %}" alt="Profile" class="rounded-circle">
               <h2>{{ wel.first_name }} {{ wel.last_name }}</h2>
               <h3>Web Designer</h3>
+                <form action="/p_photo" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <label for="profile_photo">Upload Profile</label>
+                    <input type="file" name="profile_photos" alt="profile_photo">
+                    <button type="submit" class="btn btn-success">Upload</button>
+                </form>
 
-                <div class="">
-                 <form action="/p_photo" method="post">
+              <div class="">
+                <!--   <form action="/p_photo" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <label for="profile_photo">Upload profile</label>
                     <input type="file" name="profile_photos" alt="profile_photo">
                     <button class="btn btn-success">Upload</button>
-                </form>
+                </form> -->
                 </div>
             </div>
           </div>

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 from .models import survey
-from admins.models import userprofile, survey_and_local_fee, Survey_Application, profile_photo
+from admins.models import userprofile, survey_and_local_fee, Survey_Application
 
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -30,6 +30,17 @@ def signup(request):
         return redirect('signin')
 
     return render(request, 'signup.html')
+
+
+def p_photo(request):
+    if request.method == "POST":
+        profile_photos = request.POST.get('profile_photos')
+
+        proffs = userprofile(profile_photos=profile_photos)
+        proffs.save()
+        messages.success(request, "Profile uploaded successfully")
+        return redirect('user_profile')
+    return redirect('user_profile')
 
 
 def signin(request):
@@ -64,7 +75,7 @@ def home(request):
 def welcome(request):
     email = request.user.email
     wel = User.objects.get(email=email)
-    return render(request, 'adminweb/index.html', {'wel': wel})
+    return render(request, 'adminweb/index.html', {'wel': wel, })
 
 
 def user_profile(request):
@@ -161,12 +172,3 @@ def stkpush(request):
         response = requests.post(api_url, json=request, headers=headers)
 
     return HttpResponse("Payment sent successfully")
-
-
-def p_photo(request):
-    if request.method == 'POST':
-        profile_photos = request.FILES['profile_photos']
-        pphoto = profile_photo(profile_photos=profile_photos)
-        pphoto.save()
-        return redirect('user_profile')
-    return redirect('user_profile')

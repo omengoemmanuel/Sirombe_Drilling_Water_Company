@@ -321,15 +321,15 @@ label {
     {% csrf_token %}
     <div class="mb-3">
         <label for="category" class="form-label">Survey Category</label>
-        <input type="text" class="form-control" name="cat" value="Commercial" readonly>
+        <input type="text" class="form-control" name="category" value="Commercial" readonly>
     </div>
     <div class="mb-3">
         <label for="first name" class="form-label">First Name</label>
-        <input type="text" class="form-control" name="f_name" value="{{ suv1.fname }}" readonly>
+        <input type="text" class="form-control" name="fname" value="{{ suv1.fname }}" readonly>
     </div>
     <div class="mb-3">
         <label for="last name" class="form-label">Last Name</label>
-        <input type="text" class="form-control" name="l_name" value="{{ suv1.lname }}" readonly>
+        <input type="text" class="form-control" name="lname" value="{{ suv1.lname }}" readonly>
     </div>
     <div class="mb-3">
         <label for="email" class="form-label">Email Address</label>
@@ -341,11 +341,11 @@ label {
     </div>
     <div class="mb-3">
         <label for="survey_fee" class="form-label">Survey Fee</label>
-        <input type="number" class="form-control" id="scfee" name="s_fee" value="{{ suv3.commercial_survey_fee }}" readonly oninput="add_survey()">
+        <input type="number" class="form-control" id="scfee" name="sfee" value="{{ suv3.commercial_survey_fee }}" readonly oninput="add_survey()">
     </div>
     <div class="mb-3">
         <label for="local_authority_fee" class="form-label">Local Authority Fee</label>
-        <input type="number" class="form-control" id="lcfee" name="l_fee" value="{{ suv3.commercial_local_authority_fee }}" readonly oninput="add_survey()" >
+        <input type="number" class="form-control" id="lcfee" name="lfee" value="{{ suv3.commercial_local_authority_fee }}" readonly oninput="add_survey()" >
     </div>
     <div class="mb-3">
         <label for="total_amount" class="form-label">Total Amount</label>
