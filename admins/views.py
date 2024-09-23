@@ -6,6 +6,9 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 
+from .credentials import MpesaPpassword, MpesaAccessToken
+import requests
+
 
 # Create your views here.
 def signup(request):
@@ -124,30 +127,40 @@ def Survey_Application_insert(request):
     return redirect('pay')
 
 
-def Survey_Application_commercial_insert(request):
-    if request.method == 'POST':
-        Survey_Category = request.POST.get('cat')
-        First_Name = request.POST.get('f_name')
-        Last_Name = request.POST.get('l_name')
-        Email_Address = request.POST.get('email')
-        Phone_Number = request.POST.get('phone')
-        Survey_Fee = request.POST.get('s_fee')
-        Local_Authority_Fee = request.POST.get('l_fee')
-        Total_Amount = request.POST.get('t_amount')
-
-        application = Survey_Application(Survey_Category=Survey_Category, First_Name=First_Name, Last_Name=Last_Name,
-                                         Email_Address=Email_Address, Phone_Number=Phone_Number, Survey_Fee=Survey_Fee,
-                                         Local_Authority_Fee=Local_Authority_Fee, Total_Amount=Total_Amount)
-        application.save()
-        messages.success(request, 'Survey application sent successfully')
-        return redirect('pay')
-
-
 def pay(request):
     email = request.user.email
     pay2 = Survey_Application.objects.get(Email_Address=email)
 
     return render(request, 'adminweb/pay.html', {'pay2': pay2})
+
+
+def stkpush(request):
+    if request.method == 'POST':
+        Mpesa_phone = request.POST['Mpesa_phone']
+        Amount_paid = request.POST['Amount_paid']
+
+        access_token = MpesaAccessToken.validated_access_token
+        api_url = 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest'
+
+        headers = {'Authorization': "Bearer %s" % access_token}
+
+        request = {
+            "BusinessShortCode": MpesaPpassword.short_code,
+            "Password": MpesaPpassword.decoded,
+            "Timestamp": MpesaPpassword.pay_time,
+            "TransactionType": "CustomerPayBillOnline",
+            "Amount": Amount_paid,
+            "PartyA": Mpesa_phone,
+            "PartyB": MpesaPpassword.short_code,
+            "PhoneNumber": Mpesa_phone,
+            "CallBackURL": "https://sandbox.safaricom.co.ke/mpesa/",
+            "AccountReference": "Sirombe Springs Drilling Co.",
+            "TransactionDesc": "Sirombe Springs Drilling Co. Survey charges"
+
+        }
+        response = requests.post(api_url, json=request, headers=headers)
+
+    return HttpResponse("Payment sent successfully")
 
 
 def p_photo(request):

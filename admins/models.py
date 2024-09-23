@@ -49,6 +49,8 @@ class Survey_Application(models.Model):
     Survey_Fee = models.PositiveIntegerField(null=False, blank=False)
     Local_Authority_Fee = models.PositiveIntegerField(null=False, blank=False)
     Total_Amount = models.PositiveIntegerField(null=False, blank=False)
+    Mpesa_phone = models.PositiveIntegerField(blank=False, null=False, default='0000000000')
+    Amount_paid = models.PositiveIntegerField(blank=False, null=False, default='0')
 
     def __str__(self):
         return f"{self.First_Name} {self.Last_Name}"

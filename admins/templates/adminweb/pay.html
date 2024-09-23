@@ -210,7 +210,7 @@ input:focus:-ms-input-placeholder {
                 <li class="active">Payment</li>
                 </ul>
             </div>
-            <form action="" method="post">
+            <form action="/stkpush" method="post">
                 {% csrf_token %}
                 <span id="card-header">Payment info:</span>
                 <div class="row row-1">
@@ -229,7 +229,7 @@ input:focus:-ms-input-placeholder {
                 <div class="row row-1">
                     <span id="card-header">MPESA Phone No:</span>
                     <div class="col-7">
-                <input type="number" value="254" name="mpesa_phone">
+                <input type="number" value="254" name="Mpesa_phone">
                     </div>
 
                 </div>
@@ -240,7 +240,7 @@ input:focus:-ms-input-placeholder {
                         <span id="card-inner">Please pay</span>
                     </div>
                     <div class="row row-2">
-                        <input type="text" value="{{ pay2.Total_Amount }}" name="Amount_paid" readonly>
+                        <input type="text" value="{{ pay2.Total_Amount }}"  name="Amount_paid" readonly>
                     </div>
                 </div>
 
