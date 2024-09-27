@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 from .models import survey
 from admins.models import userprofile, survey_and_local_fee, Survey_Application
@@ -72,6 +73,7 @@ def home(request):
     return render(request, 'home.html', {'navbar': 'home', 'fname': fnane, 'lname': lname})
 
 
+@login_required
 def welcome(request):
     email = request.user.email
     wel = User.objects.get(email=email)

@@ -11,11 +11,11 @@ def index(request):
 
 
 def about(request):
-    return render(request, 'about.html')
+    return render(request, 'about.html', {'navbar': 'about', })
 
 
 def service(request):
-    return render(request, 'service.html')
+    return render(request, 'service.html', {'navbar': 'service', })
 
 
 def blog(request):
@@ -24,7 +24,7 @@ def blog(request):
 
 
 def contact(request):
-    return render(request, 'contact.html')
+    return render(request, 'contact.html', {'navbar': 'contact'})
 
 
 def messageinsert(request):
