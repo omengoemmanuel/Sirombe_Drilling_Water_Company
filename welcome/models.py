@@ -26,7 +26,7 @@ class messagess(models.Model):
 
 
 class booking(models.Model):
-    query_choice =[
+    query_choice = [
         ('Select Your Query Type', 'Select Your Query Type'),
         ('Surveys and Local Fees', 'Surveys and Local Fees'),
         ('Drilling Services', 'Drilling Services'),
