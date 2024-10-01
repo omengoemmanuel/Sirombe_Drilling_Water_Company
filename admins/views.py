@@ -9,6 +9,8 @@ from django.contrib.auth import authenticate, login, logout
 
 from .credentials import MpesaPpassword, MpesaAccessToken
 import requests
+from django.conf import settings
+from django.core.mail import send_mail
 
 
 # Create your views here.
@@ -21,16 +23,36 @@ def signup(request):
         pass1 = request.POST.get('pass1')
         pass2 = request.POST.get('pass2')
 
+        if User.objects.filter(username=username).exists():
+            messages.error(request, 'Username already exist')
+            return redirect('signup')
+
+        if User.objects.filter(email=email).exists():
+            messages.error(request, 'Email is already registered')
+            return redirect('signup')
+
+        if pass1 != pass2:
+            messages.error(request, 'Password did not match, please try again')
+
         myuser = User.objects.create_user(username, email, pass1)
         myuser.first_name = fname
         myuser.last_name = lname
         myuser.save()
+
+        # send_verification_email(user)
 
         messages.success(request, "Your Account has been created successfully")
 
         return redirect('signin')
 
     return render(request, 'signup.html')
+
+
+def send_verification_email():
+    subject = "Thank you for registering"
+    message = f"Hi {User.first_name} \n\n Thank you for registering at our website. please verify your email to activate your account"
+    recipient_list = [User.email]
+    send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, recipient_list)
 
 
 def p_photo(request):
