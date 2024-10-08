@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
-from .models import survey
+
 from admins.models import userprofile, survey_and_local_fee, Survey_Application
 
 from django.contrib.auth.models import User
@@ -196,3 +196,7 @@ def stkpush(request):
         response = requests.post(api_url, json=request, headers=headers)
 
     return HttpResponse("Payment sent successfully")
+
+
+def layout(request):
+    return render(request, 'adminweb/layout.html')
