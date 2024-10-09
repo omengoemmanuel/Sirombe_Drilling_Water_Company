@@ -99,7 +99,14 @@ def home(request):
 def welcome(request):
     email = request.user.email
     wel = User.objects.get(email=email)
-    return render(request, 'adminweb/index.html', {'wel': wel, })
+
+    try:
+        survey_application = Survey_Application.objects.get(Email_Address=email)
+        status = survey_application.status
+    except Survey_Application.DoesNotExist:
+        status = "Verified"
+
+    return render(request, 'adminweb/index.html', {'wel': wel, 'status': status})
 
 
 def user_profile(request):

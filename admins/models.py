@@ -52,6 +52,11 @@ class Survey_Application(models.Model):
     Total_Amount = models.PositiveIntegerField(null=False, blank=False)
     Mpesa_phone = models.PositiveIntegerField(blank=False, null=True, default='0000000000')
     Amount_paid = models.PositiveIntegerField(blank=False, null=True, default='0')
+    status_choice = [
+        ('Approved', 'Approved'),
+        ('Verified', 'Verified')
+    ]
+    status = models.CharField(max_length=15, null=True, blank=True, default="Verified", choices=status_choice)
 
     def __str__(self):
         return f"{self.First_Name} {self.Last_Name}"
