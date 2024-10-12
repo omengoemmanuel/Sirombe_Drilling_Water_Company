@@ -28,7 +28,7 @@ def signup(request):
             return redirect('signup')
 
         if User.objects.filter(email=email).exists():
-            messages.error(request, 'Email is already registered')
+            messages.error(request, 'Email is already registered please choose a different email')
             return redirect('signup')
 
         if pass1 != pass2:
