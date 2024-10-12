@@ -13,6 +13,11 @@ from django.conf import settings
 from django.core.mail import send_mail
 
 from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_str
+from django.contrib.auth import get_user_model
+from django.template.loader import render_to_string
 
 
 # Create your views here.
@@ -116,6 +121,60 @@ def change_password(request):
 
     return render(request, 'adminweb/users-profile.html')
     pass
+
+
+# forget password function
+
+UserModel = get_user_model()
+
+
+def forgot_password(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        try:
+            user = UserModel.objects.get(email=email)
+            token = default_token_generator.make_token(user)
+            uid = urlsafe_base64_encode(force_bytes(user.pk))
+            reset_url = request.build_absolute_uri(f'/reset-password/{uid}/{token}/')
+
+            # sending email with reset link
+            send_mail(
+                'Password Reset Request',
+                f'Click the link to reset your password:{reset_url}',
+                'admin@gmail.com',
+                [email],
+            )
+            messages.success(request, 'Password reset link sent to your email')
+        except UserModel.DoesNotExist:
+            messages.error(request, 'User with tha email does not exit')
+        return redirect('forgot_password')
+
+    return render(request, 'adminweb/forgot_password.html')
+
+
+def reset_password(request, uidb64, token):
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        user = UserModel.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, UserModel.DoesNotExist):
+        user = None
+
+    if user is not None and default_token_generator.check_token(user, token):
+        if request.method == 'POST':
+            newpassword = request.POST.get('newpassword')
+            renewpasword = request.POST.get('renewpasword')
+
+            if newpassword == renewpasword:
+                user.set_password(newpassword)
+                user.save()
+                messages.success(request, 'Password reset successfully. Please log in')
+                return redirect('signin')
+            else:
+                messages.error(request, 'Password do not match')
+            return render(request, 'adminweb/reset_password.html', {'validlink': True})
+        else:
+            messages.error(request, 'The password reset link is invalid')
+            return render(request, 'adminweb/reset_password.html', {'validlink': False})
 
 
 def home(request):
