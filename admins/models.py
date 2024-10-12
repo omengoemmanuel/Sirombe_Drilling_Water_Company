@@ -26,7 +26,7 @@ class userprofile(models.Model):
     address = models.CharField(max_length=200, null=False, blank=False)
     phone = models.IntegerField()
     email = models.EmailField()
-    profile_photos = models.FileField(upload_to='uploads/profile', default='uploads/profile/profile.jpg', null=True, blank=True)
+    p_photo = models.ImageField(upload_to="uploads/profile", default="uploads/profile/profile.jpg")
 
     def __str__(self):
         return f"{self.fname} {self.lname}"
@@ -60,5 +60,3 @@ class Survey_Application(models.Model):
 
     def __str__(self):
         return f"{self.First_Name} {self.Last_Name}"
-
-

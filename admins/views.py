@@ -106,7 +106,13 @@ def welcome(request):
     except Survey_Application.DoesNotExist:
         status = "Verified"
 
-    return render(request, 'adminweb/index.html', {'wel': wel, 'status': status})
+    try:
+        pic = userprofile.objects.get(email=email)
+        picture = pic.p_photo
+    except userprofile.DoesNotExist:
+        picture = ''
+
+    return render(request, 'adminweb/index.html', {'wel': wel, 'status': status, 'picture': picture})
 
 
 def user_profile(request):
@@ -116,8 +122,22 @@ def user_profile(request):
     proff = get_object_or_404(User, email=email)
     wel = User.objects.get(email=email)
 
+    try:
+        pic = userprofile.objects.get(email=email)
+        picture = pic.p_photo
+        fname = pic.fname
+        lname = pic.lname
+        company = pic.company
+        job = pic.job
+        county = pic.county
+        address = pic.address
+        phone = pic.phone
+        email = pic.email
+    except userprofile.DoesNotExist:
+        pass
+
     return render(request, 'adminweb/users-profile.html',
-                  {'navbar': 'user_profile', 'fname': fnane, 'lname': lname, 'proff1': proff, 'wel': wel})
+                  {'navbar': 'user_profile', 'fname': fnane, 'lname': lname, 'proff1': proff, 'wel': wel, 'picture':picture, 'fname':fnane,'lname':lname,'company':company,'job':job,'county':county,'address':address,'phone':phone,'email':email })
 
 
 def profileinsert(request):
@@ -130,13 +150,13 @@ def profileinsert(request):
         address = request.POST.get('address')
         phone = request.POST.get('phone')
         email = request.POST.get('email')
+        p_photo = request.FILES['p_photo']
 
         prof = userprofile(fname=fname, lname=lname, company=company, job=job, county=county,
-                           address=address, phone=phone, email=email, )
+                           address=address, phone=phone, email=email, p_photo=p_photo)
         prof.save()
 
-        messages.success(request, 'Profile updated successfully')
-        return redirect('user_profile')
+    messages.success(request, 'Profile updated successfully')
     return redirect('user_profile')
 
 
@@ -146,7 +166,13 @@ def survey(request):
     suv2 = get_object_or_404(survey_and_local_fee)
     wel = User.objects.get(email=email)
 
-    return render(request, 'adminweb/survey.html', {'suv1': suv, 'suv3': suv2, 'wel': wel})
+    try:
+        pic = userprofile.objects.get(email=email)
+        picture = pic.p_photo
+    except userprofile.DoesNotExist:
+        picture = ''
+
+    return render(request, 'adminweb/survey.html', {'suv1': suv, 'suv3': suv2, 'wel': wel, 'picture': picture})
 
 
 def Survey_Application_insert(request):
