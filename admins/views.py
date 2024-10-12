@@ -12,6 +12,8 @@ import requests
 from django.conf import settings
 from django.core.mail import send_mail
 
+from django.contrib.auth import update_session_auth_hash
+
 
 # Create your views here.
 def signup(request):
@@ -89,6 +91,33 @@ def signout(request):
     return redirect("signin")
 
 
+@login_required()
+def change_password(request):
+    if request.method == 'POST':
+        password = request.POST.get('password')
+        newpassword = request.POST.get('newpassword')
+        renewpassword = request.POST.get('renewpassword')
+
+        if not request.user.check_password(password):
+            messages.error(request, 'Current password is incorrect')
+            return redirect('user_profile')
+
+        if newpassword != renewpassword:
+            messages.error(request, 'New password do not match')
+            return redirect('user_profile')
+
+        request.user.set_password(newpassword)
+        request.user.save()
+
+        update_session_auth_hash(request, request.user)
+
+        messages.success(request, 'Password has been changed successfully')
+        return redirect('user_profile')
+
+    return render(request, 'adminweb/users-profile.html')
+    pass
+
+
 def home(request):
     fnane = request.user.first_name
     lname = request.user.last_name
@@ -137,7 +166,9 @@ def user_profile(request):
         pass
 
     return render(request, 'adminweb/users-profile.html',
-                  {'navbar': 'user_profile', 'fname': fnane, 'lname': lname, 'proff1': proff, 'wel': wel, 'picture':picture, 'fname':fnane,'lname':lname,'company':company,'job':job,'county':county,'address':address,'phone':phone,'email':email })
+                  {'navbar': 'user_profile', 'fname': fnane, 'lname': lname, 'proff1': proff, 'wel': wel,
+                   'picture': picture, 'fname': fnane, 'lname': lname, 'company': company, 'job': job, 'county': county,
+                   'address': address, 'phone': phone, 'email': email})
 
 
 def profileinsert(request):
