@@ -211,6 +211,13 @@ def user_profile(request):
     wel = User.objects.get(email=email)
 
     try:
+        picture = ''
+        company = ''
+        job = ''
+        county = ''
+        address = ''
+        phone = ''
+
         pic = userprofile.objects.get(email=email)
         picture = pic.p_photo
         fname = pic.fname
