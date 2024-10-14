@@ -3,447 +3,560 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Survey Application</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+    <title>Survey Application</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
 
-  <!-- Favicons -->
-  <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
-  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Favicons -->
+    <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
+    <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
 
-  <!-- Google Fonts -->
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" rel="stylesheet">
-  <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+          rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
-  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/quill/quill.snow.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/quill/quill.bubble.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/simple-datatables/style.css' %}" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/quill/quill.snow.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/quill/quill.bubble.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/simple-datatables/style.css' %}" rel="stylesheet">
 
-  <!-- Template Main CSS File -->
-  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
 
     <style>
+
+
+        .card {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .bg-ocean {
+            background: linear-gradient(135deg, dodgerblue, lime);
+        }
+
+        .bg-forest {
+            background: linear-gradient(135deg, green, dodgerblue);
+        }
+
+        .bg-royal {
+            background: linear-gradient(135deg, #9b59b6, skyblue);
+        }
+
         body {
-    font-family: 'Lato', sans-serif;
-}
+            font-family: 'Lato', sans-serif;
+        }
 
-h1 {
-    margin-bottom: 40px;
-}
+        h1 {
+            margin-bottom: 40px;
+        }
 
-label {
-    color: #333;
-}
+        label {
+            color: #333;
+        }
 
-.btn-send {
-    font-weight: 300;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    width: 80%;
-    margin-left: 3px;
-    }
-.help-block.with-errors {
-    color: #ff5050;
-    margin-top: 5px;
+        .btn-send {
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            width: 80%;
+            margin-left: 3px;
+        }
 
-}
+        .help-block.with-errors {
+            color: #ff5050;
+            margin-top: 5px;
 
-.card{
-	margin-left: 10px;
-	margin-right: 10px;
-}
+        }
+
+        .card {
+            margin-left: 10px;
+            margin-right: 10px;
+        }
 
     </style>
 </head>
 <body>
 
-  <!-- ======= Header ======= -->
-  <header id="header" class="header fixed-top d-flex align-items-center">
+<!-- ======= Header ======= -->
+<header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="/welcome" class="logo d-flex align-items-center">
-        <img src="{% static 'assets/img/logo.png' %}" alt="">
-        <span class="d-none d-lg-block">Sirombe Springs</span>
-      </a>
+        <a href="/welcome" class="logo d-flex align-items-center">
+            <img src="{% static 'assets/img/logo.png' %}" alt="">
+            <span class="d-none d-lg-block">Sirombe Springs</span>
+        </a>
 
     </div><!-- End Logo -->
 
 
     <nav class="header-nav ms-auto">
-      <ul class="d-flex align-items-center">
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-            <li class="dropdown-header">
-              You have 3 new messages
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-            </li>
+        <ul class="d-flex align-items-center">
+            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
+                <li class="dropdown-header">
+                    You have 3 new messages
+                    <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+                </li>
 
-            <li class="message-item">
-              <a href="#">
-                <img src="assets/img/messages-1.jpg" alt="" class="rounded-circle">
-                <div>
-                  <h4>Maria Hudson</h4>
-                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                  <p>4 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+                <li class="message-item">
+                    <a href="#">
+                        <img src="assets/img/messages-1.jpg" alt="" class="rounded-circle">
+                        <div>
+                            <h4>Maria Hudson</h4>
+                            <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                            <p>4 hrs. ago</p>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
 
-            <li class="message-item">
-              <a href="#">
-                <img src="{% static 'assets/img/messages-2.jpg' %}" alt="" class="rounded-circle">
-                <div>
-                  <h4>Anna Nelson</h4>
-                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                  <p>6 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+                <li class="message-item">
+                    <a href="#">
+                        <img src="{% static 'assets/img/messages-2.jpg' %}" alt="" class="rounded-circle">
+                        <div>
+                            <h4>Anna Nelson</h4>
+                            <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                            <p>6 hrs. ago</p>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
 
-            <li class="message-item">
-              <a href="#">
-                <img src="assets/img/messages-3.jpg" alt="" class="rounded-circle">
-                <div>
-                  <h4>David Muldon</h4>
-                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                  <p>8 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+                <li class="message-item">
+                    <a href="#">
+                        <img src="assets/img/messages-3.jpg" alt="" class="rounded-circle">
+                        <div>
+                            <h4>David Muldon</h4>
+                            <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                            <p>8 hrs. ago</p>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
 
-            <li class="dropdown-footer">
-              <a href="#">Show all messages</a>
-            </li>
+                <li class="dropdown-footer">
+                    <a href="#">Show all messages</a>
+                </li>
 
-          </ul><!-- End Messages Dropdown Items -->
+            </ul><!-- End Messages Dropdown Items -->
 
-        </li><!-- End Messages Nav -->
+            </li><!-- End Messages Nav -->
 
-        <li class="nav-item dropdown pe-3">
+            <li class="nav-item dropdown pe-3">
 
-          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="/media/{{ picture }}" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">{{ wel.first_name }} {{ wel.last_name }}</span>
-          </a><!-- End Profile Iamge Icon -->
+                <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                    <img src="/media/{{ picture }}" alt="Profile" class="rounded-circle">
+                    <span class="d-none d-md-block dropdown-toggle ps-2">{{ wel.first_name }} {{ wel.last_name }}</span>
+                </a><!-- End Profile Iamge Icon -->
 
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-            <li class="dropdown-header">
-              <h6>{{ wel.first_name }} {{ wel.last_name }}</h6>
-              <span>Web Designer</span>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                    <li class="dropdown-header">
+                        <h6>{{ wel.first_name }} {{ wel.last_name }}</h6>
+                        <span>Web Designer</span>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
 
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="/user_profile">
-                <i class="bi bi-person"></i>
-                <span>My Profile</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="/user_profile">
+                            <i class="bi bi-person"></i>
+                            <span>My Profile</span>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
 
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="/user_profile">
-                <i class="bi bi-gear"></i>
-                <span>Account Settings</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="/user_profile">
+                            <i class="bi bi-gear"></i>
+                            <span>Account Settings</span>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
 
 
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
 
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="/signout">
-                <i class="bi bi-box-arrow-right"></i>
-                <span>Sign Out</span>
-              </a>
-            </li>
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="/signout">
+                            <i class="bi bi-box-arrow-right"></i>
+                            <span>Sign Out</span>
+                        </a>
+                    </li>
 
-          </ul><!-- End Profile Dropdown Items -->
-        </li><!-- End Profile Nav -->
+                </ul><!-- End Profile Dropdown Items -->
+            </li><!-- End Profile Nav -->
 
-      </ul>
+        </ul>
     </nav><!-- End Icons Navigation -->
 
-  </header><!-- End Header -->
+</header><!-- End Header -->
 
-  <!-- ======= Sidebar ======= -->
-  <aside id="sidebar" class="sidebar">
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
 
     <ul class="sidebar-nav" id="sidebar-nav">
 
-      <li class="nav-item">
-        <a class="nav-link " href="/welcome">
-          <i class="bi bi-grid"></i>
-          <span>Dashboard</span>
-        </a>
-      </li><!-- End Dashboard Nav -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="/user_profile">
-          <i class="bi bi-person"></i>
-          <span>Profile</span>
-        </a>
-      </li><!-- End Profile Page Nav -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="/survey">
-          <i class="bi bi-card-checklist"></i>
-          <span>Apply for Survey</span>
-        </a>
-      </li><!-- End Profile Page Nav -->
+        <li class="nav-item">
+            <a class="nav-link " href="/welcome">
+                <i class="bi bi-grid"></i>
+                <span>Dashboard</span>
+            </a>
+        </li><!-- End Dashboard Nav -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="/user_profile">
+                <i class="bi bi-person"></i>
+                <span>Profile</span>
+            </a>
+        </li><!-- End Profile Page Nav -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="/survey">
+                <i class="bi bi-card-checklist"></i>
+                <span>Apply for Survey</span>
+            </a>
+        </li><!-- End Profile Page Nav -->
     </ul>
-  </aside><!-- End Sidebar-->
-  <main id="main" class="main">
+</aside><!-- End Sidebar-->
+<main id="main" class="main">
     <div class="pagetitle">
-      <h1>Dashboard</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="/welcome">Home</a></li>
-          <li class="breadcrumb-item active">Survey application form</li>
-        </ol>
-      </nav>
+        <h1>Dashboard</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/welcome">Home</a></li>
+                <li class="breadcrumb-item active">Survey application form</li>
+            </ol>
+        </nav>
     </div><!-- End Page Title -->
-               {% for message in messages %}
+    {% for message in messages %}
         <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-        <strong>Message:</strong>{{ message }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="close">
-        </button>
+            <strong>Message:</strong>{{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="close">
+            </button>
         </div>
     {% endfor %}
-      <h1>Select Survey Category<span class="badge text-bg-secondary"></span></h1>
-      <button type="button" class=" btn-industrial btn btn-primary btn-industrial" data-bs-toggle="modal" data-bs-target="#industrialModal">Industrial Category</button>
-  <button type="button" class=" btn-commercial btn btn-success" data-bs-toggle="modal" data-bs-target="#commercialModal">Commercial Category</button>
-  <button type="button" class=" btn-domestic btn btn-info" data-bs-toggle="modal" data-bs-target="#domesticModal">Domestic Category</button>
+    <h1>Select Survey Category<span class="badge text-bg-secondary"></span></h1>
+    <button type="button" class=" btn-industrial btn btn-primary btn-industrial" data-bs-toggle="modal"
+            data-bs-target="#industrialModal">Industrial Category
+    </button>
+    <button type="button" class=" btn-commercial btn btn-success" data-bs-toggle="modal"
+            data-bs-target="#commercialModal">Commercial Category
+    </button>
+    <button type="button" class=" btn-domestic btn btn-info" data-bs-toggle="modal" data-bs-target="#domesticModal">
+        Domestic Category
+    </button>
 
-  <!-- Industrial Modal -->
-  <div class="modal fade" id="industrialModal" tabindex="-1" aria-labelledby="industrialModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="industrialModalLabel">Industrial Category</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <!-- Industrial Modal -->
+    <div class="modal fade" id="industrialModal" tabindex="-1" aria-labelledby="industrialModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="industrialModalLabel">Industrial Category</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <marquee behavior="" style="color: green" direction="">Please update your details before making the
+                        application
+                    </marquee>
+                    <!-- industrial html -->
+
+
+                    <form action="/Survey_Application_insert" method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="category" class="form-label">Survey Category</label>
+                            <input type="text" class="form-control" name="category" value="Industrial" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="first name" class="form-label">First Name</label>
+                            <input type="text" class="form-control" name="fname" value="{{ suv1.fname }}" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="last name" class="form-label">Last Name</label>
+                            <input type="text" class="form-control" name="lname" value="{{ suv1.lname }}" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" name="email" value="{{ suv1.email }}" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <input type="number" class="form-control" name="phone" value="{{ suv1.phone }}" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="survey_fee" class="form-label">Survey Fee</label>
+                            <input type="number" class="form-control" id="sfee" name="sfee"
+                                   value="{{ suv3.industrial_survey_fee }}" readonly oninput="add_fees()">
+                        </div>
+                        <div class="mb-3">
+                            <label for="local_authority_fee" class="form-label">Local Authority Fee</label>
+                            <input type="number" class="form-control" id="lfee" name="lfee"
+                                   value="{{ suv3.industrial_local_authority_fee }}" readonly oninput="add_fees()">
+                        </div>
+                        <div class="mb-3">
+                            <label for="total_amount" class="form-label">Total Amount</label>
+                            <input type="number" class="form-control" id="tamount" name="tamount" readonly>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </form>
+                    <!-- end industrial html -->
+
+                </div>
+            </div>
         </div>
+    </div>
 
-        <div class="modal-body">
-            <marquee behavior="" style="color: green" direction="">Please update your details before making the application</marquee>
-            <!-- industrial html -->
+    <!-- Commercial Modal -->
+    <div class="modal fade" id="commercialModal" tabindex="-1" aria-labelledby="commercialModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="commercialModalLabel">Commercial Category</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
 
+                <div class="modal-body">
+                    <marquee behavior="" style="color: green" direction="">Please update your details before making the
+                        application
+                    </marquee>
+                    <!-- commercial html -->
 
-<form action="/Survey_Application_insert" method="post">
-    {% csrf_token %}
-    <div class="mb-3">
-        <label for="category" class="form-label">Survey Category</label>
-        <input type="text" class="form-control" name="category" value="Industrial" readonly>
-    </div>
-    <div class="mb-3">
-        <label for="first name" class="form-label">First Name</label>
-        <input type="text" class="form-control" name="fname" value="{{ suv1.fname }}" readonly>
-    </div>
-    <div class="mb-3">
-        <label for="last name" class="form-label">Last Name</label>
-        <input type="text" class="form-control" name="lname" value="{{ suv1.lname }}" readonly>
-    </div>
-    <div class="mb-3">
-        <label for="email" class="form-label">Email Address</label>
-        <input type="email" class="form-control" name="email" value="{{ suv1.email }}" readonly>
-    </div>
-    <div class="mb-3">
-        <label for="phone" class="form-label">Phone Number</label>
-        <input type="number" class="form-control" name="phone" value="{{ suv1.phone }}" readonly>
-    </div>
-    <div class="mb-3">
-        <label for="survey_fee" class="form-label">Survey Fee</label>
-        <input type="number" class="form-control" id="sfee" name="sfee" value="{{ suv3.industrial_survey_fee }}" readonly oninput="add_fees()">
-    </div>
-    <div class="mb-3">
-        <label for="local_authority_fee" class="form-label">Local Authority Fee</label>
-        <input type="number" class="form-control" id="lfee" name="lfee" value="{{ suv3.industrial_local_authority_fee }}" readonly oninput="add_fees()">
-    </div>
-    <div class="mb-3">
-        <label for="total_amount" class="form-label">Total Amount</label>
-        <input type="number" class="form-control" id="tamount" name="tamount" readonly>
-    </div>
-     <button type="submit" class="btn btn-primary">Save changes</button>
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-</form>
- <!-- end industrial html -->
-
+                    <form action="/Survey_Application_insert" method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="category" class="form-label">Survey Category</label>
+                            <input type="text" class="form-control" name="category" value="Commercial" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="first name" class="form-label">First Name</label>
+                            <input type="text" class="form-control" name="fname" value="{{ suv1.fname }}" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="last name" class="form-label">Last Name</label>
+                            <input type="text" class="form-control" name="lname" value="{{ suv1.lname }}" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" name="email" value="{{ suv1.email }}" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <input type="number" class="form-control" name="phone" value="{{ suv1.phone }}" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="survey_fee" class="form-label">Survey Fee</label>
+                            <input type="number" class="form-control" id="scfee" name="sfee"
+                                   value="{{ suv3.commercial_survey_fee }}" readonly oninput="add_survey()">
+                        </div>
+                        <div class="mb-3">
+                            <label for="local_authority_fee" class="form-label">Local Authority Fee</label>
+                            <input type="number" class="form-control" id="lcfee" name="lfee"
+                                   value="{{ suv3.commercial_local_authority_fee }}" readonly oninput="add_survey()">
+                        </div>
+                        <div class="mb-3">
+                            <label for="total_amount" class="form-label">Total Amount</label>
+                            <input type="number" class="form-control" id="tcamount" name="tamount" readonly>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </form>
+                    <! -- end commercial html -->
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 
-  <!-- Commercial Modal -->
-  <div class="modal fade" id="commercialModal" tabindex="-1" aria-labelledby="commercialModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="commercialModalLabel">Commercial Category</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <!-- Domestic Modal -->
+    <div class="modal fade" id="domesticModal" tabindex="-1" aria-labelledby="domesticModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="domesticModalLabel">Domestic Category</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <marquee behavior="" style="color: green" direction="">Please update your details before making the
+                        application
+                    </marquee>
+                    <!-- domestic html-->
+
+                    <form action="/Survey_Application_insert" method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="category" class="form-label">Survey Category</label>
+                            <input type="text" class="form-control" name="category" value="Industrial" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="first name" class="form-label">First Name</label>
+                            <input type="text" class="form-control" name="fname" value="{{ suv1.fname }}" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="last name" class="form-label">Last Name</label>
+                            <input type="text" class="form-control" name="lname" value="{{ suv1.lname }}" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" name="email" value="{{ suv1.email }}" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <input type="number" class="form-control" name="phone" value="{{ suv1.phone }}" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="survey_fee" class="form-label">Survey Fee</label>
+                            <input type="number" class="form-control" id="sdfee" name="sfee"
+                                   value="{{ suv3.domestic_survey_fee }}" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="local_authority_fee" class="form-label">Local Authority Fee</label>
+                            <input type="number" class="form-control" id="ldfee" name="lfee"
+                                   value="{{ suv3.domestic_local_authority_fee }}" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="total_amount" class="form-label">Total Amount</label>
+                            <input type="number" class="form-control" id="tdamount" name="tamount" readonly>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </form>
+
+                    <!-- end domestic html -->
+                </div>
+            </div>
         </div>
+    </div>
+    <hr style="border: 1px solid deepskyblue">
+    <div style="color: red">
+        <marquee behavior="scroll" direction="left">
+            The system accepts only one application at a time. If a client wishes to submit multiple applications, they
+            must
+            wait until the previous application is fully processed before submitting a new one.
+        </marquee>
+    </div>
+    <hr style="border: 1px solid deepskyblue">
 
-        <div class="modal-body">
-            <marquee behavior="" style="color: green" direction="">Please update your details before making the application</marquee>
-          <!-- commercial html -->
+    <div class="container my-5">
+        <div class="row g-4">
+            <!-- Industrial Category Card -->
+            <div class="col-md-4">
+                <div class="card bg-ocean text-white h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Industrial category</h5>
+                        <h6 class="card-subtitle mb-2 text-light">Dive into tranquility</h6>
+                        <p class="card-text">Experience the calming effects of our survey that is done on large scale or
+                            the industrial category. This applies to big organization that needs large volume of water
+                            for their daily operation use</p>
+                        <div class="mb-3">
+                            <h3>Premium Plus</h3>
+                        </div>
+                        <h5 class="card-title">Click on the Industrial Category to book the category survey</h5>
+                    </div>
+                </div>
+            </div>
 
-<form action="/Survey_Application_insert" method="post">
-    {% csrf_token %}
-    <div class="mb-3">
-        <label for="category" class="form-label">Survey Category</label>
-        <input type="text" class="form-control" name="category" value="Commercial" readonly>
-    </div>
-    <div class="mb-3">
-        <label for="first name" class="form-label">First Name</label>
-        <input type="text" class="form-control" name="fname" value="{{ suv1.fname }}" readonly>
-    </div>
-    <div class="mb-3">
-        <label for="last name" class="form-label">Last Name</label>
-        <input type="text" class="form-control" name="lname" value="{{ suv1.lname }}" readonly>
-    </div>
-    <div class="mb-3">
-        <label for="email" class="form-label">Email Address</label>
-        <input type="email" class="form-control" name="email" value="{{ suv1.email }}" readonly>
-    </div>
-    <div class="mb-3">
-        <label for="phone" class="form-label">Phone Number</label>
-        <input type="number" class="form-control" name="phone" value="{{ suv1.phone }}" readonly>
-    </div>
-    <div class="mb-3">
-        <label for="survey_fee" class="form-label">Survey Fee</label>
-        <input type="number" class="form-control" id="scfee" name="sfee" value="{{ suv3.commercial_survey_fee }}" readonly oninput="add_survey()">
-    </div>
-    <div class="mb-3">
-        <label for="local_authority_fee" class="form-label">Local Authority Fee</label>
-        <input type="number" class="form-control" id="lcfee" name="lfee" value="{{ suv3.commercial_local_authority_fee }}" readonly oninput="add_survey()" >
-    </div>
-    <div class="mb-3">
-        <label for="total_amount" class="form-label">Total Amount</label>
-        <input type="number" class="form-control" id="tcamount" name="tamount" readonly>
-    </div>
-      <button type="submit" class="btn btn-primary">Save changes</button>
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-</form>
-          <! -- end commercial html -->
+            <!-- Forest Green Card -->
+            <div class="col-md-4">
+                <div class="card bg-forest text-white h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Forest Green</h5>
+                        <h6 class="card-subtitle mb-2 text-light">Embrace nature's beauty</h6>
+                        <p class="card-text">Surround yourself with the refreshing essence of lush forests.</p>
+                        <span class="badge bg-light text-success mb-3">Eco-friendly</span>
+                        <br>
+                        <a href="#" class="btn btn-outline-light">Explore Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Royal Purple Card -->
+            <div class="col-md-4">
+                <div class="card bg-royal text-white h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Royal Purple</h5>
+                        <h6 class="card-subtitle mb-2 text-light">Indulge in luxury</h6>
+                        <p class="card-text">Elevate your space with our regal and sophisticated purple hues.</p>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="fw-bold">Premium</span>
+                            <span class="badge bg-light text-purple">Limited Edition</span>
+                        </div>
+                        <a href="#" class="btn btn-outline-light">Get Exclusive Access</a>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 
-  <!-- Domestic Modal -->
-  <div class="modal fade" id="domesticModal" tabindex="-1" aria-labelledby="domesticModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="domesticModalLabel">Domestic Category</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-
-        <div class="modal-body">
-            <marquee behavior="" style="color: green" direction="">Please update your details before making the application</marquee>
-          <!-- domestic html-->
-
-<form action="/Survey_Application_insert" method="post">
-    {% csrf_token %}
-    <div class="mb-3">
-        <label for="category" class="form-label">Survey Category</label>
-        <input type="text" class="form-control" name="category" value="Industrial" readonly>
-    </div>
-    <div class="mb-3">
-        <label for="first name" class="form-label">First Name</label>
-        <input type="text" class="form-control" name="fname" value="{{ suv1.fname }}" readonly>
-    </div>
-    <div class="mb-3">
-        <label for="last name" class="form-label">Last Name</label>
-        <input type="text" class="form-control" name="lname" value="{{ suv1.lname }}" readonly>
-    </div>
-    <div class="mb-3">
-        <label for="email" class="form-label">Email Address</label>
-        <input type="email" class="form-control" name="email" value="{{ suv1.email }}" readonly>
-    </div>
-    <div class="mb-3">
-        <label for="phone" class="form-label">Phone Number</label>
-        <input type="number" class="form-control" name="phone" value="{{ suv1.phone }}" readonly>
-    </div>
-    <div class="mb-3">
-        <label for="survey_fee" class="form-label">Survey Fee</label>
-        <input type="number" class="form-control" id="sdfee" name="sfee" value="{{ suv3.domestic_survey_fee }}" readonly>
-    </div>
-    <div class="mb-3">
-        <label for="local_authority_fee" class="form-label">Local Authority Fee</label>
-        <input type="number" class="form-control" id="ldfee" name="lfee" value="{{ suv3.domestic_local_authority_fee }}" readonly >
-    </div>
-    <div class="mb-3">
-        <label for="total_amount" class="form-label">Total Amount</label>
-        <input type="number" class="form-control" id="tdamount" name="tamount" readonly>
-    </div>
-     <button type="submit" class="btn btn-primary">Save changes</button>
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-</form>
-
-         <!-- end domestic html -->
-        </div>
-      </div>
-    </div>
-  </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
 
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-  </main><!-- End #main -->
-
-  <!-- ======= Footer ======= -->
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+</main><!-- End #main -->
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- Vendor JS Files -->
-  <script src="{% static 'assets/vendor/apexcharts/apexcharts.min.js' %}"></script>
-  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-  <script src="{% static 'assets/vendor/chart.js/chart.umd.js' %}"></script>
-  <script src="{% static 'assets/vendor/echarts/echarts.min.js' %}"></script>
-  <script src="{% static 'assets/vendor/quill/quill.js' %}"></script>
-  <script src="{% static 'assets/vendor/simple-datatables/simple-datatables.js' %}"></script>
-  <script src="{% static 'assets/vendor/tinymce/tinymce.min.js' %}"></script>
-  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+<!-- ======= Footer ======= -->
 
 
-  <!-- Template Main JS File -->
-  <script src="{% static 'assets/js/main.js' %}"></script>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Vendor JS Files -->
+<script src="{% static 'assets/vendor/apexcharts/apexcharts.min.js' %}"></script>
+<script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'assets/vendor/chart.js/chart.umd.js' %}"></script>
+<script src="{% static 'assets/vendor/echarts/echarts.min.js' %}"></script>
+<script src="{% static 'assets/vendor/quill/quill.js' %}"></script>
+<script src="{% static 'assets/vendor/simple-datatables/simple-datatables.js' %}"></script>
+<script src="{% static 'assets/vendor/tinymce/tinymce.min.js' %}"></script>
+<script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+
+
+<!-- Template Main JS File -->
+<script src="{% static 'assets/js/main.js' %}"></script>
 
 
 </body>
