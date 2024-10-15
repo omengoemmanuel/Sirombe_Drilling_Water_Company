@@ -274,21 +274,38 @@ def survey(request):
 
 def Survey_Application_insert(request):
     if request.method == 'POST':
+        Email_Address = request.POST.get('email')
+
+        # Check if the user has already submitted an application
+        existing_application = Survey_Application.objects.filter(Email_Address=Email_Address).exists()
+        if existing_application:
+            messages.error(request,
+                           'You have a pending survey application that has not been yet approved,if you feel its an error, kindly call the administrator')
+            return redirect('survey')
+
+        # Proceed with saving the new application
         Survey_Category = request.POST.get('category')
         First_Name = request.POST.get('fname')
         Last_Name = request.POST.get('lname')
-        Email_Address = request.POST.get('email')
         Phone_Number = request.POST.get('phone')
         Survey_Fee = request.POST.get('sfee')
         Local_Authority_Fee = request.POST.get('lfee')
         Total_Amount = request.POST.get('tamount')
 
-        application = Survey_Application(Survey_Category=Survey_Category, First_Name=First_Name, Last_Name=Last_Name,
-                                         Email_Address=Email_Address, Phone_Number=Phone_Number, Survey_Fee=Survey_Fee,
-                                         Local_Authority_Fee=Local_Authority_Fee, Total_Amount=Total_Amount)
+        application = Survey_Application(
+            Survey_Category=Survey_Category,
+            First_Name=First_Name,
+            Last_Name=Last_Name,
+            Email_Address=Email_Address,
+            Phone_Number=Phone_Number,
+            Survey_Fee=Survey_Fee,
+            Local_Authority_Fee=Local_Authority_Fee,
+            Total_Amount=Total_Amount
+        )
         application.save()
         messages.success(request, 'Survey application sent successfully')
         return redirect('pay')
+
     return redirect('pay')
 
 
@@ -329,4 +346,24 @@ def stkpush(request):
 
 
 def layout(request):
-    return render(request, 'adminweb/layout.html')
+    email = request.user.email
+    wel = User.objects.get(email=email)
+
+    try:
+        pic = userprofile.objects.get(email=email)
+        picture = pic.p_photo
+    except userprofile.DoesNotExist:
+        picture = ''
+    return render(request, 'adminweb/layout.html', {'wel': wel, 'picture': picture})
+
+
+def drilling(request):
+    email = request.user.email
+    wel = User.objects.get(email=email)
+
+    try:
+        pic = userprofile.objects.get(email=email)
+        picture = pic.p_photo
+    except userprofile.DoesNotExist:
+        picture = ''
+    return render(request, 'adminweb/drilling.html', {'wel': wel, 'picture': picture})

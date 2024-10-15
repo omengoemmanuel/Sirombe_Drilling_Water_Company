@@ -112,7 +112,7 @@
 <aside id="sidebar" class="sidebar">
     <ul class="sidebar-nav" id="sidebar-nav">
         <li class="nav-item">
-            <a class="nav-link " href="/user_profile">
+            <a class="nav-link " href="/welcome">
                 <i class="bi bi-grid"></i>
                 <span>Dashboard</span>
             </a>
@@ -129,6 +129,12 @@
             <a class="nav-link collapsed" href="/survey">
                 <i class="bi bi-card-checklist"></i>
                 <span>Apply for Survey</span>
+            </a>
+        </li><!-- End Survey Application Nav -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="/drilling">
+                <i class="bi bi-person"></i>
+                <span>Apply for Drilling</span>
             </a>
         </li><!-- End Survey Application Nav -->
     </ul>
@@ -183,7 +189,8 @@
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                 Survey Application
                             </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800" style="color: deepskyblue">Status:  {{ status }}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" style="color: deepskyblue">
+                                Status: {{ status }}</div>
                         </div>
                     </div>
                 </div>
@@ -195,7 +202,8 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" style="color: deepskyblue">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"
+                                 style="color: deepskyblue">
                                 Drilling as A Serice
                             </div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800" style="color: deepskyblue">Status:</div>
