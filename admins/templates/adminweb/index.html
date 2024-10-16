@@ -152,6 +152,13 @@
         </nav>
     </div><!-- End Page Title -->
 
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            <strong>Message:</strong>{{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="close"></button>
+        </div>
+    {% endfor %}
+
     <!-- Example Cards (You can adjust as needed) -->
     <div class="row">
         <div class="col-xl-3 col-md-6 mb-4">

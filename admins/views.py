@@ -280,7 +280,7 @@ def Survey_Application_insert(request):
         existing_application = Survey_Application.objects.filter(Email_Address=Email_Address).exists()
         if existing_application:
             messages.error(request,
-                           'You have a pending survey application that has not been yet approved,if you feel its an error, kindly call the administrator')
+                           'You have a pending survey application that has not been yet approved,if you feel its an error, kindly contact the administrator')
             return redirect('survey')
 
         # Proceed with saving the new application
@@ -360,10 +360,17 @@ def layout(request):
 def drilling(request):
     email = request.user.email
     wel = User.objects.get(email=email)
-
+    drill = Survey_Application.objects.get(Email_Address=email)
     try:
         pic = userprofile.objects.get(email=email)
         picture = pic.p_photo
     except userprofile.DoesNotExist:
         picture = ''
-    return render(request, 'adminweb/drilling.html', {'wel': wel, 'picture': picture})
+
+    if drill.status == 'Approved':
+        return render(request, 'adminweb/drilling.html', {'wel': wel, 'picture': picture})
+
+    else:
+        messages.error(request,
+                       "Your Survey Application is still on Verifyied stage, Please wait for the Approval. If this is an error, Please contact the administrator")
+        return redirect('welcome')

@@ -1,6 +1,21 @@
 {% extends 'adminweb/layout.html' %}
+{% load static %}
+{% block body %}
+    <main id="main" class="main">
 
-<main id="main" class="main">
-
-
-</main>
+        apply
+    </main>
+    <footer class="bg-dark text-light py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">&copy; 2024 Sirombe Springs. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="#" class="text-muted me-2">Privacy Policy</a>
+                    <a href="#" class="text-muted">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+{% endblock %}
