@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 
-from admins.models import userprofile, survey_and_local_fee, Survey_Application
+from admins.models import userprofile, survey_and_local_fee, Survey_Application, Payment
 
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -17,6 +17,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from django.contrib.auth import get_user_model
+from django.http import JsonResponse
 from django.template.loader import render_to_string
 
 
@@ -361,6 +362,7 @@ def drilling(request):
     email = request.user.email
     wel = User.objects.get(email=email)
     drill = Survey_Application.objects.get(Email_Address=email)
+
     try:
         pic = userprofile.objects.get(email=email)
         picture = pic.p_photo
@@ -374,3 +376,13 @@ def drilling(request):
         messages.error(request,
                        "Your Survey Application is still on Verifyied stage, Please wait for the Approval. If this is an error, Please contact the administrator")
         return redirect('welcome')
+
+
+def get_downpayment(request):
+    name = request.GET.get('name')
+
+    try:
+        payment = Payment.objects.get(name=name)
+        return JsonResponse({'downpayment': payment.downpayment})
+    except Payment.DoesNotExist:
+        return JsonResponse({'error': 'Payment not found'}, status=404)

@@ -1,21 +1,150 @@
 {% extends 'adminweb/layout.html' %}
 {% load static %}
 {% block body %}
-    <main id="main" class="main">
+    <title>Drilling Application</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .step-content {
+            display: none;
+        }
 
-        apply
-    </main>
-    <footer class="bg-dark text-light py-4">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 text-center text-md-start">
-                    <p class="mb-0">&copy; 2024 Sirombe Springs. All rights reserved.</p>
-                </div>
-                <div class="col-md-6 text-center text-md-end">
-                    <a href="#" class="text-muted me-2">Privacy Policy</a>
-                    <a href="#" class="text-muted">Terms of Service</a>
+        .step-content.active {
+            display: block;
+        }
+    </style>
+    <main id="main" class="main">
+        <div class="pagetitle">
+            <h1>Drilling</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/welcome">Home</a></li>
+                    <li class="breadcrumb-item active">Drilling application form</li>
+                </ol>
+            </nav>
+        </div><!-- End Page Title -->
+        <div class="container mt-5">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="text-center mb-4">Drilling Services</h2>
+                    <form id="multiStepForm">
+                        <div class="step-content active" id="step1">
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="payment-dropdown">Select Drilling Service:</label>
+                                    <select class="form-control" id="payment-dropdown" name="serviceType">
+                                        <option value="Choose a service">Choose a service</option>
+                                        <option value="Symmetric Drilling">Symmetric Drilling</option>
+                                        <option value="Core Drilling">Core Drilling</option>
+                                        <option value="Geo-Technical Drilling">Geo-Technical Drilling</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="clientName">First Name:</label>
+                                    <input type="text" class="form-control" id="clientName" name="fname"
+                                           placeholder="Enter your name">
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="clientName">Last Name:</label>
+                                    <input type="text" class="form-control" id="clientName" name="lname"
+                                           placeholder="Enter your name">
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="contactEmail">Contact Email:</label>
+                                    <input type="email" class="form-control" id="contactEmail" name="email"
+                                           placeholder="Enter your email">
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="clientName">Survey Status:</label>
+                                    <input type="text" class="form-control" id="clientName" name="status"
+                                           placeholder="Survey status">
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="clientName">Expected Depth:</label>
+                                    <input type="number" class="form-control" id="clientName" name="height"
+                                           placeholder="Expected Height and Depth">
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="downpayment-input">Down Payment Fee:</label>
+                                    <input type="text" class="form-control" id="downpayment-input" name="dpayment"
+                                           placeholder="Down Payment Fee">
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="clientName">Drilling Fee Charge:</label>
+                                    <input type="number" class="form-control" id="clientName" name="d_fee"
+                                           placeholder="Drilling Fee Charge">
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-primary next-btn">Next</button>
+                        </div>
+
+                        <div class="step-content" id="step2">
+                            <h4>Step 2: Project Details</h4>
+                            <div class="form-group">
+                                <label for="projectDetails">Project Details:</label>
+                                <textarea class="form-control" id="projectDetails" name="projectDetails" rows="4"
+                                          placeholder="Provide details about the project"></textarea>
+                            </div>
+                            <button type="button" class="btn btn-secondary prev-btn">Previous</button>
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-    </footer>
+
+        <!-- Bootstrap JS and dependencies -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.0/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+                crossorigin="anonymous"></script>
+        <script>
+            // JavaScript for multi-step form navigation
+            $(document).ready(function () {
+                var currentStep = 1;
+
+                $(".next-btn").click(function () {
+                    $("#step" + currentStep).removeClass("active");
+                    currentStep++;
+                    $("#step" + currentStep).addClass("active");
+                });
+
+                $(".prev-btn").click(function () {
+                    $("#step" + currentStep).removeClass("active");
+                    currentStep--;
+                    $("#step" + currentStep).addClass("active");
+                });
+
+                $("#multiStepForm").submit(function (e) {
+                    e.preventDefault();
+                    alert("Form submitted successfully!");
+                });
+            });
+
+            document.getElementById('payment-dropdown').addEventListener('change', function () {
+                const paymentType = this.value;
+                if (paymentType) {
+                    fetch(`/get-downpayment/?name=${paymentType}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.downpayment) {
+                                document.getElementById('downpayment-input').value = data.downpayment;
+                            } else {
+                                document.getElementById('downpayment-input').value = 'N/A';
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error fetching downpayment:', error);
+                        });
+                } else {
+                    document.getElementById('downpayment-input').value = '';
+                }
+            });
+        </script>
+
+
+
+    </main>
 {% endblock %}

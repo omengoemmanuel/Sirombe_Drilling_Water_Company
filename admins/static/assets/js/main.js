@@ -367,3 +367,5 @@ btnDomestic.addEventListener(
   "click",
   calulatePrice("sdfee", "ldfee", "tdamount")
 );
+
+

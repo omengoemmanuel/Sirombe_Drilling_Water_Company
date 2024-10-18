@@ -52,6 +52,7 @@ class Survey_Application(models.Model):
     Total_Amount = models.PositiveIntegerField(null=False, blank=False)
     Mpesa_phone = models.PositiveIntegerField(blank=False, null=True, default='0000000000')
     Amount_paid = models.PositiveIntegerField(blank=False, null=True, default='0')
+    depth = models.PositiveIntegerField(blank=False, null=True, default='0')
     status_choice = [
         ('Approved', 'Approved'),
         ('Verified', 'Verified')
@@ -60,3 +61,16 @@ class Survey_Application(models.Model):
 
     def __str__(self):
         return f"{self.First_Name} {self.Last_Name}"
+
+
+class Payment(models.Model):
+    name_choices = [
+        ('Symmetric Drilling', 'Symmetric Drilling'),
+        ('Core Drilling', 'Core Drilling',),
+        ('Geo-Technical Drilling', 'Geo-Technical Drilling')
+    ]
+    name = models.CharField(max_length=50, choices=name_choices)
+    downpayment = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return self.name
