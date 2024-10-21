@@ -370,7 +370,7 @@ def drilling(request):
         picture = ''
 
     if drill.status == 'Approved':
-        return render(request, 'adminweb/drilling.html', {'wel': wel, 'picture': picture})
+        return render(request, 'adminweb/drilling.html', {'wel': wel, 'picture': picture, 'drill': drill})
 
     else:
         messages.error(request,

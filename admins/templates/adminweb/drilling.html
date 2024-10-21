@@ -23,12 +23,13 @@
                 </ol>
             </nav>
         </div><!-- End Page Title -->
-        <div class="container mt-5">
-            <div class="card">
+        <div class="container mt-5" style="background-color: blue">
+            <div class="card" style="">
                 <div class="card-body">
-                    <h2 class="text-center mb-4">Drilling Services</h2>
+                    <h2 class="text-center mb-4">Drilling & Plumbing Services </h2>
                     <form id="multiStepForm">
                         <div class="step-content active" id="step1">
+                            <h4>Step 1: Drilling Applications</h4>
                             <div class="form-row">
                                 <div class="col-md-4 mb-3">
                                     <label for="payment-dropdown">Select Drilling Service:</label>
@@ -42,49 +43,61 @@
                                 <div class="col-md-4 mb-3">
                                     <label for="clientName">First Name:</label>
                                     <input type="text" class="form-control" id="clientName" name="fname"
-                                           placeholder="Enter your name">
+                                           value="{{ drill.First_Name }}" readonly>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="clientName">Last Name:</label>
                                     <input type="text" class="form-control" id="clientName" name="lname"
-                                           placeholder="Enter your name">
+                                           value="{{ drill.Last_Name }}" readonly>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="contactEmail">Contact Email:</label>
                                     <input type="email" class="form-control" id="contactEmail" name="email"
-                                           placeholder="Enter your email">
+                                           value="{{ drill.Email_Address }}" readonly>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="contactEmail">Contact Phone No:</label>
+                                    <input type="text" class="form-control" id="contactEmail" name="phone"
+                                           value="{{ drill.Phone_Number }}" readonly>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="clientName">Survey Status:</label>
                                     <input type="text" class="form-control" id="clientName" name="status"
-                                           placeholder="Survey status">
+                                       value="{{ drill.status }}" readonly>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="clientName">Expected Depth:</label>
                                     <input type="number" class="form-control" id="clientName" name="height"
-                                           placeholder="Expected Height and Depth">
+                                           value="{{ drill.depth }}" readonly>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="downpayment-input">Down Payment Fee:</label>
                                     <input type="text" class="form-control" id="downpayment-input" name="dpayment"
-                                           placeholder="Down Payment Fee">
+                                           placeholder="Down Payment Fee" readonly>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="clientName">Drilling Fee Charge:</label>
-                                    <input type="number" class="form-control" id="clientName" name="d_fee"
+                                    <input type="text" class="form-control" id="clientName" name="d_fee"
                                            placeholder="Drilling Fee Charge">
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="clientName"></label>
+                                    <button type="submit" class="btn btn-success">Click to Pay Down payment Fee</button>
+
+
                                 </div>
                             </div>
                             <button type="button" class="btn btn-primary next-btn">Next</button>
                         </div>
 
                         <div class="step-content" id="step2">
-                            <h4>Step 2: Project Details</h4>
-                            <div class="form-group">
-                                <label for="projectDetails">Project Details:</label>
-                                <textarea class="form-control" id="projectDetails" name="projectDetails" rows="4"
-                                          placeholder="Provide details about the project"></textarea>
+                            <h4>Step 2: Plumbing Applications</h4>
+                            <div class="col-md-4 mb-3">
+                                <label for="clientName">First Name:</label>
+                                <input type="text" class="form-control" id="clientName" name="fname"
+                                       placeholder="Enter your name">
                             </div>
+
                             <button type="button" class="btn btn-secondary prev-btn">Previous</button>
                             <button type="submit" class="btn btn-success">Submit</button>
                         </div>
@@ -143,7 +156,6 @@
                 }
             });
         </script>
-
 
 
     </main>

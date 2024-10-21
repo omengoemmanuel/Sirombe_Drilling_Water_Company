@@ -59,15 +59,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# Add this setting to use the built-in message tags
-
-
 MESSAGE_TAGS = {
     messages.DEBUG: 'debug',
     messages.INFO: 'info',
     messages.SUCCESS: 'success',
     messages.WARNING: 'warning',
-    messages.ERROR: 'danger',  # Bootstrap uses "danger" instead of "error"
+    messages.ERROR: 'danger',
 }
 
 ROOT_URLCONF = 'sirombe_springs.urls'
