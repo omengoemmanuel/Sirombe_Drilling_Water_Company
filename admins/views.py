@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 
-from admins.models import userprofile, survey_and_local_fee, Survey_Application, Payment
+from admins.models import userprofile, survey_and_local_fee, Survey_Application, Payment, Pump
 
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -386,3 +386,13 @@ def get_downpayment(request):
         return JsonResponse({'downpayment': payment.downpayment})
     except Payment.DoesNotExist:
         return JsonResponse({'error': 'Payment not found'}, status=404)
+
+
+def get_pump(request):
+    pump = request.GET.get('pump')
+
+    try:
+        pump = Pump.objects.get(pump=pump)
+        return JsonResponse({'cost': pump.cost})
+    except Pump.DoesNotExist:
+        return JsonResponse({'error': 'Cost not found'}, status=404)

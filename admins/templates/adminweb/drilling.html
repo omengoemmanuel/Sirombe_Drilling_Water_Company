@@ -63,40 +63,73 @@
                                 <div class="col-md-4 mb-3">
                                     <label for="clientName">Survey Status:</label>
                                     <input type="text" class="form-control" id="clientName" name="status"
-                                       value="{{ drill.status }}" readonly>
+                                           value="{{ drill.status }}" readonly>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="clientName">Expected Depth:</label>
-                                    <input type="number" class="form-control" id="clientName" name="height"
+                                    <input type="number" class="form-control" id="depth" name="depth"
                                            value="{{ drill.depth }}" readonly>
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <label for="downpayment-input">Down Payment Fee:</label>
-                                    <input type="text" class="form-control" id="downpayment-input" name="dpayment"
+                                    <label for="downpaymentinput">Down Payment Fee:</label>
+                                    <input type="text" class="form-control" id="downpaymentinput" name="dpayment"
                                            placeholder="Down Payment Fee" readonly>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="clientName">Drilling Fee Charge:</label>
-                                    <input type="text" class="form-control" id="clientName" name="d_fee"
-                                           placeholder="Drilling Fee Charge">
+                                    <input type="number" class="form-control" id="drillingCharge" name="d_fee"
+                                           placeholder="Drilling Fee Charge" readonly>
                                 </div>
-                                <div class="col-md-4 mb-3">
-                                    <label for="clientName"></label>
-                                    <button type="submit" class="btn btn-success">Click to Pay Down payment Fee</button>
 
-
-                                </div>
                             </div>
                             <button type="button" class="btn btn-primary next-btn">Next</button>
                         </div>
-
                         <div class="step-content" id="step2">
-                            <h4>Step 2: Plumbing Applications</h4>
-                            <div class="col-md-4 mb-3">
-                                <label for="clientName">First Name:</label>
-                                <input type="text" class="form-control" id="clientName" name="fname"
-                                       placeholder="Enter your name">
+                            <h4>Step 2: Drilling Applications</h4>
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="pump-dropdown">Select Pump:</label>
+                                    <select class="form-control" id="pump-dropdown" name="pumpType">
+                                        <option value="Choose pump">Choose pump</option>
+                                        <option value="Submersible Electric Pump">Submersible Electric Pump</option>
+                                        <option value="Solar Pump">Solar Pump</option>
+                                        <option value="Hand Pump">Hand Pump</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="pumppaymentinput">Pump Payment Fee:</label>
+                                    <input type="text" class="form-control" id="pumppaymentinput" name="ppayment"
+                                           placeholder="Pump Payment Fee" readonly>
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <label for="clientName">Expected Height:</label>
+                                    <input type="number" class="form-control" id="height" name="height"
+                                           value="{{ drill.height }}" readonly>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="clientName">Piping Fee:</label>
+                                    <input type="number" class="form-control" id="pipefee" name="height"
+                                           value="" readonly>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="tank-dropdown">Select Tank:</label>
+                                    <select class="form-control" id="tank-dropdown" name="serviceType">
+                                        <option value="Choose tank">Choose tank</option>
+                                        <option value="Household Tank Plastic">Household Tank Plastic</option>
+                                        <option value="Household Steel Tank">Household Steel Tank</option>
+                                        <option value="Large Steel Tank">Large Steel Tank</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <label for="clientName">Tank Fee Charge:</label>
+                                    <input type="number" class="form-control" id="tankCharge" name="d_fee"
+                                           placeholder="Tank Fee Charge">
+                                </div>
+
                             </div>
+
 
                             <button type="button" class="btn btn-secondary prev-btn">Previous</button>
                             <button type="submit" class="btn btn-success">Submit</button>
@@ -136,23 +169,87 @@
                 });
             });
 
+            function calculatePipeCharge() {
+                const height = parseFloat(document.getElementById("height").value) ||0;
+                let pipefee;
+                if (height<=100){
+                    pipefee = height * 1000;
+                } else if (height> 100 && height <=200){
+                    pipefee = height * 1500;
+                } else if (height >200 && height <=300){
+                    pipefee = height * 2000;
+                } else if (height >300){
+                    pipefee = height * 2500;
+                }else {
+                    pipefee = "Select Pump"
+                }
+                document.getElementById("pipefee").value = pipefee;
+            }
+            window.onload = function (){
+                calculatePipeCharge();
+            };
+
+            function calculateDrillingCharge() {
+                const depth = parseFloat(document.getElementById("depth").value) || 0;
+                const downpaymentinput = parseFloat(document.getElementById("downpaymentinput").value) || 0;
+
+                let drillingCharge;
+
+                if (depth <= 100) {
+                    drillingCharge = (depth * 1000) + downpaymentinput;
+                } else if (depth > 100 && depth <= 200) {
+                    drillingCharge = (depth * 1500) + downpaymentinput;
+                } else if (depth > 200 && depth <= 300) {
+                    drillingCharge = (depth * 2000) + downpaymentinput;
+                } else if (depth > 300) {
+                    drillingCharge = (depth * 2500) + downpaymentinput;
+                } else {
+                    drillingCharge = "Select drilling services";
+                }
+                document.getElementById("drillingCharge").value = drillingCharge;
+            }
+
+            // Trigger when drilling service is selected
             document.getElementById('payment-dropdown').addEventListener('change', function () {
                 const paymentType = this.value;
-                if (paymentType) {
+                if (paymentType && paymentType !== "Choose a service") {
                     fetch(`/get-downpayment/?name=${paymentType}`)
                         .then(response => response.json())
                         .then(data => {
                             if (data.downpayment) {
-                                document.getElementById('downpayment-input').value = data.downpayment;
+                                document.getElementById('downpaymentinput').value = data.downpayment;
                             } else {
-                                document.getElementById('downpayment-input').value = 'N/A';
+                                document.getElementById('downpaymentinput').value = 'N/A';
                             }
+                            // Trigger drilling charge calculation after updating downpayment
+                            calculateDrillingCharge();
                         })
                         .catch(error => {
                             console.error('Error fetching downpayment:', error);
                         });
                 } else {
-                    document.getElementById('downpayment-input').value = '';
+                    document.getElementById('downpaymentinput').value = '';
+                    document.getElementById('drillingCharge').value = '';
+                }
+            });
+
+            document.getElementById('pump-dropdown').addEventListener('change', function () {
+                const costType = this.value;
+                if (costType) {
+                    fetch(`/get-pump/?pump=${costType}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.cost) {
+                                document.getElementById('pumppaymentinput').value = data.cost;
+                            } else {
+                                document.getElementById('pumppaymentinput').value = 'N/A';
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error fetching cost:', error);
+                        });
+                } else {
+                    document.getElementById('pumppaymentinput').value = '';
                 }
             });
         </script>

@@ -52,7 +52,8 @@ class Survey_Application(models.Model):
     Total_Amount = models.PositiveIntegerField(null=False, blank=False)
     Mpesa_phone = models.PositiveIntegerField(blank=False, null=True, default='0000000000')
     Amount_paid = models.PositiveIntegerField(blank=False, null=True, default='0')
-    depth = models.PositiveIntegerField(blank=False, null=True, default='0')
+    depth = models.PositiveIntegerField(blank=False, null=False, default='0')
+    height = models.PositiveIntegerField(blank=False, null=False, default='0')
     status_choice = [
         ('Approved', 'Approved'),
         ('Verified', 'Verified')
@@ -74,3 +75,16 @@ class Payment(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Pump(models.Model):
+    pump_choices = [
+        ('Submersible Electric Pump', 'Submersible Electric Pump'),
+        ('Solar Pump', 'Solar Pump'),
+        ('Hand Pump', 'Hand Pump')
+    ]
+    pump = models.CharField(max_length=100, choices=pump_choices)
+    cost = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return self.pump
