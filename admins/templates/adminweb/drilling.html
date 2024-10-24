@@ -85,7 +85,7 @@
                             <button type="button" class="btn btn-primary next-btn">Next</button>
                         </div>
                         <div class="step-content" id="step2">
-                            <h4>Step 2: Drilling Applications</h4>
+                            <h4>Step 2: Pump and Tank Applications</h4>
                             <div class="form-row">
                                 <div class="col-md-4 mb-3">
                                     <label for="pump-dropdown">Select Pump:</label>
@@ -125,11 +125,14 @@
                                 <div class="col-md-4 mb-3">
                                     <label for="clientName">Tank Fee Charge:</label>
                                     <input type="text" class="form-control" id="tankCharge" name="d_fee"
-                                           placeholder="Tank Fee Charge">
+                                           placeholder="Tank Fee Charge" readonly>
                                 </div>
-
+                                <div class="col-md-4 mb-3">
+                                    <label for="clientName">Pump and Tank Fee:</label>
+                                    <input type="text" class="form-control" id="tankfee" name="tank_fee"
+                                           placeholder="Pump and Tank Fee">
+                                </div>
                             </div>
-
 
                             <button type="button" class="btn btn-secondary prev-btn">Previous</button>
                             <button type="submit" class="btn btn-success">Submit</button>
@@ -170,22 +173,27 @@
             });
 
             function calculatePipeCharge() {
-                const height = parseFloat(document.getElementById("height").value) ||0;
+                const height = parseFloat(document.getElementById("height").value) || 0;
                 let pipefee;
-                if (height<=100){
+
+                if (height <= 100) {
                     pipefee = height * 1000;
-                } else if (height> 100 && height <=200){
+                } else if (height > 100 && height <= 200) {
                     pipefee = height * 1500;
-                } else if (height >200 && height <=300){
+                } else if (height > 200 && height <= 300) {
                     pipefee = height * 2000;
-                } else if (height >300){
+                } else if (height > 300) {
                     pipefee = height * 2500;
-                }else {
-                    pipefee = "Select Pump"
+                } else {
+                    pipefee = "N/A";
                 }
+
                 document.getElementById("pipefee").value = pipefee;
+                calculateTankFee(); // Trigger fee calculation after updating pipe fee
             }
-            window.onload = function (){
+
+            // Call this function on page load to calculate pipe charge based on default height
+            window.onload = function () {
                 calculatePipeCharge();
             };
 
@@ -244,34 +252,53 @@
                             } else {
                                 document.getElementById('pumppaymentinput').value = 'N/A';
                             }
+                            // Trigger fee calculation after updating pump payment
+                            calculateTankFee();
                         })
                         .catch(error => {
                             console.error('Error fetching cost:', error);
                         });
                 } else {
                     document.getElementById('pumppaymentinput').value = '';
+                    calculateTankFee();
                 }
             });
 
-            document.getElementById('tank-dropdown').addEventListener('change', function (){
+            document.getElementById('tank-dropdown').addEventListener('change', function () {
                 const tankType = this.value;
-                if (tankType){
+                if (tankType) {
                     fetch(`/get-tank/?tank=${tankType}`)
                         .then(response => response.json())
                         .then(data => {
-                            if (data.cost){
-                                document.getElementById('tankCharge').value = data.cost
+                            if (data.cost) {
+                                document.getElementById('tankCharge').value = data.cost;
                             } else {
                                 document.getElementById('tankCharge').value = 'N/A';
                             }
+                            // Trigger fee calculation after updating tank charge
+                            calculateTankFee();
                         })
                         .catch(error => {
-                            console.error('Error fetching cost', error);
+                            console.error('Error fetching cost:', error);
                         });
-                }else {
+                } else {
                     document.getElementById('tankCharge').value = '';
+                    calculateTankFee();
                 }
             });
+
+            function calculateTankFee() {
+                const pumppayment = parseFloat(document.getElementById('pumppaymentinput').value) || 0;
+                const pipefee = parseFloat(document.getElementById('pipefee').value) || 0;
+                const tankCharge = parseFloat(document.getElementById('tankCharge').value) || 0;
+
+                // Calculate the total tank fee
+                const totalTankFee = pumppayment + pipefee + tankCharge;
+
+                // Update the tankfee field
+                document.getElementById('tankfee').value = totalTankFee.toFixed(2); // Show 2 decimal places
+            }
+
         </script>
 
 
