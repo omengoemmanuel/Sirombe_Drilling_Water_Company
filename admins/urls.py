@@ -23,6 +23,7 @@ urlpatterns = [
     path('get-downpayment/', views.get_downpayment, name='get_downpayment'),
     path('get-pump/', views.get_pump, name='get_pump'),
     path('get-tank/', views.get_tank, name='get_tank'),
-    path('invoice', views.invoice, name='invoice')
+    path('invoice', views.invoice, name='invoice'),
+    path('drillinginsert', views.drillinginsert, name='drillinginsert')
 
 ]

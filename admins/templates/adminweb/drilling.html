@@ -27,7 +27,8 @@
             <div class="card" style="">
                 <div class="card-body">
                     <h2 class="text-center mb-4">Drilling & Plumbing Services </h2>
-                    <form id="multiStepForm" action="" method="post">
+                    <form id="multiStepForm" action="/drillinginsert" method="post">
+                        {% csrf_token %}
                         <div class="step-content active" id="step1">
                             <h4>Step 1: Drilling Applications</h4>
                             <div class="form-row">
@@ -166,10 +167,7 @@
                     $("#step" + currentStep).addClass("active");
                 });
 
-                $("#multiStepForm").submit(function (e) {
-                    e.preventDefault();
-                    alert("Form submitted successfully!");
-                });
+
             });
 
             function calculatePipeCharge() {

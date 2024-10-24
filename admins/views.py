@@ -1,7 +1,8 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 
-from admins.models import userprofile, survey_and_local_fee, Survey_Application, Payment, Pump, Tank
+from admins.models import userprofile, survey_and_local_fee, Survey_Application, Payment, Pump, Tank, \
+    drilling_and_pump_installation
 
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -410,3 +411,32 @@ def get_tank(request):
 
 def invoice(request):
     return render(request, 'adminweb/invoice.html')
+
+
+def drillinginsert(request):
+    if request.method == 'POST':
+        serviceType = request.POST.get('serviceType')
+        fname = request.POST.get('fname')
+        lname = request.POST.get('lname')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        status = request.POST.get('status')
+        depth = request.POST.get('depth')
+        down_payment = request.POST.get('down_payment')
+        drilling_fee = request.POST.get('drilling_fee')
+        pumpType = request.POST.get('pumpType')
+        pump_payment = request.POST.get('pump_payment')
+        height = request.POST.get('height')
+        pipe_fee = request.POST.get('pipe_fee')
+        tankType = request.POST.get('tankType')
+        tank_fee = request.POST.get('tank_fee')
+        pump_tank_fee = request.POST.get('pump_tank_fee')
+
+        pump_tank = drilling_and_pump_installation(serviceType=serviceType, fname=fname, lname=lname, email=email,
+                                                   phone=phone, status=status, depth=depth, down_payment=down_payment,
+                                                   drilling_fee=drilling_fee, pumpType=pumpType,
+                                                   pump_payment=pump_payment, height=height, pipe_fee=pipe_fee,
+                                                   tankType=tankType, tank_fee=tank_fee, pump_tank_fee=pump_tank_fee)
+        pump_tank.save()
+        return redirect('invoice')
+    return redirect('invoice')

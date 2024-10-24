@@ -101,3 +101,25 @@ class Tank(models.Model):
 
     def __str__(self):
         return self.tank
+
+
+class drilling_and_pump_installation(models.Model):
+    serviceType = models.CharField(max_length=50, null=False, blank=False)
+    fname = models.CharField(max_length=20, null=False, blank=False)
+    lname = models.CharField(max_length=20, null=False, blank=False)
+    email = models.EmailField()
+    phone = models.CharField(max_length=14, null=False, blank=False)
+    status = models.CharField(max_length=20, null=False, blank=False)
+    depth = models.PositiveIntegerField()
+    down_payment = models.DecimalField(max_digits=10, decimal_places=2)
+    drilling_fee = models.DecimalField(max_digits=10, decimal_places=2)
+    pumpType = models.CharField(max_length=50, null=False, blank=False)
+    pump_payment = models.DecimalField(max_digits=10, decimal_places=2)
+    height = models.PositiveIntegerField()
+    pipe_fee = models.DecimalField(max_digits=10, decimal_places=2)
+    tankType = models.CharField(max_length=50, null=False, blank=False)
+    tank_fee = models.DecimalField(max_digits=10, decimal_places=2)
+    pump_tank_fee = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return f"{self.fname} {self.lname}"
