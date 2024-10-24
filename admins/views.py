@@ -406,3 +406,7 @@ def get_tank(request):
         return JsonResponse({'cost': tank.cost})
     except Tank.DoesNotExist:
         return JsonResponse({'Error': 'Cost not found'}, status=404)
+
+
+def invoice(request):
+    return render(request, 'adminweb/invoice.html')

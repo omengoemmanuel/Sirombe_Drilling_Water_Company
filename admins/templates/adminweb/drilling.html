@@ -27,7 +27,7 @@
             <div class="card" style="">
                 <div class="card-body">
                     <h2 class="text-center mb-4">Drilling & Plumbing Services </h2>
-                    <form id="multiStepForm">
+                    <form id="multiStepForm" action="" method="post">
                         <div class="step-content active" id="step1">
                             <h4>Step 1: Drilling Applications</h4>
                             <div class="form-row">
@@ -72,12 +72,12 @@
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="downpaymentinput">Down Payment Fee:</label>
-                                    <input type="text" class="form-control" id="downpaymentinput" name="dpayment"
+                                    <input type="text" class="form-control" id="downpaymentinput" name="down_payment"
                                            placeholder="Down Payment Fee" readonly>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="clientName">Drilling Fee Charge:</label>
-                                    <input type="number" class="form-control" id="drillingCharge" name="d_fee"
+                                    <input type="number" class="form-control" id="drillingCharge" name="drilling_fee"
                                            placeholder="Drilling Fee Charge" readonly>
                                 </div>
 
@@ -98,7 +98,7 @@
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="pumppaymentinput">Pump Payment Fee:</label>
-                                    <input type="text" class="form-control" id="pumppaymentinput" name="ppayment"
+                                    <input type="text" class="form-control" id="pumppaymentinput" name="pump_payment"
                                            placeholder="Pump Payment Fee" readonly>
                                 </div>
 
@@ -109,12 +109,12 @@
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="clientName">Piping Fee:</label>
-                                    <input type="number" class="form-control" id="pipefee" name="height"
+                                    <input type="number" class="form-control" id="pipefee" name="pipe_fee"
                                            value="" readonly>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="tank-dropdown">Select Tank:</label>
-                                    <select class="form-control" id="tank-dropdown" name="serviceType">
+                                    <select class="form-control" id="tank-dropdown" name="tankType">
                                         <option value="Choose tank">Choose tank</option>
                                         <option value="Household Tank Plastic">Household Tank Plastic</option>
                                         <option value="Household Steel Tank">Household Steel Tank</option>
@@ -124,13 +124,13 @@
 
                                 <div class="col-md-4 mb-3">
                                     <label for="clientName">Tank Fee Charge:</label>
-                                    <input type="text" class="form-control" id="tankCharge" name="d_fee"
+                                    <input type="text" class="form-control" id="tankCharge" name="tank_fee"
                                            placeholder="Tank Fee Charge" readonly>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="clientName">Pump and Tank Fee:</label>
-                                    <input type="text" class="form-control" id="tankfee" name="tank_fee"
-                                           placeholder="Pump and Tank Fee">
+                                    <input type="text" class="form-control" id="tankfee" name="pump_tank_fee"
+                                           placeholder="Pump and Tank Fee" readonly>
                                 </div>
                             </div>
 
