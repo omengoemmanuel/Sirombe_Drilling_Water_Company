@@ -124,7 +124,7 @@
 
                                 <div class="col-md-4 mb-3">
                                     <label for="clientName">Tank Fee Charge:</label>
-                                    <input type="number" class="form-control" id="tankCharge" name="d_fee"
+                                    <input type="text" class="form-control" id="tankCharge" name="d_fee"
                                            placeholder="Tank Fee Charge">
                                 </div>
 
@@ -250,6 +250,26 @@
                         });
                 } else {
                     document.getElementById('pumppaymentinput').value = '';
+                }
+            });
+
+            document.getElementById('tank-dropdown').addEventListener('change', function (){
+                const tankType = this.value;
+                if (tankType){
+                    fetch(`/get-tank/?tank=${tankType}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.cost){
+                                document.getElementById('tankCharge').value = data.cost
+                            } else {
+                                document.getElementById('tankCharge').value = 'N/A';
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error fetching cost', error);
+                        });
+                }else {
+                    document.getElementById('tankCharge').value = '';
                 }
             });
         </script>

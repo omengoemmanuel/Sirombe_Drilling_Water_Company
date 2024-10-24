@@ -21,6 +21,7 @@ urlpatterns = [
 
     path('drilling', views.drilling, name='drilling'),
     path('get-downpayment/', views.get_downpayment, name='get_downpayment'),
-    path('get-pump/', views.get_pump, name='get_pump')
+    path('get-pump/', views.get_pump, name='get_pump'),
+    path('get-tank/', views.get_tank, name='get_tank')
 
 ]

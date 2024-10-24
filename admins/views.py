@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 
-from admins.models import userprofile, survey_and_local_fee, Survey_Application, Payment, Pump
+from admins.models import userprofile, survey_and_local_fee, Survey_Application, Payment, Pump, Tank
 
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -396,3 +396,13 @@ def get_pump(request):
         return JsonResponse({'cost': pump.cost})
     except Pump.DoesNotExist:
         return JsonResponse({'error': 'Cost not found'}, status=404)
+
+
+def get_tank(request):
+    tank = request.GET.get('tank')
+
+    try:
+        tank = Tank.objects.get(tank=tank)
+        return JsonResponse({'cost': tank.cost})
+    except Tank.DoesNotExist:
+        return JsonResponse({'Error': 'Cost not found'}, status=404)

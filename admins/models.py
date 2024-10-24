@@ -88,3 +88,16 @@ class Pump(models.Model):
 
     def __str__(self):
         return self.pump
+
+
+class Tank(models.Model):
+    tank_choices = [
+        ('Household Tank Plastic', 'Household Tank Plastic'),
+        ('Household Steel Tank', 'Household Steel Tank'),
+        ('Large Steel Tank', 'Large Steel Tank')
+    ]
+    tank = models.CharField(max_length=100, choices=tank_choices)
+    cost = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return self.tank
