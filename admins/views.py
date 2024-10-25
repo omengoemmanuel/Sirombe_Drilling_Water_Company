@@ -19,6 +19,9 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from django.contrib.auth import get_user_model
 from django.http import JsonResponse
+import random
+from datetime import datetime
+from decimal import Decimal, ROUND_DOWN
 from django.template.loader import render_to_string
 
 
@@ -410,7 +413,28 @@ def get_tank(request):
 
 
 def invoice(request):
-    return render(request, 'adminweb/invoice.html')
+    email = request.user.email
+    inv = drilling_and_pump_installation.objects.get(email=email)
+    inv1 = userprofile.objects.get(email=email)
+    invoice_id = random.randint(0000, 99999)
+    current_date = datetime.now()
+    invoices = get_object_or_404(drilling_and_pump_installation)
+
+    subtotal = invoices.drilling_fee + invoices.pump_payment + invoices.pipe_fee + invoices.tank_fee
+
+    tax = (subtotal * Decimal('0.16')).quantize(Decimal('0.00'), rounding=ROUND_DOWN)
+
+    grand_total = subtotal + tax
+
+# making currencies be with commas and decimal
+    formatted_subtotal = f"{subtotal:,.2f}"
+    formatted_tax = f"{tax:,.2f}"
+    formatted_total = f"{grand_total:,.2f}"
+
+    return render(request, 'adminweb/invoice.html',
+                  {'inv': inv, 'inv1': inv1, 'invoice_id': invoice_id, 'current_date': current_date,
+                   'subtotal': formatted_subtotal, 'tax': formatted_tax, 'grand_total': formatted_total
+                   })
 
 
 def drillinginsert(request):
