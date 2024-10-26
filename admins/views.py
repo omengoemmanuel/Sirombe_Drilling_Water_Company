@@ -426,7 +426,7 @@ def invoice(request):
 
     grand_total = subtotal + tax
 
-# making currencies be with commas and decimal
+    # making currencies be with commas and decimal
     formatted_subtotal = f"{subtotal:,.2f}"
     formatted_tax = f"{tax:,.2f}"
     formatted_total = f"{grand_total:,.2f}"
@@ -464,3 +464,32 @@ def drillinginsert(request):
         pump_tank.save()
         return redirect('invoice')
     return redirect('invoice')
+
+
+def drill_stkpush(request):
+    if request.method == 'POST':
+        total = request.POST['total']
+        phone = request.POST['phone']
+
+        access_token = MpesaAccessToken.validated_access_token
+        api_url = 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest'
+
+        headers = {'Authorization': "Bearer %s" % access_token}
+
+        request = {
+            "BusinessShortCode": MpesaPpassword.short_code,
+            "Password": MpesaPpassword.decoded,
+            "Timestamp": MpesaPpassword.pay_time,
+            "TransactionType": "CustomerPayBillOnline",
+            "Amount": total,
+            "PartyA": phone,
+            "PartyB": MpesaPpassword.short_code,
+            "PhoneNumber": phone,
+            "CallBackURL": "https://sandbox.safaricom.co.ke/mpesa/",
+            "AccountReference": "Sirombe Springs Drilling Co.",
+            "TransactionDesc": "Sirombe Springs Drilling Co. Drilling charges"
+
+        }
+        response = requests.post(api_url, json=request, headers=headers)
+
+    return HttpResponse("Payment sent successfully")
