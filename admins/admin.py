@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import survey, userprofile, survey_and_local_fee, Survey_Application, Payment, Pump, Tank, drilling_and_pump_installation
+from .models import survey, userprofile, survey_and_local_fee, Survey_Application, Payment, Pump, Tank, drilling_and_pump_installation, MpesaPayment
 
 # Register your models here.
 admin.site.register(survey)
@@ -10,4 +10,5 @@ admin.site.register(Payment)
 admin.site.register(Pump)
 admin.site.register(Tank)
 admin.site.register(drilling_and_pump_installation)
+admin.site.register(MpesaPayment)
 

@@ -13,7 +13,7 @@ urlpatterns = [
     path('Survey_Application_insert', views.Survey_Application_insert, name='Survey_Application_insert'),
     path('pay', views.pay, name='pay'),
     path('stkpush', views.stkpush, name='stkpush'),
-    path('drill_stkpush', views.drill_stkpush, name='drill_stkpush'),
+
     path('p_photo', views.p_photo, name='p_photo'),
     path('layout', views.layout, name='layout'),
     path('change_password', views.change_password, name='change_password'),

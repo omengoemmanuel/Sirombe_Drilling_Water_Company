@@ -123,3 +123,17 @@ class drilling_and_pump_installation(models.Model):
 
     def __str__(self):
         return f"{self.fname} {self.lname}"
+
+
+class MpesaPayment(models.Model):
+    merchant_request_id = models.CharField(max_length=50)
+    checkout_request_id = models.CharField(max_length=50)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    mpesa_receipt_number = models.CharField(max_length=100)
+    transaction_date = models.DateTimeField()
+    phone_number = models.CharField(max_length=15)
+    result_code = models.IntegerField()
+    result_desc = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.mpesa_receipt_number

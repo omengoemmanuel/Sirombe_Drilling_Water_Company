@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 
 from admins.models import userprofile, survey_and_local_fee, Survey_Application, Payment, Pump, Tank, \
-    drilling_and_pump_installation
+    drilling_and_pump_installation, MpesaPayment
 
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -22,6 +22,10 @@ from django.http import JsonResponse
 import random
 from datetime import datetime
 from decimal import Decimal, ROUND_DOWN
+
+from django.views.decorators.csrf import csrf_exempt
+import json
+
 from django.template.loader import render_to_string
 
 
@@ -466,30 +470,36 @@ def drillinginsert(request):
     return redirect('invoice')
 
 
-def drill_stkpush(request):
+# mpesa call back messages
+@csrf_exempt
+def mpesa_callback(request):
     if request.method == 'POST':
-        total = request.POST['total']
-        phone = request.POST['phone']
+        mpesa_response = json.loads(request.body)
+        callback_data = mpesa_response.get("Body", {}).get("stkCallback", {})
 
-        access_token = MpesaAccessToken.validated_access_token
-        api_url = 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest'
+        merchant_request_id = callback_data.get("MerchantRequestID")
+        checkout_request_id = callback_data.get("CheckoutRequestID")
+        result_code = callback_data.get("ResultCode")
+        result_desc = callback_data.get("ResultDesc")
 
-        headers = {'Authorization': "Bearer %s" % access_token}
+        # checking weather payment was successfull (resultcode 0 means success)
+        if result_code == 0:
+            amount = callback_data["CallbackMetadata"]["Item"][0]["Value"]
+            mpesa_receipt_number = callback_data["CallbackMetadata"]["Item"][1]["Value"]
+            phone_number = callback_data["CallbackMetadata"]["Item"][2]["Value"]
+            transaction_date = datetime.now()
 
-        request = {
-            "BusinessShortCode": MpesaPpassword.short_code,
-            "Password": MpesaPpassword.decoded,
-            "Timestamp": MpesaPpassword.pay_time,
-            "TransactionType": "CustomerPayBillOnline",
-            "Amount": total,
-            "PartyA": phone,
-            "PartyB": MpesaPpassword.short_code,
-            "PhoneNumber": phone,
-            "CallBackURL": "https://sandbox.safaricom.co.ke/mpesa/",
-            "AccountReference": "Sirombe Springs Drilling Co.",
-            "TransactionDesc": "Sirombe Springs Drilling Co. Drilling charges"
+            MpesaPayment.objects.create(
+                merchant_request_id=merchant_request_id,
+                checkout_request_id=checkout_request_id,
+                amount=amount,
+                mpesa_receipt_number=mpesa_receipt_number,
+                phone_number=phone_number,
+                transaction_date=transaction_date,
+                result_desc=result_desc,
+                result_code=result_code
+            )
 
-        }
-        response = requests.post(api_url, json=request, headers=headers)
-
-    return HttpResponse("Payment sent successfully")
+            return JsonResponse({"ResultCode": 0, "ResultDesc": "Success"})
+        else:
+            return JsonResponse({"ResultCode": 1, "ResultDesc": "Failed"})
