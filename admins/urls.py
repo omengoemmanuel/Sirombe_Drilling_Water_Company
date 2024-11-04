@@ -25,6 +25,9 @@ urlpatterns = [
     path('get-pump/', views.get_pump, name='get_pump'),
     path('get-tank/', views.get_tank, name='get_tank'),
     path('invoice', views.invoice, name='invoice'),
-    path('drillinginsert', views.drillinginsert, name='drillinginsert')
+    path('drillinginsert', views.drillinginsert, name='drillinginsert'),
+    path('delete/<id>', views.delete, name='delete')
+
+
 
 ]

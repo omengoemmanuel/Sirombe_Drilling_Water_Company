@@ -3,7 +3,9 @@
 <html lang="en">
 
 <head>
+
     <!-- Google Web Fonts -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
@@ -44,6 +46,8 @@
 
     <!-- Template Main CSS File -->
     <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+
 </head>
 
 <body>
@@ -197,7 +201,7 @@
                                 Survey Application
                             </div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800" style="color: deepskyblue">
-                                Status: {{ status }}</div>
+                                Status: {{ status1 }} </div>
                         </div>
                     </div>
                 </div>
@@ -222,35 +226,39 @@
 
     </div>
     <div class="row">
-        <h3 class="h5 mb-0 font-weight-bold text-gray-800">Active and Completed Applications</h3>
+        <h3 class="h5 mb-0 font-weight-bold text-gray-800">Survey Application</h3>
         <div class="card">
             <div class="card-body">
                 <table class="table">
                     <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Application</th>
-                        <th scope="col">Duration</th>
-                        <th scope="col">Priority</th>
-                        <th scope="col">Progress</th>
+                        <th scope="col">Application ID</th>
+                        <th scope="col">Survey Category</th>
+                        <th scope="col">Depth</th>
+                        <th scope="col">Height</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Delete</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
-                        <th scope="row">1</th>
-                        <td>Survey</td>
-                        <td>2 months</td>
-                        <td>High</td>
-                        <td>In progress</td>
+                        <th scope="row">{{ id }}</th>
+                        <td>{{ cate }}</td>
+                        <td>{{ depth }}</td>
+                        <td>{{ height}}</td>
+                        <td>{{ status1 }}</td>
+                        <td>
+                            <a href="/delete/{{ id }}" class="btn btn-danger">Delete</a>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
+
             </div>
         </div>
-
     </div>
 
-
+    </div>
     </div>
 
 

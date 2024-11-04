@@ -209,7 +209,39 @@ def welcome(request):
     except userprofile.DoesNotExist:
         picture = ''
 
-    return render(request, 'adminweb/index.html', {'wel': wel, 'status': status, 'picture': picture})
+    try:
+        cat = Survey_Application.objects.get(Email_Address=email)
+        cate = cat.Survey_Category
+    except Survey_Application.DoesNotExist:
+        cate = ''
+
+    try:
+        depth = Survey_Application.objects.get(Email_Address=email)
+        depth = depth.depth
+    except Survey_Application.DoesNotExist:
+        depth = ''
+
+    try:
+        height = Survey_Application.objects.get(Email_Address=email)
+        height = height.height
+    except Survey_Application.DoesNotExist:
+        height = ''
+
+    try:
+        status = Survey_Application.objects.get(Email_Address=email)
+        status1 = status.status
+    except Survey_Application.DoesNotExist:
+        status1 = ''
+
+    try:
+        id = Survey_Application.objects.get(Email_Address=email)
+        id = id.id
+    except Survey_Application.DoesNotExist:
+        id = ''
+
+    return render(request, 'adminweb/index.html',
+                  {'wel': wel, 'status': status, 'picture': picture, 'cate': cate,
+                   'depth': depth, 'height': height, 'status1': status1, 'id': id})
 
 
 def user_profile(request):
@@ -312,7 +344,7 @@ def Survey_Application_insert(request):
             Total_Amount=Total_Amount
         )
         application.save()
-        messages.success(request, 'Survey application sent successfully')
+        messages.success(request, 'Please check your phone and enter your MPESA pin to complete your application')
         return redirect('pay')
 
     return redirect('pay')
@@ -351,7 +383,7 @@ def stkpush(request):
         }
         response = requests.post(api_url, json=request, headers=headers)
 
-    return HttpResponse("Payment sent successfully")
+    return redirect('welcome')
 
 
 def layout(request):
@@ -503,3 +535,9 @@ def mpesa_callback(request):
             return JsonResponse({"ResultCode": 0, "ResultDesc": "Success"})
         else:
             return JsonResponse({"ResultCode": 1, "ResultDesc": "Failed"})
+
+
+def delete(request, id):
+    survey_delete = Survey_Application.objects.get(id=id)
+    survey_delete.delete()
+    return redirect('/welcome')
