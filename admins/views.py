@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 
 from admins.models import userprofile, survey_and_local_fee, Survey_Application, Payment, Pump, Tank, \
-    drilling_and_pump_installation, MpesaPayment
+    drilling_and_pump_installation
 
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -239,9 +239,41 @@ def welcome(request):
     except Survey_Application.DoesNotExist:
         id = ''
 
+    # drilling status
+    try:
+        drill_id = drilling_and_pump_installation.objects.get(email=email)
+        drill_id = drill_id.id
+    except drilling_and_pump_installation.DoesNotExist:
+        drill_id = ''
+
+    try:
+        drill_cate = drilling_and_pump_installation.objects.get(email=email)
+        drill_cate = drill_cate.serviceType
+    except drilling_and_pump_installation.DoesNotExist:
+        drill_cate = ''
+
+    try:
+        pump = drilling_and_pump_installation.objects.get(email=email)
+        pump = pump.pumpType
+    except drilling_and_pump_installation.DoesNotExist:
+        pump = ''
+
+    try:
+        tank = drilling_and_pump_installation.objects.get(email=email)
+        tank = tank.tankType
+    except drilling_and_pump_installation.DoesNotExist:
+        tank = ''
+
+    try:
+        drill_status = drilling_and_pump_installation.objects.get(email=email)
+        drill_status = drill_status.status1
+    except drilling_and_pump_installation.DoesNotExist:
+        drill_status = ''
+
     return render(request, 'adminweb/index.html',
                   {'wel': wel, 'status': status, 'picture': picture, 'cate': cate,
-                   'depth': depth, 'height': height, 'status1': status1, 'id': id})
+                   'depth': depth, 'height': height, 'status1': status1, 'id': id, 'drill_id': drill_id,
+                   'drill_cate': drill_cate, 'pump': pump, 'tank': tank, 'drill_status': drill_status})
 
 
 def user_profile(request):
@@ -298,6 +330,7 @@ def profileinsert(request):
     return redirect('user_profile')
 
 
+@login_required()
 def survey(request):
     email = request.user.email
     suv = get_object_or_404(userprofile, email=email)
@@ -310,7 +343,14 @@ def survey(request):
     except userprofile.DoesNotExist:
         picture = ''
 
-    return render(request, 'adminweb/survey.html', {'suv1': suv, 'suv3': suv2, 'wel': wel, 'picture': picture})
+    try:
+
+        profile_check = userprofile.objects.all().exists()
+        return render(request, 'adminweb/survey.html',
+                      {'suv1': suv, 'suv3': suv2, 'wel': wel, 'picture': picture, 'profile_check': profile_check})
+    except userprofile.DoesNotExist:
+        messages.error(request, 'Please update your profile before making survey application')
+        return redirect("user_profile")
 
 
 def Survey_Application_insert(request):
@@ -503,41 +543,14 @@ def drillinginsert(request):
 
 
 # mpesa call back messages
-@csrf_exempt
-def mpesa_callback(request):
-    if request.method == 'POST':
-        mpesa_response = json.loads(request.body)
-        callback_data = mpesa_response.get("Body", {}).get("stkCallback", {})
-
-        merchant_request_id = callback_data.get("MerchantRequestID")
-        checkout_request_id = callback_data.get("CheckoutRequestID")
-        result_code = callback_data.get("ResultCode")
-        result_desc = callback_data.get("ResultDesc")
-
-        # checking weather payment was successfull (resultcode 0 means success)
-        if result_code == 0:
-            amount = callback_data["CallbackMetadata"]["Item"][0]["Value"]
-            mpesa_receipt_number = callback_data["CallbackMetadata"]["Item"][1]["Value"]
-            phone_number = callback_data["CallbackMetadata"]["Item"][2]["Value"]
-            transaction_date = datetime.now()
-
-            MpesaPayment.objects.create(
-                merchant_request_id=merchant_request_id,
-                checkout_request_id=checkout_request_id,
-                amount=amount,
-                mpesa_receipt_number=mpesa_receipt_number,
-                phone_number=phone_number,
-                transaction_date=transaction_date,
-                result_desc=result_desc,
-                result_code=result_code
-            )
-
-            return JsonResponse({"ResultCode": 0, "ResultDesc": "Success"})
-        else:
-            return JsonResponse({"ResultCode": 1, "ResultDesc": "Failed"})
-
 
 def delete(request, id):
     survey_delete = Survey_Application.objects.get(id=id)
     survey_delete.delete()
     return redirect('/welcome')
+
+
+def delete_drilling(request, id):
+    drill_delete = drilling_and_pump_installation.objects.get(id=id)
+    drill_delete.delete()
+    return redirect('welcome')

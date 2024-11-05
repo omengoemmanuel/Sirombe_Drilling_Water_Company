@@ -245,7 +245,7 @@
                         <th scope="row">{{ id }}</th>
                         <td>{{ cate }}</td>
                         <td>{{ depth }}</td>
-                        <td>{{ height}}</td>
+                        <td>{{ height }}</td>
                         <td>{{ status1 }}</td>
                         <td>
                             <a href="/delete/{{ id }}" class="btn btn-danger">Delete</a>
@@ -257,8 +257,37 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <h3 class="h5 mb-0 font-weight-bold text-gray-800">Drilling Application</h3>
+        <div class="card">
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Drilling ID</th>
+                        <th scope="col">Drilling Category</th>
+                        <th scope="col">Pump</th>
+                        <th scope="col">Tank</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">{{ drill_id }}</th>
+                        <td>{{ drill_cate}}</td>
+                        <td>{{ pump}}</td>
+                        <td>{{ tank }}</td>
+                        <td>{{ drill_status }}</td>
+                        <td>
+                            <a href="/delete_drilling/{{ drill_id }}" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
 
-    </div>
+            </div>
+        </div>
     </div>
 
 
