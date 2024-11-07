@@ -144,25 +144,17 @@ def forgot_password(request):
             user = UserModel.objects.get(email=email)
             token = default_token_generator.make_token(user)
             uid = urlsafe_base64_encode(force_bytes(user.pk))
-            reset_url = request.build_absolute_uri(f'/reset-password/{uid}/{token}/')
 
-            # sending email with reset link
-            send_mail(
-                'Password Reset Request',
-                f'Click the link to reset your password:{reset_url}',
-                'admin@gmail.com',
-                [email],
-            )
-            messages.success(request, 'Password reset link sent to your email')
+            return redirect('reset_password', uidb64=uid, token=token)
         except UserModel.DoesNotExist:
-            messages.error(request, 'User with tha email does not exit')
-        return redirect('forgot_password')
-
+            messages.error(request, 'User with this email does not exist')
+            return redirect('forgot_password')
     return render(request, 'adminweb/forgot_password.html')
 
 
 def reset_password(request, uidb64, token):
     try:
+        # Decode uidb64 to get the user's ID
         uid = force_str(urlsafe_base64_decode(uidb64))
         user = UserModel.objects.get(pk=uid)
     except (TypeError, ValueError, OverflowError, UserModel.DoesNotExist):
@@ -176,14 +168,14 @@ def reset_password(request, uidb64, token):
             if newpassword == renewpasword:
                 user.set_password(newpassword)
                 user.save()
-                messages.success(request, 'Password reset successfully. Please log in')
+                messages.success(request, 'Password reset successfully. Please login')
                 return redirect('signin')
             else:
-                messages.error(request, 'Password do not match')
-            return render(request, 'adminweb/reset_password.html', {'validlink': True})
-        else:
-            messages.error(request, 'The password reset link is invalid')
-            return render(request, 'adminweb/reset_password.html', {'validlink': False})
+                messages.error(request, 'Passwords do not match')
+        return render(request, 'adminweb/reset_password.html', {'validlink': True})
+    else:
+        messages.error(request, 'The password reset link is invalid or has expired')
+        return render(request, 'adminweb/reset_password.html', {'validlink': False})
 
 
 def home(request):
