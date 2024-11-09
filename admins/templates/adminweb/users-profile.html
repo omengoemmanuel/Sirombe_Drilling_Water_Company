@@ -31,7 +31,59 @@
     <!-- Template Main CSS File -->
     <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
 
+ <style>
+        /* Basic sidebar styles */
+        #sidebar {
+            width: 250px;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #f8f9fa;
+            padding-top: 20px;
+        }
 
+        /* Hide the sidebar by default on Android */
+        #sidebar.android-hidden {
+            transform: translateX(-250px);
+            transition: transform 0.3s ease;
+        }
+
+        /* Show the sidebar when toggled */
+        #sidebar.active {
+            transform: translateX(0);
+        }
+
+        /* Hamburger button styles */
+        #hamburger-btn {
+            display: none; /* Hide by default */
+            font-size: 24px;
+            cursor: pointer;
+            margin: 15px;
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            z-index: 1000;
+        }
+
+        /* Only show the hamburger button on Android devices */
+        .android #hamburger-btn {
+            display: block;
+        }
+
+        /* Sidebar link styles */
+        .sidebar-nav .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .sidebar-nav .nav-link:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
 </head>
 
 <body>
@@ -162,39 +214,62 @@
 
 </header><!-- End Header -->
 <!-- ======= Sidebar ======= -->
+<div id="hamburger-btn" onclick="toggleSidebar()">
+    <i class="bi bi-list"></i>
+</div>
+
+<!-- Sidebar -->
 <aside id="sidebar" class="sidebar">
-
     <ul class="sidebar-nav" id="sidebar-nav">
-
         <li class="nav-item">
-            <a class="nav-link " href="/welcome">
+            <a class="nav-link" href="/welcome">
                 <i class="bi bi-grid"></i>
                 <span>Dashboard</span>
             </a>
-        </li><!-- End Dashboard Nav -->
+        </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="/welcome">
+                <i class="bi bi-grid"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
         <li class="nav-item">
             <a class="nav-link collapsed" href="/user_profile">
                 <i class="bi bi-person"></i>
                 <span>Profile</span>
             </a>
-        </li><!-- End Profile Page Nav -->
+        </li>
         <li class="nav-item">
             <a class="nav-link collapsed" href="/survey">
                 <i class="bi bi-card-checklist"></i>
-                <span>Apply for survey</span>
+                <span>Apply for Survey</span>
             </a>
-        </li><!-- End Profile Page Nav -->
+        </li>
         <li class="nav-item">
             <a class="nav-link collapsed" href="/drilling">
                 <i class="bi bi-droplet"></i>
                 <span>Apply for Drilling</span>
             </a>
-        </li><!-- End Survey Application Nav -->
-
-
+        </li>
     </ul>
-
 </aside><!-- End Sidebar-->
+<script>
+    // Detect if the user is on an Android device
+    if (navigator.userAgent.toLowerCase().includes("android")) {
+        // Add 'android' class to body
+        document.body.classList.add("android");
+
+        // Hide the sidebar by default on Android
+        document.getElementById("sidebar").classList.add("android-hidden");
+    }
+
+    // Toggle sidebar visibility
+    function toggleSidebar() {
+        var sidebar = document.getElementById("sidebar");
+        sidebar.classList.toggle("active");
+    }
+</script>
+<!-- End Sidebar-->
 
 <main id="main" class="main">
 
