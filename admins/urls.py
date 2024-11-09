@@ -27,6 +27,7 @@ urlpatterns = [
     path('invoice', views.invoice, name='invoice'),
     path('drillinginsert', views.drillinginsert, name='drillinginsert'),
     path('delete/<id>', views.delete, name='delete'),
-    path('delete_drilling/<id>', views.delete_drilling, name='delete_drilling')
+    path('delete_drilling/<id>', views.delete_drilling, name='delete_drilling'),
 
+    path('mpesa/callback/', views.mpesa_callback, name = 'mpesa_callback'),
 ]

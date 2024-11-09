@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 
 from admins.models import userprofile, survey_and_local_fee, Survey_Application, Payment, Pump, Tank, \
-    drilling_and_pump_installation
+    drilling_and_pump_installation, MpesaTransaction
 
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -416,6 +416,60 @@ def stkpush(request):
         response = requests.post(api_url, json=request, headers=headers)
 
     return redirect('welcome')
+
+
+# callback url
+@csrf_exempt
+def mpesa_callback(request):
+    if request.method == 'POST':
+        # pass the json payload from safaricom
+        payload = json.loads(request.body)
+        stk_callback = payload.get("Body", {}).get("stkCallback", {})
+
+        # extract data from json payload
+        merchant_request_id = stk_callback.get("MerchantRequestID")
+        checkout_request_id = stk_callback.get("CheckoutRequestID")
+        result_code = stk_callback.get("ResultCode")
+        result_desc = stk_callback.get("ResultDesc")
+
+        # initialize option varriables
+        amount = None
+        mpesa_receipt_number = None
+        balance = None
+        transaction_date = None
+        phone_number = None
+
+        # extract info is transcation is successful
+        if result_code == 0:
+            callback_metadata = stk_callback.get("CallbackMetadata", {}).get("Item", [])
+            for item in callback_metadata:
+                name = item.get("Name")
+                if name == "Amount":
+                    amount = item.get("Value")
+                elif name == "MpesaReceiptNumber":
+                    mpesa_receipt_number = item.get("Value")
+                elif name == "Balance":
+                    balance = item.get("Value")
+                elif name == "TransactionDate":
+                    transaction_date = datetime.strptime(str(item.get("Value")), "%Y%m%d%H%M%S")
+                elif name == "PhoneNumber":
+                    phone_number = item.get("Value")
+
+        # save to database
+        MpesaTransaction.objects.create(
+            merchant_request_id=merchant_request_id,
+            checkout_request_id=checkout_request_id,
+            result_code=result_code,
+            result_desc=result_desc,
+            amount=amount,
+            mpesa_receipt_number=mpesa_receipt_number,
+            balance=balance,
+            transaction_date=transaction_date,
+            phone_number=phone_number
+        )
+        # sent success to safaricom witn success message
+        return JsonResponse({"Resultdesc": "Success"})
+    return JsonResponse({"error": "Invalid request method"}, status=405)
 
 
 def layout(request):
