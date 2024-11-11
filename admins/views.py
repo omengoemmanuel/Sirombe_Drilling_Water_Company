@@ -262,10 +262,16 @@ def welcome(request):
     except drilling_and_pump_installation.DoesNotExist:
         drill_status = ''
 
+    try:
+        profile_status = userprofile.objects.get(email=email)
+        profile_status = ''
+    except userprofile.DoesNotExist:
+        profile_status = messages.success(request, 'Please update your profile to make the application')
+
     return render(request, 'adminweb/index.html',
                   {'wel': wel, 'status': status, 'picture': picture, 'cate': cate,
                    'depth': depth, 'height': height, 'status1': status1, 'id': id, 'drill_id': drill_id,
-                   'drill_cate': drill_cate, 'pump': pump, 'tank': tank, 'drill_status': drill_status})
+                   'drill_cate': drill_cate, 'pump': pump, 'tank': tank, 'drill_status': drill_status, 'profile_status':profile_status})
 
 
 def user_profile(request):
