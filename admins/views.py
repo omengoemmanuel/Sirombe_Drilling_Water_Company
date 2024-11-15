@@ -266,7 +266,7 @@ def welcome(request):
         profile_status = userprofile.objects.get(email=email)
         profile_status = ''
     except userprofile.DoesNotExist:
-        profile_status = messages.success(request, 'Please update your profile to make the application')
+        profile_status = messages.warning(request, 'Please update your profile to make the application')
 
     return render(request, 'adminweb/index.html',
                   {'wel': wel, 'status': status, 'picture': picture, 'cate': cate,
@@ -546,7 +546,8 @@ def invoice(request):
     inv1 = userprofile.objects.get(email=email)
     invoice_id = random.randint(0000, 99999)
     current_date = datetime.now()
-    invoices = get_object_or_404(drilling_and_pump_installation)
+    # invoices = get_object_or_404(drilling_and_pump_installation)
+    invoices = drilling_and_pump_installation.objects.get(email=email)
 
     subtotal = invoices.drilling_fee + invoices.pump_payment + invoices.pipe_fee + invoices.tank_fee
 
