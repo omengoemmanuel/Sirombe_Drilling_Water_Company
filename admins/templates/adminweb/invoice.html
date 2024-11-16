@@ -137,6 +137,34 @@
     .align-bottom {
         vertical-align: bottom !important;
     }
+    .page-tools {
+    margin-top: 20px;
+  }
+
+  .action-buttons .btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 15px;
+    border: 1px solid #dcdcdc;
+    border-radius: 5px;
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .action-buttons .btn:hover {
+    background-color: #f0f0f0;
+  }
+
+  .text-primary-m1 {
+    color: #1a73e8;
+  }
+
+  .text-danger-m1 {
+    color: #d32f2f;
 
 </style>
 
@@ -159,17 +187,44 @@
             </div>
         </div>
         <div class="page-tools">
-            <div class="action-buttons">
-                <a class="btn bg-white btn-light mx-1px text-95" href="#" data-title="Print">
-                    <i class="mr-1 fa fa-print text-primary-m1 text-120 w-2"></i>
-                    Print
-                </a>
-                <a class="btn bg-white btn-light mx-1px text-95" href="#" data-title="PDF">
-                    <i class="mr-1 fa fa-file-pdf-o text-danger-m1 text-120 w-2"></i>
-                    Export
-                </a>
-            </div>
-        </div>
+  <div class="action-buttons">
+    <a class="btn bg-white btn-light mx-1px text-95" href="#" data-title="Print" onclick="printPage()">
+      <i class="mr-1 fa fa-print text-primary-m1 text-120 w-2"></i>
+      Print
+    </a>
+    <a class="btn bg-white btn-light mx-1px text-95" href="#" data-title="PDF" onclick="exportPDF()">
+      <i class="mr-1 fa fa-file-pdf-o text-danger-m1 text-120 w-2"></i>
+      Export
+    </a>
+  </div>
+</div>
+
+<!-- Content to be printed or exported -->
+<div id="content" style="margin-top: 20px;">
+
+</div>
+
+<!-- Include the html2pdf library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+<script>
+  // Function to trigger print dialog
+  function printPage() {
+    window.print();
+  }
+
+  // Function to export content as PDF
+  function exportPDF() {
+    const content = document.getElementById('content');
+    const options = {
+      margin: 0.5,
+      filename: 'exported-content.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+    html2pdf().set(options).from(content).save();
+  }
+</script>
 
     </div>
 
@@ -286,7 +341,7 @@
                                     Tax (16%)
                                 </div>
                                 <div class="col-5">
-                                    <span class="text-110 text-secondary-d1">{{ tax }}</span>
+                                    <span class="text-110 text-secondary-d1">Ksh. {{ tax }}</span>
                                 </div>
                             </div>
 
@@ -295,10 +350,10 @@
                                     Total Amount
                                 </div>
                                 <div class="col-5">
-                                    <span class="text-150 text-success-d3 opacity-2">{{ grand_total }}</span>
+                                    <span class="text-150 text-success-d3 opacity-2">Ksh. {{ grand_total }}</span>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                     <div>
