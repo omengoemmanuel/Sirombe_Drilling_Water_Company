@@ -26,6 +26,9 @@ from decimal import Decimal, ROUND_DOWN
 from django.views.decorators.csrf import csrf_exempt
 import json
 
+from django.core.exceptions import ValidationError
+from django.contrib.auth.password_validation import validate_password
+
 from django.template.loader import render_to_string
 
 
@@ -40,25 +43,29 @@ def signup(request):
         pass2 = request.POST.get('pass2')
 
         if User.objects.filter(username=username).exists():
-            messages.error(request, 'Username already exist')
+            messages.error(request, 'Username already exists')
             return redirect('signup')
 
         if User.objects.filter(email=email).exists():
-            messages.error(request, 'Email is already registered please choose a different email')
+            messages.error(request, 'Email is already registered, please choose a different email')
             return redirect('signup')
 
         if pass1 != pass2:
-            messages.error(request, 'Password did not match, please try again')
+            messages.error(request, 'Passwords did not match, please try again')
+            return redirect('signup')
+
+        try:
+            validate_password(pass1)  # Validates password strength
+        except ValidationError as e:
+            messages.error(request, e.messages[0])  # Show password validation error
+            return redirect('signup')
 
         myuser = User.objects.create_user(username, email, pass1)
         myuser.first_name = fname
         myuser.last_name = lname
         myuser.save()
 
-        # send_verification_email(user)
-
-        messages.success(request, "Your Account has been created successfully")
-
+        messages.success(request, "Your account has been created successfully")
         return redirect('signin')
 
     return render(request, 'signup.html')
@@ -91,7 +98,12 @@ def signin(request):
 
         if user is not None:
             login(request, user)
-            return redirect("welcome")
+
+            # Redirect based on user type
+            if user.is_superuser or user.is_staff:  # Admin or staff
+                return redirect("custo")  # Admin dashboard
+            else:
+                return redirect("welcome")  # Client dashboard
         else:
             messages.error(request, "Invalid Logins")
             return redirect("signin")
@@ -271,7 +283,8 @@ def welcome(request):
     return render(request, 'adminweb/index.html',
                   {'wel': wel, 'status': status, 'picture': picture, 'cate': cate,
                    'depth': depth, 'height': height, 'status1': status1, 'id': id, 'drill_id': drill_id,
-                   'drill_cate': drill_cate, 'pump': pump, 'tank': tank, 'drill_status': drill_status, 'profile_status':profile_status})
+                   'drill_cate': drill_cate, 'pump': pump, 'tank': tank, 'drill_status': drill_status,
+                   'profile_status': profile_status})
 
 
 def user_profile(request):
