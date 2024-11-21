@@ -45,7 +45,7 @@ def delete_profile(request, id):
     det_prof.delete()
     return redirect("users_profile")
 
-
+@staff_member_required
 def edit_user_profile(request, id):
     if request.method == 'POST':
         fname = request.POST.get('fname')
@@ -74,3 +74,54 @@ def edit_user_profile(request, id):
 
     user_pro = userprofile.objects.get(id=id)
     return render(request, 'admincustom/edituserprof.html', {'user_pro': user_pro})
+
+
+@staff_member_required
+def survey_app(request):
+    suv_app = Survey_Application.objects.all()
+    return render(request, 'admincustom/surveyapplication.html', {'suv_app': suv_app})
+
+
+def survey_app_del(request, id):
+    suv_del = Survey_Application.objects.get(id=id)
+    suv_del.delete()
+    return redirect('survey_app')
+
+
+@staff_member_required
+def edit_survey_app(request, id):
+    if request.method == 'POST':
+        Survey_Category = request.POST.get('category')
+        First_Name = request.POST.get('fname')
+        Last_Name = request.POST.get('lname')
+        Email_Address = request.POST.get('email')
+        Phone_Number = request.POST.get('phone')
+        Survey_Fee = request.POST.get('sfee')
+        Local_Authority_Fee = request.POST.get('lfee')
+        Total_Amount = request.POST.get('tamount')
+        Amount_paid = request.POST.get('Amount_paid')
+        depth = request.POST.get('depth')
+        height = request.POST.get('height')
+        status = request.POST.get('status')
+
+        edit_surveys = Survey_Application.objects.get(id=id)
+        edit_surveys.Survey_Category = Survey_Category
+        edit_surveys.First_Name = First_Name
+        edit_surveys.Last_Name = Last_Name
+        edit_surveys.Email_Address = Email_Address
+        edit_surveys.Phone_Number = Phone_Number
+        edit_surveys.Survey_Fee = Survey_Fee
+        edit_surveys.Local_Authority_Fee = Local_Authority_Fee
+        edit_surveys.Total_Amount = Total_Amount
+        edit_surveys.Amount_paid = Amount_paid
+        edit_surveys.depth = depth
+        edit_surveys.height = height
+        edit_surveys.status = status
+
+        edit_surveys.save()
+        return redirect('survey_app')
+
+
+
+    edit_surveys = Survey_Application.objects.get(id=id)
+    return render(request, 'admincustom/edit_survey_app.html', {'edit_surveys':edit_surveys})

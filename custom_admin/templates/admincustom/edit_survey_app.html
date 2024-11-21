@@ -19,7 +19,6 @@
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
 
-
     <!-- Fonts and icons -->
     <script src="{% static 'assets/js/plugin/webfont/webfont.min.js' %}"></script>
     <script>
@@ -282,7 +281,6 @@
                 <!-- End Logo Header -->
             </div>
             <!-- Navbar Header -->
-             <!-- Navbar Header -->
             <nav
                     class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom"
             >
@@ -364,54 +362,109 @@
             <!-- End Navbar -->
         </div>
 
-        <div class="container" style="background-color: #ccccff">
+        <div class="container">
             <div class="page-inner">
                 <div
                         class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4"
                 >
                     <div>
-                        <h3 class="fw-bold mb-3">User Logins</h3>
+                        <h3 class="fw-bold mb-3">Survey Approvals</h3>
                     </div>
+
                 </div>
                 <div class="row">
-                    <div class="container my-4">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-hover">
-                                <thead class="table-dark">
-                                <tr>
-                                    <th>No.</th>
-                                    <th>User Name</th>
-                                    <th>Email Address</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
+                    <div class="col-12">
+                        <div class="card" style="background-color: turquoise">
+                            <div class="card-body">
+                                <form action="" method="post">
+                                    {% csrf_token %}
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="survey_cate" class="">Survey Category</label>
+                                                <input type="text" class="form-control" name="category"
+                                                       value="{{ edit_surveys.Survey_Category }}" readonly>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="fname" class="">First Name</label>
+                                                <input type="text" class="form-control" name="fname"
+                                                       value="{{ edit_surveys.First_Name }}" readonly>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="email" class="">Email Address</label>
+                                                <input type="email" class="form-control" name="email"
+                                                       value="{{ edit_surveys.Email_Address }}" readonly>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="survey_fee" class="">Survey Fee</label>
+                                                <input type="text" class="form-control" name="sfee"
+                                                       value="{{ edit_surveys.Survey_Fee }}" readonly>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="Total" class="">Total</label>
+                                                <input type="text" class="form-control" name="tamount"
+                                                       value="{{ edit_surveys.Total_Amount }}" readonly>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="depth" class="">Depth</label>
+                                                <input type="text" class="form-control" name="depth"
+                                                       value="{{ edit_surveys.depth }}" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="height" class="">Height</label>
+                                                <input type="text" class="form-control" name="height"
+                                                       value="{{ edit_surveys.height }}"required>
+                                            </div>
+                                        </div>
+                                        <!-- Second Column -->
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="height" class=""></label>
+                                                <input type="text" class="form-control" name=""
+                                                       value="" style="background: turquoise; border: 2px solid turquoise;">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="last_name" class="">Last Name</label>
+                                                <input type="text" class="form-control" name="lname"
+                                                       value="{{ edit_surveys.Last_Name }}"readonly>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="phone" class="">Phone</label>
+                                                <input type="text" class="form-control" name="phone"
+                                                       value="{{ edit_surveys.Phone_Number }}" readonly>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="ocal_authority" class="">Local Authority Fee</label>
+                                                <input type="text" class="form-control" name="lfee"
+                                                       value="{{ edit_surveys.Local_Authority_Fee }}"readonly>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="Amount_paid" class="">Amount Paid</label>
+                                                <input type="text" class="form-control" name="Amount_paid"
+                                                       value="{{ edit_surveys.Amount_paid }}" readonly>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="status" class="">Status</label>
+                                                <select name="status" id="status" class="form-control" required>
+                                                    <option value="">Click to select status</option>
+                                                    <option value="Approved">Approved</option>
+                                                    <option value="Verified">Verified</option>
 
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="Amount_paid" class=""></label>
 
-                                </tr>
-                                </thead>
-                                {% for l in logs %}
-                                    <tbody>
-                                    <tr>
-                                        <td>{{ forloop.counter }}</td>
-                                        <td>{{ l.username }}</td>
-                                        <td>{{ l.email }}</td>
-                                        <td>{{ l.first_name }}</td>
-                                        <td>{{ l.last_name }}</td>
-                                        <td>{{ l.Permission }}</td>
-                                        <td>
-                                           <!-- <a href="" class="btn btn-primary btn-sm">Reset Password</a> -->
-                                            <a href="/delete_user/{{ l.id }}" class="btn btn-danger btn-sm">Delete Acoount</a>
-                                        </td>
-
-                                    </tr>
-
-                                    </tbody>{% endfor %}
-                            </table>
+                                                <button type="submit" class="form-control"
+                                                        style="background-color: lightskyblue">Approve Application
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
-
-
                 </div>
 
 
@@ -419,66 +472,76 @@
 
 
         </div>
-        <!--   Core JS Files   -->
-        <script src="{% static 'assets/js/core/jquery-3.7.1.min.js' %}"></script>
-        <script src="{% static 'assets/js/core/popper.min.js' %}"></script>
-        <script src="{% static 'assets/js/core/bootstrap.min.js' %}"></script>
+        <div class="row">
 
-        <!-- jQuery Scrollbar -->
-        <script src="{% static 'assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js' %}"></script>
 
-        <!-- Chart JS -->
-        <script src="{% static 'assets/js/plugin/chart.js/chart.min.js' %}"></script>
+        </div>
 
-        <!-- jQuery Sparkline -->
-        <script src="{% static 'assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js' %}"></script>
 
-        <!-- Chart Circle -->
-        <script src="{% static 'assets/js/plugin/chart-circle/circles.min.js' %}"></script>
+    </div>
 
-        <!-- Datatables -->
-        <script src="{% static 'assets/js/plugin/datatables/datatables.min.js' %}"></script>
 
-        <!-- Bootstrap Notify -->
-        <script src="{% static 'assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js' %}"></script>
+</div>
+<!--   Core JS Files   -->
+<script src="{% static 'assets/js/core/jquery-3.7.1.min.js' %}"></script>
+<script src="{% static 'assets/js/core/popper.min.js' %}"></script>
+<script src="{% static 'assets/js/core/bootstrap.min.js' %}"></script>
 
-        <!-- jQuery Vector Maps -->
-        <script src="{% static 'assets/js/plugin/jsvectormap/jsvectormap.min.js' %}"></script>
-        <script src="{% static 'assets/js/plugin/jsvectormap/world.js' %}"></script>
+<!-- jQuery Scrollbar -->
+<script src="{% static 'assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js' %}"></script>
 
-        <!-- Sweet Alert -->
-        <script src="{% static 'assets/js/plugin/sweetalert/sweetalert.min.js' %}"></script>
+<!-- Chart JS -->
+<script src="{% static 'assets/js/plugin/chart.js/chart.min.js' %}"></script>
 
-        <!-- Kaiadmin JS -->
-        <script src="{% static 'assets/js/kaiadmin.min.js' %}"></script>
+<!-- jQuery Sparkline -->
+<script src="{% static 'assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js' %}"></script>
 
-        <script>
-            $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
-                type: "line",
-                height: "70",
-                width: "100%",
-                lineWidth: "2",
-                lineColor: "#177dff",
-                fillColor: "rgba(23, 125, 255, 0.14)",
-            });
+<!-- Chart Circle -->
+<script src="{% static 'assets/js/plugin/chart-circle/circles.min.js' %}"></script>
 
-            $("#lineChart2").sparkline([99, 125, 122, 105, 110, 124, 115], {
-                type: "line",
-                height: "70",
-                width: "100%",
-                lineWidth: "2",
-                lineColor: "#f3545d",
-                fillColor: "rgba(243, 84, 93, .14)",
-            });
+<!-- Datatables -->
+<script src="{% static 'assets/js/plugin/datatables/datatables.min.js' %}"></script>
 
-            $("#lineChart3").sparkline([105, 103, 123, 100, 95, 105, 115], {
-                type: "line",
-                height: "70",
-                width: "100%",
-                lineWidth: "2",
-                lineColor: "#ffa534",
-                fillColor: "rgba(255, 165, 52, .14)",
-            });
-        </script>
+<!-- Bootstrap Notify -->
+<script src="{% static 'assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js' %}"></script>
+
+<!-- jQuery Vector Maps -->
+<script src="{% static 'assets/js/plugin/jsvectormap/jsvectormap.min.js' %}"></script>
+<script src="{% static 'assets/js/plugin/jsvectormap/world.js' %}"></script>
+
+<!-- Sweet Alert -->
+<script src="{% static 'assets/js/plugin/sweetalert/sweetalert.min.js' %}"></script>
+
+<!-- Kaiadmin JS -->
+<script src="{% static 'assets/js/kaiadmin.min.js' %}"></script>
+
+<script>
+    $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
+        type: "line",
+        height: "70",
+        width: "100%",
+        lineWidth: "2",
+        lineColor: "#177dff",
+        fillColor: "rgba(23, 125, 255, 0.14)",
+    });
+
+    $("#lineChart2").sparkline([99, 125, 122, 105, 110, 124, 115], {
+        type: "line",
+        height: "70",
+        width: "100%",
+        lineWidth: "2",
+        lineColor: "#f3545d",
+        fillColor: "rgba(243, 84, 93, .14)",
+    });
+
+    $("#lineChart3").sparkline([105, 103, 123, 100, 95, 105, 115], {
+        type: "line",
+        height: "70",
+        width: "100%",
+        lineWidth: "2",
+        lineColor: "#ffa534",
+        fillColor: "rgba(255, 165, 52, .14)",
+    });
+</script>
 </body>
 </html>
