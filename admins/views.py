@@ -581,10 +581,16 @@ def invoice(request):
 
 def drillinginsert(request):
     if request.method == 'POST':
+        email = request.POST.get('email')
+
+        existing_application = drilling_and_pump_installation.objects.filter(email=email).exists()
+        if existing_application:
+            messages.error(request, "You can only make ONE drilling application at a time")
+            return redirect('drilling')
+
         serviceType = request.POST.get('serviceType')
         fname = request.POST.get('fname')
         lname = request.POST.get('lname')
-        email = request.POST.get('email')
         phone = request.POST.get('phone')
         status = request.POST.get('status')
         depth = request.POST.get('depth')
