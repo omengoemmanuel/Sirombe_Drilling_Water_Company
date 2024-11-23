@@ -2,6 +2,8 @@ from django.shortcuts import render, HttpResponse, redirect
 from admins.models import userprofile, Survey_Application, drilling_and_pump_installation
 from django.contrib.auth import get_user_model, logout
 from django.contrib.admin.views.decorators import staff_member_required
+from welcome.models import blog_page
+from django.contrib import messages
 
 
 # Create your views here.
@@ -44,6 +46,7 @@ def delete_profile(request, id):
     det_prof = userprofile.objects.get(id=id)
     det_prof.delete()
     return redirect("users_profile")
+
 
 @staff_member_required
 def edit_user_profile(request, id):
@@ -121,7 +124,36 @@ def edit_survey_app(request, id):
         edit_surveys.save()
         return redirect('survey_app')
 
-
-
     edit_surveys = Survey_Application.objects.get(id=id)
-    return render(request, 'admincustom/edit_survey_app.html', {'edit_surveys':edit_surveys})
+    return render(request, 'admincustom/edit_survey_app.html', {'edit_surveys': edit_surveys})
+
+
+@staff_member_required()
+def blog_update(request):
+    blog_item = blog_page.objects.all()
+    return render(request, 'admincustom/blog_update.html', {'blog_item': blog_item})
+
+
+def blog_update_insert(request):
+    if request.method == 'POST':
+        blog_name = request.POST.get('blog_name')
+        blog_description = request.POST.get('blog_description')
+        date = request.POST.get('date')
+        image = request.FILES['image']
+
+        blogs_photos = blog_page(blog_name=blog_name, blog_description=blog_description, date=date, image=image)
+        blogs_photos.save()
+        messages.success(request, 'Blog photo added successfully')
+
+        return redirect('blog_update')
+    return redirect('blog_update')
+
+
+def blog_update_delete(request, id):
+    blog_del = blog_page.objects.get(id=id)
+    blog_del.delete()
+    messages.success(request, 'Blog deleted successfully')
+    return redirect('blog_update')
+
+
+
