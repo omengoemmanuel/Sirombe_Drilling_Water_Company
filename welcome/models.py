@@ -20,6 +20,8 @@ class messagess(models.Model):
     mail = models.EmailField()
     subject = models.CharField(max_length=50, null=False, blank=False)
     message = models.TextField()
+    message_date = models.DateTimeField(auto_now_add=True)
+
 
     def __str__(self):
         return self.fname

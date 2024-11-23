@@ -2,7 +2,7 @@ from django.shortcuts import render, HttpResponse, redirect
 from admins.models import userprofile, Survey_Application, drilling_and_pump_installation
 from django.contrib.auth import get_user_model, logout
 from django.contrib.admin.views.decorators import staff_member_required
-from welcome.models import blog_page
+from welcome.models import blog_page, messagess
 from django.contrib import messages
 
 
@@ -156,4 +156,6 @@ def blog_update_delete(request, id):
     return redirect('blog_update')
 
 
-
+def new_message(request):
+    megg = messagess.objects.all()
+    return render(request, 'admincustom/new_message.html', {'megg':megg})

@@ -15,6 +15,7 @@ urlpatterns = [
     path('edit_survey_app/<id>', views.edit_survey_app, name='edit_survey_app'),
     path('blog_update', views.blog_update, name='blog_update'),
     path('blog_update_insert', views.blog_update_insert, name='blog_update_insert'),
-    path('blog_update_delete/<id>', views.blog_update_delete, name='blog_update_delete')
+    path('blog_update_delete/<id>', views.blog_update_delete, name='blog_update_delete'),
+    path('new_message', views.new_message, name='new_message')
 
 ]
