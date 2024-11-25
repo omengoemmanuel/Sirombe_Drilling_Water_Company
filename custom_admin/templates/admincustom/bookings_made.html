@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <title>Edit details</title>
+    <title>Admin Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
     <meta
@@ -142,7 +142,7 @@
                         <div class="collapse" id="sidebarLayouts">
                             <ul class="nav nav-collapse">
                                 <li>
-                                    <a href="//survey_app">
+                                    <a href="/survey_app">
                                         <span class="sub-item">Survey Applications</span>
                                     </a>
                                 </li>
@@ -368,126 +368,178 @@
                         class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4"
                 >
                     <div>
-                        <h3 class="fw-bold mb-3">Edit User Profile</h3>
+                        <h3 class="fw-bold mb-3">Bookings Made</h3>
                     </div>
+
                 </div>
-                <form action="" method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="mb-3">
-                                <label for="fname" class="">First Name</label>
-                                <input type="text" class="form-control" name="fname" value="{{ user_pro.fname }}" readonly required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="lname" class="">Company</label>
-                                <input type="text" class="form-control" name="company" value="{{ user_pro.company }}" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="county" class="">County</label>
-                                <input type="text" class="form-control" name="county" value="{{ user_pro.county }}" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="phone" class="">Phone</label>
-                                <input type="text" class="form-control" name="phone" value="{{ user_pro.phone }}" required>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="mb-3">
-                                <div class="mb-3">
-                                    <label for="lname" class="">Last Name</label>
-                                    <input type="text" class="form-control" name="lname" value="{{ user_pro.lname }}" readonly required>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="job" class="">Job</label>
-                                <input type="text" class="form-control" name="job" value="{{ user_pro.job }}" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="address" class="">Address</label>
-                                <input type="text" class="form-control" name="address" value="{{ user_pro.address }}" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="email" class="">Email</label>
-                                <input type="text" class="form-control" name="email" value="{{ user_pro.email }}" readonly required>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="mb-3">
-                                <label for="photo">Profile</label>
-                                <img src="/media/{{ user_pro.p_photo }}" alt="" width="200" height="200">
-                                <input type="file" class="form-control" name="p_photo" required>
-                            </div>
-                            <button type="submit" class="form-control" style="background-color: lightskyblue">Update
-                            </button>
-                        </div>
+                <div class="row">
+                    <style>
+                        body {
+                            font-family: Arial, sans-serif;
+                            margin: 20px;
+                            background-color: #f4f4f9;
+                            color: #333;
+                        }
+
+                        .table-container {
+                            overflow-x: auto;
+                            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                            border-radius: 8px;
+                            background: white;
+                        }
+
+                        table {
+                            width: 100%;
+                            border-collapse: collapse;
+                            min-width: 600px;
+                        }
+
+                        th, td {
+                            text-align: left;
+                            padding: 12px 15px;
+                            word-wrap: break-word;
+                        }
+
+                        th {
+                            background-color: #4CAF50;
+                            color: white;
+                            font-weight: bold;
+                        }
+
+                        tr:nth-child(even) {
+                            background-color: #f9f9f9;
+                        }
+
+                        tr:hover {
+                            background-color: #eafaf1;
+                        }
+
+                        td {
+                            border-bottom: 1px solid #ddd;
+                        }
+
+                        caption {
+                            caption-side: top;
+                            font-size: 1.5em;
+                            margin-bottom: 10px;
+                            color: #555;
+                        }
+
+                        @media (max-width: 600px) {
+                            th, td {
+                                font-size: 14px;
+                                padding: 10px 8px;
+                            }
+                        }
+                    </style>
+                    </head>
+                    <body>
+
+                    <div class="table-container">
+                        <table>
+                            <caption>List of bookings made</caption>
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Query Type</th>
+                                <th>Phone</th>
+                                <th>Location</th>
+                                <th>Pick Date</th>
+                                <th>Pick Time</th>
+                            </tr>
+                            </thead>
+                            {% for books in book %}
+                            <tbody>
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ books.name }}</td>
+                                <td>{{ books.query_type }}</td>
+                                <td>{{ books.phone }}</td>
+                                <td>{{ books.location }}</td>
+                                <td>{{ books.pick_date }}</td>
+                                <td>{{ books.pick_time }}</td>
+                            </tr>
+                            </tbody>
+                            {% endfor %}
+                        </table>
                     </div>
-                </form>
-
-            </div>
 
 
-        </div>
-        <!--   Core JS Files   -->
-        <script src="{% static 'assets/js/core/jquery-3.7.1.min.js' %}"></script>
-        <script src="{% static 'assets/js/core/popper.min.js' %}"></script>
-        <script src="{% static 'assets/js/core/bootstrap.min.js' %}"></script>
 
-        <!-- jQuery Scrollbar -->
-        <script src="{% static 'assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js' %}"></script>
 
-        <!-- Chart JS -->
-        <script src="{% static 'assets/js/plugin/chart.js/chart.min.js' %}"></script>
 
-        <!-- jQuery Sparkline -->
-        <script src="{% static 'assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js' %}"></script>
+</div>
+<div class="row">
 
-        <!-- Chart Circle -->
-        <script src="{% static 'assets/js/plugin/chart-circle/circles.min.js' %}"></script>
 
-        <!-- Datatables -->
-        <script src="{% static 'assets/js/plugin/datatables/datatables.min.js' %}"></script>
+</div>
 
-        <!-- Bootstrap Notify -->
-        <script src="{% static 'assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js' %}"></script>
 
-        <!-- jQuery Vector Maps -->
-        <script src="{% static 'assets/js/plugin/jsvectormap/jsvectormap.min.js' %}"></script>
-        <script src="{% static 'assets/js/plugin/jsvectormap/world.js' %}"></script>
+</div>
 
-        <!-- Sweet Alert -->
-        <script src="{% static 'assets/js/plugin/sweetalert/sweetalert.min.js' %}"></script>
 
-        <!-- Kaiadmin JS -->
-        <script src="{% static 'assets/js/kaiadmin.min.js' %}"></script>
+</div>
+<!--   Core JS Files   -->
+<script src="{% static 'assets/js/core/jquery-3.7.1.min.js' %}"></script>
+<script src="{% static 'assets/js/core/popper.min.js' %}"></script>
+<script src="{% static 'assets/js/core/bootstrap.min.js' %}"></script>
 
-        <script>
-            $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
-                type: "line",
-                height: "70",
-                width: "100%",
-                lineWidth: "2",
-                lineColor: "#177dff",
-                fillColor: "rgba(23, 125, 255, 0.14)",
-            });
+<!-- jQuery Scrollbar -->
+<script src="{% static 'assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js' %}"></script>
 
-            $("#lineChart2").sparkline([99, 125, 122, 105, 110, 124, 115], {
-                type: "line",
-                height: "70",
-                width: "100%",
-                lineWidth: "2",
-                lineColor: "#f3545d",
-                fillColor: "rgba(243, 84, 93, .14)",
-            });
+<!-- Chart JS -->
+<script src="{% static 'assets/js/plugin/chart.js/chart.min.js' %}"></script>
 
-            $("#lineChart3").sparkline([105, 103, 123, 100, 95, 105, 115], {
-                type: "line",
-                height: "70",
-                width: "100%",
-                lineWidth: "2",
-                lineColor: "#ffa534",
-                fillColor: "rgba(255, 165, 52, .14)",
-            });
-        </script>
+<!-- jQuery Sparkline -->
+<script src="{% static 'assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js' %}"></script>
+
+<!-- Chart Circle -->
+<script src="{% static 'assets/js/plugin/chart-circle/circles.min.js' %}"></script>
+
+<!-- Datatables -->
+<script src="{% static 'assets/js/plugin/datatables/datatables.min.js' %}"></script>
+
+<!-- Bootstrap Notify -->
+<script src="{% static 'assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js' %}"></script>
+
+<!-- jQuery Vector Maps -->
+<script src="{% static 'assets/js/plugin/jsvectormap/jsvectormap.min.js' %}"></script>
+<script src="{% static 'assets/js/plugin/jsvectormap/world.js' %}"></script>
+
+<!-- Sweet Alert -->
+<script src="{% static 'assets/js/plugin/sweetalert/sweetalert.min.js' %}"></script>
+
+<!-- Kaiadmin JS -->
+<script src="{% static 'assets/js/kaiadmin.min.js' %}"></script>
+
+<script>
+    $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
+        type: "line",
+        height: "70",
+        width: "100%",
+        lineWidth: "2",
+        lineColor: "#177dff",
+        fillColor: "rgba(23, 125, 255, 0.14)",
+    });
+
+    $("#lineChart2").sparkline([99, 125, 122, 105, 110, 124, 115], {
+        type: "line",
+        height: "70",
+        width: "100%",
+        lineWidth: "2",
+        lineColor: "#f3545d",
+        fillColor: "rgba(243, 84, 93, .14)",
+    });
+
+    $("#lineChart3").sparkline([105, 103, 123, 100, 95, 105, 115], {
+        type: "line",
+        height: "70",
+        width: "100%",
+        lineWidth: "2",
+        lineColor: "#ffa534",
+        fillColor: "rgba(255, 165, 52, .14)",
+    });
+</script>
 </body>
 </html>
