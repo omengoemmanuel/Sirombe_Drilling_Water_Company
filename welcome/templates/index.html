@@ -56,7 +56,8 @@
         <div class="row gx-0 align-items-center" style="height: 45px;">
             <div class="col-lg-6 text-center text-lg-start mb-lg-0">
                 <div class="d-flex flex-wrap">
-                    <a href="#" class="text-muted me-4"><i class="fas fa-map-marker-alt text-primary me-2"></i>Rang'ala Kajamba</a>
+                    <a href="#" class="text-muted me-4"><i class="fas fa-map-marker-alt text-primary me-2"></i>Rang'ala
+                        Kajamba</a>
                     <a href="tel:+254700270075" class="text-muted me-4"><i
                             class="fas fa-phone-alt text-primary me-2"></i>+254700270075</a>
                     <a href="sirombesprings@gmail.com" class="text-muted me-0"><i
@@ -128,12 +129,19 @@
                                         <div class="row g-3">
                                             <div class="col-12">
                                                 <select class="form-select" aria-label=""
-                                                        name="query_type">
+                                                        name="query_type" required>
                                                     <option selected>Select Your Query type</option>
-                                                    <option value="Surveys and Local fees">Surveys and Local fees</option>
+                                                    <option value="Surveys and Local fees">Surveys and Local fees
+                                                    </option>
                                                     <option value="Drilling Services">Drilling Services</option>
                                                     <option value="Pump Installation">Pump Installation</option>
                                                 </select>
+                                            </div>
+                                            <div class="col-12">
+                                                <input type="text" class="form-control" name="name" placeholder="Full Name" required>
+                                            </div>
+                                            <div class="col-12">
+                                                <input type="text" class="form-control" name="phone" placeholder="Phone Number" required>
                                             </div>
                                             <div class="col-12">
                                                 <div class="input-group">
@@ -141,7 +149,7 @@
                                                         <span class="fas fa-map-marker-alt"></span> <span class="ms-1">Location</span>
                                                     </div>
                                                     <input class="form-control" type="text" placeholder="Enter a City "
-                                                           aria-label="Enter your current location" name="location">
+                                                           aria-label="Enter your current location" name="location" required>
                                                 </div>
                                             </div>
 
@@ -150,9 +158,9 @@
                                                     <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
                                                         <span class="fas fa-calendar-alt"></span><span class="ms-1">Pick Date</span>
                                                     </div>
-                                                    <input class="form-control" type="date" name="pick_date">
+                                                    <input class="form-control" type="date" name="pick_date" required>
                                                     <select class="form-select ms-3" aria-label="Default select example"
-                                                            name="pick_time">
+                                                            name="pick_time" required>
                                                         <option selected>10:00AM</option>
                                                         <option value="11:00AM">11:00AM</option>
                                                         <option value="12:00PM">12:00PM</option>
@@ -196,12 +204,19 @@
                                         <div class="row g-3">
                                             <div class="col-12">
                                                 <select class="form-select" aria-label="Default select example"
-                                                        name="query_type">
+                                                        name="query_type" required>
                                                     <option selected>Select Your Query type</option>
-                                                    <option value="Surveys and Local fees">Surveys and Local fees</option>
+                                                    <option value="Surveys and Local fees">Surveys and Local fees
+                                                    </option>
                                                     <option value="Drilling Services">Drilling Services</option>
                                                     <option value="Pump Installation">Pump Installation</option>
                                                 </select>
+                                            </div>
+                                            <div class="col-12">
+                                                <input type="text" class="form-control" name="name" placeholder="Full Name" required>
+                                            </div>
+                                            <div class="col-12">
+                                                <input type="text" class="form-control" name="phone" placeholder="Phone Number" required>
                                             </div>
                                             <div class="col-12">
                                                 <div class="input-group">
@@ -209,7 +224,7 @@
                                                         <span class="fas fa-map-marker-alt"></span> <span class="ms-1">Location</span>
                                                     </div>
                                                     <input class="form-control" type="text" placeholder="Enter a City "
-                                                           aria-label="Enter your current location" name="location">
+                                                           aria-label="Enter your current location" name="location" required>
                                                 </div>
                                             </div>
 
@@ -218,9 +233,9 @@
                                                     <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
                                                         <span class="fas fa-calendar-alt"></span><span class="ms-1">Pick Date</span>
                                                     </div>
-                                                    <input class="form-control" type="date" name="pick_date">
+                                                    <input class="form-control" type="date" name="pick_date" required>
                                                     <select class="form-select ms-3" aria-label="Default select example"
-                                                            name="pick_time">
+                                                            name="pick_time" required>
                                                         <option selected>10:00AM</option>
                                                         <option value="11:00AM">11:00AM</option>
                                                         <option value="12:00PM">12:00PM</option>
@@ -672,7 +687,7 @@
 
                 </div>
             </div>
-                                <div class="col-md-6 col-lg-6 col-xl-3">
+            <div class="col-md-6 col-lg-6 col-xl-3">
                 <div class="footer-item d-flex flex-column">
                     <h4 class="text-white mb-4">Quick Links</h4>
                     <a href="#"><i class="fas fa-angle-right me-2"></i> Home</a>

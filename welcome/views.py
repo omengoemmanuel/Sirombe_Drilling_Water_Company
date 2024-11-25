@@ -50,8 +50,11 @@ def bookings(request):
         location = request.POST.get('location')
         pick_date = request.POST.get('pick_date')
         pick_time = request.POST.get('pick_time')
+        name = request.POST.get('name')
+        phone = request.POST.get('phone')
 
-        book = booking(query_type=query_type, location=location, pick_date=pick_date, pick_time=pick_time)
+        book = booking(query_type=query_type, location=location, pick_date=pick_date, pick_time=pick_time, name=name,
+                       phone=phone)
         book.save()
 
         return redirect('/')

@@ -22,7 +22,6 @@ class messagess(models.Model):
     message = models.TextField()
     message_date = models.DateTimeField(auto_now_add=True)
 
-
     def __str__(self):
         return self.fname
 
@@ -32,6 +31,8 @@ class booking(models.Model):
     location = models.CharField(max_length=50, null=False, blank=False)
     pick_date = models.DateField()
     pick_time = models.TimeField()
+    name = models.CharField(max_length=255, null=False, blank=False, default="XXXXXXXX")
+    phone = models.CharField(max_length=13, null=False, blank=False, default="XXXXXXXX")
 
     def __str__(self):
-        return self.query_type
+        return self.name
