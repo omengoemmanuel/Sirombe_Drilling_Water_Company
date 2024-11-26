@@ -98,6 +98,7 @@ class Tank(models.Model):
     ]
     tank = models.CharField(max_length=100, choices=tank_choices)
     cost = models.DecimalField(max_digits=10, decimal_places=2)
+    tank_photo = models.ImageField(upload_to='uploads/tanks', default='uploads/tanks/tank.jpg')
 
     def __str__(self):
         return self.tank

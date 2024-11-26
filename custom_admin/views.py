@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect
-from admins.models import userprofile, Survey_Application, drilling_and_pump_installation
+from admins.models import userprofile, Survey_Application, drilling_and_pump_installation, Tank
 from django.contrib.auth import get_user_model, logout
 from django.contrib.admin.views.decorators import staff_member_required
 from welcome.models import blog_page, messagess, booking
@@ -164,3 +164,47 @@ def new_message(request):
 def booking_made(request):
     book = booking.objects.all()
     return render(request, 'admincustom/bookings_made.html', {'book': book})
+
+
+def tank(request):
+    tnk = Tank.objects.all()
+    return render(request, 'admincustom/tanks.html', {'tnk': tnk})
+
+
+def add_tank(request):
+    if request.method == 'POST':
+        tank = request.POST.get('tank')
+        cost = request.POST.get('cost')
+        tank_photo = request.FILES['tank_photo']
+
+        tank_save = Tank(tank=tank, cost=cost, tank_photo=tank_photo)
+        tank_save.save()
+        messages.success(request, 'Tank added successfully')
+
+        return redirect('tank')
+    return render(request, 'admincustom/add_tank.html')
+
+
+def delete_tank(request, id):
+    del_tank = Tank.objects.get(id=id)
+    del_tank.delete()
+    messages.success(request, 'Tank deleted successfully')
+    return redirect('tank')
+
+
+def edit_tank(request, id):
+    if request.method == 'POST':
+        tank = request.POST.get('tank')
+        cost = request.POST.get('cost')
+        tank_photo = request.FILES['tank_photo']
+
+        edi = Tank.objects.get(id=id)
+        edi.tank = tank
+        edi.cost = cost
+        edi.tank_photo = tank_photo
+        edi.save()
+        messages.success(request, 'Tank item updated successfully')
+        return redirect('tank')
+
+    edi = Tank.objects.get(id=id)
+    return render(request, 'admincustom/edit tank.html', {'edi': edi})

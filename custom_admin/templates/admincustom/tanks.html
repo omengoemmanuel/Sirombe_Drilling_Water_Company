@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <title>Admin Dashboard</title>
+    <title>Tanks</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
     <meta
@@ -368,111 +368,50 @@
                         class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4"
                 >
                     <div>
-                        <h3 class="fw-bold mb-3">Survey Approvals</h3>
+                        <h3 class="fw-bold mb-3">Tanks</h3>
                     </div>
+
 
                 </div>
                 <div class="row">
-                    <div class="col-12">
-                        <div class="card" style="background-color: turquoise">
-                            <div class="card-body">
-                                <form action="" method="post">
-                                    {% csrf_token %}
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label for="survey_cate" class="">Survey Category</label>
-                                                <input type="text" class="form-control" name="category"
-                                                       value="{{ edit_surveys.Survey_Category }}" readonly>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="fname" class="">First Name</label>
-                                                <input type="text" class="form-control" name="fname"
-                                                       value="{{ edit_surveys.First_Name }}" readonly>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="email" class="">Email Address</label>
-                                                <input type="email" class="form-control" name="email"
-                                                       value="{{ edit_surveys.Email_Address }}" readonly>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="survey_fee" class="">Survey Fee</label>
-                                                <input type="text" class="form-control" name="sfee"
-                                                       value="{{ edit_surveys.Survey_Fee }}" readonly>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="Total" class="">Total</label>
-                                                <input type="text" class="form-control" name="tamount"
-                                                       value="{{ edit_surveys.Total_Amount }}" readonly>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="depth" class="">Depth</label>
-                                                <input type="text" class="form-control" name="depth"
-                                                       value="{{ edit_surveys.depth }}" required>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="height" class="">Height</label>
-                                                <input type="text" class="form-control" name="height"
-                                                       value="{{ edit_surveys.height }}"required>
-                                            </div>
-                                        </div>
-                                        <!-- Second Column -->
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label for="height" class=""></label>
-                                                <input type="text" class="form-control" name=""
-                                                       value="" style="background: turquoise; border: 2px solid turquoise;">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="last_name" class="">Last Name</label>
-                                                <input type="text" class="form-control" name="lname"
-                                                       value="{{ edit_surveys.Last_Name }}"readonly>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="phone" class="">Phone</label>
-                                                <input type="text" class="form-control" name="phone"
-                                                       value="{{ edit_surveys.Phone_Number }}" readonly>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="ocal_authority" class="">Local Authority Fee</label>
-                                                <input type="text" class="form-control" name="lfee"
-                                                       value="{{ edit_surveys.Local_Authority_Fee }}"readonly>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="Amount_paid" class="">Amount Paid</label>
-                                                <input type="text" class="form-control" name="Amount_paid"
-                                                       value="{{ edit_surveys.Amount_paid }}" readonly>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="status" class="">Status</label>
-                                                <select name="status" id="status" class="form-control" required>
-                                                    <option value="">Click to select status</option>
-                                                    <option value="Approved">Approved</option>
-                                                    <option value="Verified">Verified</option>
 
-                                                </select>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="Amount_paid" class=""></label>
+                    <a href="/add_tank">
+                        <button type="submit" class="btn btn-success" style="width: 150px">Add tank</button>
+                    </a>
 
-                                                <button type="submit" class="form-control"
-                                                        style="background-color: lightskyblue">Approve Application
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
-
             </div>
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    <strong>Message:</strong>{{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="close"></button>
+                </div>
+            {% endfor %}
+            <div class="row">
+                <div class="container my-5">
+                    <div class="row row-cols-1 row-cols-md-3 g-4">
+                        {% for tn in tnk %}
+                            <div class="col">
+                                <div class="card h-100">
+                                    <img src="/media/{{ tn.tank_photo }}" class="card-img-top" alt="" height="350">
+                                    <div class="card-body">
+                                        <h8 class="card-title">{{ tn.tank }}</h8>
+                                        <h6 class="card-title">Ksh.{{ tn.cost }} </h6>
+                                        <a href="/delete_tank/{{ tn.id }}">
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </a>
+                                        <a href="/edit_tank/{{ tn.id }}">
+                                            <button type="submit" class="btn btn-info">Edit</button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>{% endfor %}
 
+                    </div>
 
-        </div>
-        <div class="row">
+                </div>
+            </div>
 
 
         </div>

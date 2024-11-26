@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-txcsr0kgor-@u0h!psgy@(9x^#ek0z)!=t5lj*2a7dwla3#l-+
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['192.168.88.28', 'localhost', '127.0.0.1', '9cae-41-84-154-54.ngrok-free.app']
+ALLOWED_HOSTS = ['192.168.88.28', 'localhost', '127.0.0.1', '1c05-41-84-154-54.ngrok-free.app']
 
 # Email backend
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
