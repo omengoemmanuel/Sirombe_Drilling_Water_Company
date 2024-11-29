@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect
-from admins.models import userprofile, Survey_Application, drilling_and_pump_installation, Tank
+from admins.models import userprofile, Survey_Application, drilling_and_pump_installation, Tank, Pump
 from django.contrib.auth import get_user_model, logout
 from django.contrib.admin.views.decorators import staff_member_required
 from welcome.models import blog_page, messagess, booking
@@ -208,3 +208,46 @@ def edit_tank(request, id):
 
     edi = Tank.objects.get(id=id)
     return render(request, 'admincustom/edit tank.html', {'edi': edi})
+
+
+def pump(request):
+    pumpss = Pump.objects.all()
+    return render(request, 'admincustom/pump.html', {'pumpss': pumpss})
+
+
+def add_pump(request):
+    if request.method == 'POST':
+        pump = request.POST.get('pump')
+        cost = request.POST.get('cost')
+        pump_photo = request.FILES['pump_photo']
+
+        ad_pump = Pump(pump=pump, cost=cost, pump_photo=pump_photo)
+        ad_pump.save()
+        messages.success(request, "Pump added successfully")
+        return redirect('pump')
+    return render(request, 'admincustom/add_pump.html')
+
+
+def delete_pump(request, id):
+    del_pump = Pump.objects.get(id=id)
+    del_pump.delete()
+    messages.success(request, "Pump details deleted successfully")
+    return redirect('pump')
+
+
+def edit_pump(request, id):
+    if request.method == 'POST':
+        pump = request.POST.get('pump')
+        cost = request.POST.get('cost')
+        pump_photo = request.FILES['pump_photo']
+
+        edi_pump = Pump.objects.get(id=id)
+        edi_pump.pump = pump
+        edi_pump.cost = cost
+        edi_pump.pump_photo = pump_photo
+        edi_pump.save()
+        messages.success(request, "Pump edited successfully")
+        return redirect('pump')
+
+    ed_pump = Pump.objects.get(id=id)
+    return render(request, 'admincustom/edit_pump.html', {'ed_pump': ed_pump})

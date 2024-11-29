@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <title>Add Tanks</title>
+    <title>Tanks</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
     <meta
@@ -368,59 +368,49 @@
                         class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4"
                 >
                     <div>
-                        <h3 class="fw-bold mb-3">Add Tank</h3>
+                        <h3 class="fw-bold mb-3">Pumps</h3>
                     </div>
-                    {% for message in messages %}
-                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-                            <strong>Message:</strong>{{ message }}
-                            <button type="button" class="close" data-dismiss="alert" aria-label="close"></button>
-                        </div>
-                    {% endfor %}
+
+
                 </div>
                 <div class="row">
-                    <div class="card">
-                        <div class="card-body">
-                            <form action="" method="post" enctype="multipart/form-data">
-                                {% csrf_token %}
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="mb-4">
-                                            <label for="tank" class="form-label">Select Tank</label>
-                                            <select name="tank" id="tank" class="form-control">
-                                                <option value="">Select a tank</option>
-                                                <option value="Household Tank Plastic">Household Tank Plastic</option>
-                                                <option value="Household Steel Tank">Household Steel Tank</option>
-                                                <option value="Large Steel Tank">Large Steel Tank</option>
-                                            </select>
-                                        </div>
-                                        <div class="mb-4">
-                                            <label for="price" class="form-label">Tank Price</label>
-                                            <input type="text" class="form-control" name="cost"
-                                                   placeholder="Enter price">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="mb-4">
-                                            <label for="tank_photo" class="form-label">Tank Photo</label>
-                                            <input type="file" class="form-control" name="tank_photo">
-                                        </div>
-                                        <div class="mb-3">
-                                            <button type="submit" class="btn btn-success">Submit</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
 
+                    <a href="/add_pump">
+                        <button type="submit" class="btn btn-success" style="width: 150px">Add Pump</button>
+                    </a>
 
                 </div>
 
-
             </div>
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    <strong>Message:</strong>{{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="close"></button>
+                </div>
+            {% endfor %}
             <div class="row">
+                <div class="container my-5">
+                    <div class="row row-cols-1 row-cols-md-3 g-4">
+                        {% for p in pumpss %}
+                        <div class="col">
+                            <div class="card h-100">
+                                <img src="/media/{{ p.pump_photo }}" class="card-img-top" alt="" height="350">
+                                <div class="card-body">
+                                    <h8 class="card-title">{{ p.pump }}</h8>
+                                    <h6 class="card-title">Ksh.{{ p.cost }} </h6>
+                                    <a href="/delete_pump/{{ p.id }}">
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </a>
+                                    <a href="/edit_pump/{{ p.id }}">
+                                        <button type="submit" class="btn btn-info">Edit</button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
 
-
+                </div>
             </div>
 
 
@@ -428,66 +418,69 @@
 
 
     </div>
-    <!--   Core JS Files   -->
-    <script src="{% static 'assets/js/core/jquery-3.7.1.min.js' %}"></script>
-    <script src="{% static 'assets/js/core/popper.min.js' %}"></script>
-    <script src="{% static 'assets/js/core/bootstrap.min.js' %}"></script>
 
-    <!-- jQuery Scrollbar -->
-    <script src="{% static 'assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js' %}"></script>
 
-    <!-- Chart JS -->
-    <script src="{% static 'assets/js/plugin/chart.js/chart.min.js' %}"></script>
+</div>
+<!--   Core JS Files   -->
+<script src="{% static 'assets/js/core/jquery-3.7.1.min.js' %}"></script>
+<script src="{% static 'assets/js/core/popper.min.js' %}"></script>
+<script src="{% static 'assets/js/core/bootstrap.min.js' %}"></script>
 
-    <!-- jQuery Sparkline -->
-    <script src="{% static 'assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js' %}"></script>
+<!-- jQuery Scrollbar -->
+<script src="{% static 'assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js' %}"></script>
 
-    <!-- Chart Circle -->
-    <script src="{% static 'assets/js/plugin/chart-circle/circles.min.js' %}"></script>
+<!-- Chart JS -->
+<script src="{% static 'assets/js/plugin/chart.js/chart.min.js' %}"></script>
 
-    <!-- Datatables -->
-    <script src="{% static 'assets/js/plugin/datatables/datatables.min.js' %}"></script>
+<!-- jQuery Sparkline -->
+<script src="{% static 'assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js' %}"></script>
 
-    <!-- Bootstrap Notify -->
-    <script src="{% static 'assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js' %}"></script>
+<!-- Chart Circle -->
+<script src="{% static 'assets/js/plugin/chart-circle/circles.min.js' %}"></script>
 
-    <!-- jQuery Vector Maps -->
-    <script src="{% static 'assets/js/plugin/jsvectormap/jsvectormap.min.js' %}"></script>
-    <script src="{% static 'assets/js/plugin/jsvectormap/world.js' %}"></script>
+<!-- Datatables -->
+<script src="{% static 'assets/js/plugin/datatables/datatables.min.js' %}"></script>
 
-    <!-- Sweet Alert -->
-    <script src="{% static 'assets/js/plugin/sweetalert/sweetalert.min.js' %}"></script>
+<!-- Bootstrap Notify -->
+<script src="{% static 'assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js' %}"></script>
 
-    <!-- Kaiadmin JS -->
-    <script src="{% static 'assets/js/kaiadmin.min.js' %}"></script>
+<!-- jQuery Vector Maps -->
+<script src="{% static 'assets/js/plugin/jsvectormap/jsvectormap.min.js' %}"></script>
+<script src="{% static 'assets/js/plugin/jsvectormap/world.js' %}"></script>
 
-    <script>
-        $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
-            type: "line",
-            height: "70",
-            width: "100%",
-            lineWidth: "2",
-            lineColor: "#177dff",
-            fillColor: "rgba(23, 125, 255, 0.14)",
-        });
+<!-- Sweet Alert -->
+<script src="{% static 'assets/js/plugin/sweetalert/sweetalert.min.js' %}"></script>
 
-        $("#lineChart2").sparkline([99, 125, 122, 105, 110, 124, 115], {
-            type: "line",
-            height: "70",
-            width: "100%",
-            lineWidth: "2",
-            lineColor: "#f3545d",
-            fillColor: "rgba(243, 84, 93, .14)",
-        });
+<!-- Kaiadmin JS -->
+<script src="{% static 'assets/js/kaiadmin.min.js' %}"></script>
 
-        $("#lineChart3").sparkline([105, 103, 123, 100, 95, 105, 115], {
-            type: "line",
-            height: "70",
-            width: "100%",
-            lineWidth: "2",
-            lineColor: "#ffa534",
-            fillColor: "rgba(255, 165, 52, .14)",
-        });
-    </script>
+<script>
+    $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
+        type: "line",
+        height: "70",
+        width: "100%",
+        lineWidth: "2",
+        lineColor: "#177dff",
+        fillColor: "rgba(23, 125, 255, 0.14)",
+    });
+
+    $("#lineChart2").sparkline([99, 125, 122, 105, 110, 124, 115], {
+        type: "line",
+        height: "70",
+        width: "100%",
+        lineWidth: "2",
+        lineColor: "#f3545d",
+        fillColor: "rgba(243, 84, 93, .14)",
+    });
+
+    $("#lineChart3").sparkline([105, 103, 123, 100, 95, 105, 115], {
+        type: "line",
+        height: "70",
+        width: "100%",
+        lineWidth: "2",
+        lineColor: "#ffa534",
+        fillColor: "rgba(255, 165, 52, .14)",
+    });
+</script>
 </body>
 </html>

@@ -21,6 +21,10 @@ urlpatterns = [
     path('tank', views.tank, name='tank'),
     path('add_tank', views.add_tank, name='add_tank'),
     path('delete_tank/<id>', views.delete_tank, name='delete_tank'),
-    path('edit_tank/<id>', views.edit_tank, name='edit_tank')
+    path('edit_tank/<id>', views.edit_tank, name='edit_tank'),
+    path('pump', views.pump, name='pump'),
+    path('add_pump', views.add_pump, name='add_pump'),
+    path('delete_pump/<id>', views.delete_pump, name='delete_pump'),
+    path('edit_pump/<id>', views.edit_pump, name='edit_pump')
 
 ]
