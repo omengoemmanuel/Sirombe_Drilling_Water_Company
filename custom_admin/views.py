@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.shortcuts import render, HttpResponse, redirect
 from admins.models import userprofile, Survey_Application, drilling_and_pump_installation, Tank, Pump
 from django.contrib.auth import get_user_model, logout
@@ -26,6 +27,22 @@ def user_logins(request):
     User = get_user_model()
     logs = User.objects.all()
     return render(request, 'admincustom/userlogins.html', {'logs': logs})
+
+
+@staff_member_required()
+def update_admin_privilege(request):
+    if request.method == 'POST':
+        user_id = request.POST.get('user_id')
+        is_staff = request.POST.get('is_staff') == "on"
+
+        try:
+            user = User.objects.get(id=user_id)
+            user.is_staff = is_staff
+            user.save()
+            messages.success(request, f"Admin privilege{'granted' if is_staff else 'revoked'} for {user.first_name}.")
+        except User.DoesNotExist:
+            messages.error(request, "User not found.")
+        return redirect(request.META.get('HTTP_REFERER', "/"))
 
 
 @staff_member_required()
