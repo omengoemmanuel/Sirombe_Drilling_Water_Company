@@ -371,8 +371,13 @@
                         <h3 class="fw-bold mb-3">Survey Applications</h3>
                     </div>
                 </div>
-
             </div>
+                      {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    <strong>Message:</strong>{{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="close"></button>
+                </div>
+            {% endfor %}
             <div class="row">
                 <div class="table-responsive">
                     <table id="adminTable" class="table table-striped table-bordered">
@@ -409,7 +414,7 @@
                             <td>{{ suv.height }}</td>
                             <td>{{ suv.status }}</td>
                             <td>
-                                <a href="/edit_survey_app/{{ suv.id }}" class="btn btn-sm btn-warning">Edit</a>
+                                <a href="/edit_survey_app/{{ suv.id }}" class="btn btn-sm btn-warning">Approve</a>
                                 <a href="/survey_app_del/{{ suv.id }}" class="btn btn-sm btn-danger">Delete</a>
                             </td>
                         </tr>

@@ -39,7 +39,7 @@ def update_admin_privilege(request):
             user = User.objects.get(id=user_id)
             user.is_staff = is_staff
             user.save()
-            messages.success(request, f"Admin privilege{'granted' if is_staff else 'revoked'} for {user.first_name}.")
+            messages.success(request, f"Admin privilege {'granted' if is_staff else 'revoked'} for {user.first_name}.")
         except User.DoesNotExist:
             messages.error(request, "User not found.")
         return redirect(request.META.get('HTTP_REFERER', "/"))
@@ -139,6 +139,7 @@ def edit_survey_app(request, id):
         edit_surveys.status = status
 
         edit_surveys.save()
+        messages.success(request, f"Survey Application {edit_surveys.Survey_Category} updated.")
         return redirect('survey_app')
 
     edit_surveys = Survey_Application.objects.get(id=id)
